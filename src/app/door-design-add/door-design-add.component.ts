@@ -34,6 +34,15 @@ export class DoorDesignAddComponent implements OnInit {
   doorSubCollectionList: any[] = [];
   doorSubCollection!: number;
 
+  doorPanelList : any[] = [];
+  doorPanel!: number;
+
+  doorModelList: any[] = [];
+  doorModel!: number;
+
+  doorColorList: any[] = [];
+  doorColor!: number;
+
   constructor(private utilsService: UtilsService) { }
 
   ngOnInit(): void {
@@ -52,6 +61,21 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorWidthInch = widthInch;
     this.doorHeightFt = heightFt;
     this.doorHeightInch = heightInch;
+  }
+
+  selectSubCollection(item: any) {
+    this.doorSubCollection = item.doorSubCollectionId;
+    this.getDoorPanels(item.doorSubCollectionId);
+  }
+
+  selectPanel(item: any) {
+    this.doorPanel = item?.doorPanelId;
+    this.getVisualizationModel();
+  }
+
+  selectModel(item:any) {
+    this.doorModel = item?.doorModelId;
+    this.doorColorList = item?.lstDoorColor;
   }
 
   // API Calling
@@ -97,6 +121,30 @@ export class DoorDesignAddComponent implements OnInit {
   getDoorSubCollection(doorCollection: number) {
     this.utilsService.getDoorSubCollection(doorCollection).subscribe((data: any) => {
       this.doorSubCollectionList = data?.payload;
+    }, (error) => {
+      console.error('Error During door typeOfDoorsList :', error);
+    })
+  }
+
+  getDoorPanels(doorSubCollection: number) {
+    this.utilsService.getDoorPanels(doorSubCollection).subscribe((data: any) => {
+      this.doorPanelList = data?.payload;
+    }, (error) => {
+      console.error('Error During door typeOfDoorsList :', error);
+    })
+  }
+
+  getVisualizationModel() {
+    const payload = {
+      doorHeight: String(this.doorHeightFt) + '.0',
+      doorWidth: String(this.doorWidthFt) + '.0',
+      doorTypeId: this.doorType,
+      doorCompanyId: this.doorCompany,
+      doorPanelId: this.doorPanel,
+      doorOrSectional : "SECTION_DOOR"
+    }
+    this.utilsService.getVisualizationModel(payload).subscribe((data: any) => {
+      this.doorModelList = data?.payload;
     }, (error) => {
       console.error('Error During door typeOfDoorsList :', error);
     })

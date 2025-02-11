@@ -61,4 +61,19 @@ export class UtilsService {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=${doorCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
+
+  getDoorPanels(doorSubCollection: number) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${doorSubCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getVisualizationModel(payload: any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationModel`,payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getDoorPerforatedAngle(doorSubCollection: number) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${doorSubCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
 }

@@ -108,16 +108,73 @@
     <div class="card-body">
       <div class="d-flex" style="gap: 10px;">
         <ng-container *ngFor="let item of doorCollectionList">
-          <button class="btn btn btn-outline-primary" type="button"> {{ item.doorCollectionName }} </button>
+          <button class="btn btn btn-outline-primary" [ngClass]="{'active': doorCollection == item.doorCollectionId}" type="button" (click)="doorCollection = item.doorCollectionId"> {{ item.doorCollectionName }} </button>
         </ng-container>
       </div>
       <div class="d-flex mt-2" style="gap: 10px;">
         <ng-container *ngFor="let item of doorSubCollectionList">
-          <div style="background-color: rgb(192, 190, 190);">
-            <div style=" margin: auto;">
+          <div style="background-color: rgb(192, 190, 190);" [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}" (click)="selectSubCollection(item)">
+            <div style="margin: auto;">
               <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
             </div>
             <p>{{item?.doorSubCollectionName}}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-header">
+      Panel Style And Model Number
+    </div>
+    <div class="card-body">
+      <div class="d-flex" style="gap: 10px;">
+        <ng-container *ngFor="let item of doorPanelList">
+          <div style="background-color: rgb(192, 190, 190); text-align: center;" [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
+            <div style="margin: auto;">
+              <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
+            </div>
+            <p>{{item?.doorPanelName}}</p>
+          </div>
+        </ng-container>
+      </div>
+      <p class="mb-2 mt-2">Model number</p>
+      <div class="d-flex mt-2" style="gap: 10px;">
+        <ng-container *ngFor="let item of doorModelList">
+          <div class="p-4" style="background-color: rgb(192, 190, 190); border-radius: 10px;" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
+            <p>{{item?.doorModelName}}</p>
+            <p>{{item?.quality}}</p>
+            <p>{{item?.range}}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="card-header">
+      Color
+    </div>
+    <div class="card-body">
+      <!-- <div class="d-flex" style="gap: 10px;">
+        <ng-container *ngFor="let item of doorPanelList">
+          <div style="background-color: rgb(192, 190, 190); text-align: center;" [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
+            <div style="margin: auto;">
+              <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
+            </div>
+            <p>{{item?.doorPanelName}}</p>
+          </div>
+        </ng-container>
+      </div> -->
+      <!-- <p class="mb-2 mt-2">Model number</p> -->
+      <div class="row mt-2">
+        <ng-container *ngFor="let item of doorColorList">
+          <div class="col-1 m-1" style="border-radius: 10px; text-align: center;">
+            <div style="border-radius: 50%; height: 100px; width: 100px;" [ngStyle]="{'background-color': item?.colorCode }" [ngClass]="{'active': doorColor == item.doorColorId}" (click)="selectModel(item)">
+              <img [src]="item?.fileBackPath" alt="" style="border-radius: 50%; height: 100px; width: 100px;">
+            </div>
+            <p>{{item?.doorColorAliasName}}</p>
           </div>
         </ng-container>
       </div>
