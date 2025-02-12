@@ -62,18 +62,63 @@ export class UtilsService {
     return this.http.get(this.apiUrl + `DoorSubCollection/GetDoorCollectionListById?DoorCollectionId=${doorCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
+  // Function to be used for getting door panels
   getDoorPanels(doorSubCollection: number) {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${doorSubCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
+  // Function to be used for getting model and based on model get color listing
   getVisualizationModel(payload: any) {
     const token = this.getLoginUserToken();
-    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationModel`,payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationModel`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
+  // Function to be used for getting door angle
   getDoorPerforatedAngle(doorSubCollection: number) {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `DoorSubCollectionPanel/GetBySubCollectionId?SubCollectionId=${doorSubCollection}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting window glass category
+  getWindowGlassCategory(doorModel: number) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationGlazingType?DoorModelId=${doorModel}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting window glass sub category
+  getWindowGlassSubCategory(glazingTypeId: number) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationGlazingByTypeId?GlazingTypeId=${glazingTypeId}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting window insert category
+  getWindowInsertCategory(doorModel: number) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationInsertsType?DoorModelId=${doorModel}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting window insert sub category
+  getWindowInsertSubCategory(insertId: number) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationInsertsTypeId?InsulatedTypeId=${insertId}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting sprint type
+  getSpringCategoryType() {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `SpringCategoryType/SpringCategoryType`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting sprint
+  getSpringCategory(springTypeId: number) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `SpringCategory/SpringCategoryTypeId?SpringCategoryTypeId=${springTypeId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting sprint details
+  getVisualizationSpringDetails(payload: any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationSpringDetails`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 }
