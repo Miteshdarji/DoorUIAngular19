@@ -1,0 +1,45 @@
+<div class="container">
+  <!-- Dynamic Grid Size Controls -->
+  <div class="grid-controls">
+    <label>Rows: <input type="number" [(ngModel)]="rowSize" (change)="updateGrid()"></label>
+    <label>Columns: <input type="number" [(ngModel)]="colSize" (change)="updateGrid()"></label>
+  </div>
+
+  <div class="grid-container">
+    <!-- Left Side (Display Boxes with Image) -->
+    <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+      <div *ngFor="let row of grid; let rowIndex = index">
+        <div *ngFor="let cell of row; let colIndex = index" class="box">
+          
+          <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="assets/white.png" alt="Selected" class="innerImg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side (Checkbox Grid) -->
+    <!-- <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+      <div *ngFor="let row of grid; let rowIndex = index">
+        <div *ngFor="let cell of row; let colIndex = index" class="box">
+          <label>
+            <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
+                   (change)="onCheckboxChange(rowIndex, colIndex, $event)">
+            {{ cell }}
+          </label>
+        </div>
+      </div>
+    </div> -->
+    <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+      <div *ngFor="let row of grid; let rowIndex = index">
+         <!-- "Check All" button inside the first row of each column -->
+        <div *ngFor="let cell of row; let colIndex = index" class="box">
+          <button *ngIf="rowIndex === 0" class="check-all-btn" (click)="toggleColumnSelection(colIndex)">ALL</button>
+          <label>
+            <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
+                   (change)="onCheckboxChange(rowIndex, colIndex, $event)">
+            {{ cell }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
