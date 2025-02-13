@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class UtilsService {
   private apiUrl = 'https://doorportal-001-site1.etempurl.com/v1/';
-
   constructor(private http: HttpClient) { }
 
   // Function to be used authenticate the user
@@ -15,7 +14,7 @@ export class UtilsService {
     const payload = { "userName": "sap.dhaval@gmail.com", "password": "Tdhaval@74" }
     return this.http.post(this.apiUrl + 'Account/Authenticate', payload);
   }
-
+  
   // Function to be used fot setting login user details
   setLocalStorage(userDetails: any) {
     localStorage.setItem('loginUser', JSON.stringify(userDetails));

@@ -3,12 +3,13 @@ import { UtilsService } from '../utils/utils.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DoorSize } from '../../config/size.constant';
-
+import { DoorDesignVisualizeComponent } from '../door-design-visualize/door-design-visualize.component';
 @Component({
   selector: 'app-door-design-add',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DoorDesignVisualizeComponent
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './door-design-add.component.html',
@@ -42,6 +43,15 @@ export class DoorDesignAddComponent implements OnInit {
 
   doorColorList: any[] = [];
   doorColor!: number;
+
+  // ===  Visualize UI [Start] ===== 
+  rowArray: string[] = [];
+  column: number = 0;
+  rowSize = 0; // Default number of rows
+  colSize = 0; // Default number of columns
+  grid: string[][] = [];
+  selectedBoxes: boolean[][] = [];
+  // ===  Visualize UI [Start] ===== 
 
   constructor(private utilsService: UtilsService) { }
 
@@ -145,8 +155,59 @@ export class DoorDesignAddComponent implements OnInit {
     }
     this.utilsService.getVisualizationModel(payload).subscribe((data: any) => {
       this.doorModelList = data?.payload;
+      console.log('****** Array: ', this.doorModelList[0]?.lstDoorColor[0]?.noOfSection)
+      console.log('****** Row ' , this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail)
+      console.log('****** Final Row ' , this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail.length)
+      console.log('****** Final Column  ', this.doorModelList[0]?.widthSection);   
+      this.rowSize = this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail.length;
+      this.colSize = this.doorModelList[0]?.widthSection;
+      this.initializeGrid();
+
+//       console.log('Data:', this.doorModelList[0]?.noOfSection);
+// console.log('Type:', typeof this.doorModelList[0]?.noOfSection);
+// console.log('Is Array:', Array.isArray(this.doorModelList[0]?.noOfSection));
+const dataArray: string[] = this.doorModelList[0]?.noOfSection.values.split(',');
+console.log(dataArray); // ['21', '21', '21', '21']
+
+      console.log('****** Back Image ' + this.doorModelList[0]?.lstDoorColor[0]?.fileBackPath);
+      
     }, (error) => {
       console.error('Error During door typeOfDoorsList :', error);
     })
   }
+
+
+// ====== Dynamic Window Binding ( Row and Column )===== 
+
+initializeGrid() {
+  this.grid = [];
+  this.selectedBoxes = [];
+
+  for (let i = 0; i < this.colSize; i++) {
+    this.grid[i] = [];
+    this.selectedBoxes[i] = [];
+    for (let j = 0; j < this.rowSize; j++) {
+      this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
+      this.selectedBoxes[i][j] = false; // Default unchecked
+    }
+  }
+}
+
+onCheckboxChange(row: number, col: number, event: Event) {
+  const isChecked = (event.target as HTMLInputElement).checked;
+  this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
+  console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+}
+
+updateGrid() {
+  this.initializeGrid(); // Reinitialize grid when row/column values change
+}
+
+// To select all checkbox logic
+toggleColumnSelection(col: number) {
+  const allChecked = this.selectedBoxes.every(row => row[col]);
+  this.selectedBoxes.forEach(row => row[col] = !allChecked);
+}
+
+
 }
