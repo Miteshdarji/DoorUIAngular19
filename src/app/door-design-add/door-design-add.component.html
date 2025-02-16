@@ -168,11 +168,11 @@
     <div class="card-body">
       <div class="row mt-2">
         <ng-container *ngFor="let item of doorColorList">
-          <div class="col-2 m-1"
+          <div class="col-2 m-1"  [ngClass]="{'active': doorColor == item.doorColorId}"
             style="border-radius: 10px; text-align: center; flex-direction: column;align-items: center;display: flex;">
             <div style="border-radius: 50%; height: 100px; width: 100px;"
-              [ngStyle]="{'background-color': item?.colorCode }" [ngClass]="{'active': doorColor == item.doorColorId}"
-              (click)="selectModel(item)">
+              [ngStyle]="{'background-color': item?.colorCode }"
+              (click)="selectColor(item)">
               <img [src]="item?.fileBackPath" alt="" style="border-radius: 50%; height: 100px; width: 100px;">
             </div>
             <p>{{item?.doorColorAliasName}}</p>
@@ -283,39 +283,67 @@
   </div>
 
   <!-- Strut -->
-  <div class="card mt-2" *ngIf="doorSpringCategoryTypeList.length > 0">
+  <div class="card mt-2" *ngIf="doorStrutCategoryTypeList.length > 0">
     <div class="card-header">
       Strut
     </div>
     <div class="card-body">
-      <!-- <div class="row">
-          <div class="col-6">
-            <p> <b>Spring</b> </p>
-            <div class="mt-1 d-flex" style="gap: 8px;">
-              <ng-container *ngFor="let item of doorSpringCategoryTypeList">
-                <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-                  [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
-                  (click)="selectSpringCategoryType(item)">
-                  {{ item?.springCategoryTypeName }}
-                </div>
-              </ng-container>
+      <div class="row">
+        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
+          <h6>Strut Catogary (Height/Ga/KSI):</h6>
+          <ng-container *ngFor="let item of doorStrutCategoryTypeList">
+            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+              [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
+              (click)="selectStrutCategoryType(item)">
+              {{ item?.sturtCategoryTypeDesc }}
             </div>
-          </div>
-          <div class="col-6">
-            <div>
-              <label for="dropdown" class="form-label">Cyclage</label>
-              <select id="dropdown" class="form-select" aria-label="Default select example"
-                [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
-                <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
-                  {{ item.springCategoryDesc }}
-                </option>
-              </select>
+          </ng-container>
+        </div>
+        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
+          <h6>Strut Type:</h6>
+          <ng-container *ngFor="let item of doorStrutsTypeList">
+            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+              [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
+              (click)="selectSpringCategoryType(item)">
+              {{ item?.sturtCategoryDesc }}
             </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{ visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
-            <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+   <!-- Strut -->
+   <div class="card mt-2" *ngIf="doorSealCategoryTypeList.length > 0">
+    <div class="card-header">
+      Seals
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-6 mt-1 d-flex" style="gap: 8px;">
+          <ng-container *ngFor="let item of doorSealCategoryTypeList">
+            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+              [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
+              (click)="selectSealCategoryType(item)">
+              {{ item?.doorSealTypeDescription }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-6">
+          <div>
+            <select id="dropdown" class="form-select" aria-label="Default select example"
+              [(ngModel)]="doorSealTypeCategory" (change)="changeSpringCategory($event)">
+              <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
+                {{ item.springCategoryDesc }}
+              </option>
+            </select>
           </div>
-        </div> -->
+
+          <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
+            visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
+          <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

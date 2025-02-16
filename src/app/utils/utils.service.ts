@@ -121,4 +121,26 @@ export class UtilsService {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationSpringDetails`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
+
+  // Function to be used for getting strut categories
+  getStrutCategoryTypes() {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `SturtCategoryType/StrutCategoryTypes`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting strut types
+  strutType(payload: any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationSturtPrice`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  // Function to be used for getting seal categories
+  getDoorSealType() {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `DoorSealType/DoorSealType`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+  getDoorSealTypeCategory(payload: any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationSealCategory`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
 }
