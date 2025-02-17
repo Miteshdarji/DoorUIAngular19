@@ -1,5 +1,164 @@
-<div style="margin-left: 5%; margin-right: 5%;" class="mt-2">
-  <div class="card">
+<!-- ps code -->
+<div class="door-designer-tool"> 
+<div class="container">
+  <div class="row">
+    <!-- Left Part -->
+     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="leftbar">
+        <h2 class="h3">Door Summary</h2>
+        <div class="summary">
+            <!-- Door Visual Canvas -->
+            <!-- if no design -->
+            <div class="visual-canvas-placeholder">
+               <div class="inner d-flex flex-column align-items-center justify-content-center">
+                  <div class="icon d-flex align-items-center justify-content-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M496 480H480V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v416H16C7.164 480 0 487.2 0 496C0 504.8 7.164 512 16 512h480c8.836 0 16-7.164 16-16C512 487.2 504.8 480 496 480zM240 480H64V288h176V480zM240 256H64V64c0-17.67 14.33-32 32-32h144V256zM448 480h-176V288H448V480zM448 256h-176V32H416c17.67 0 32 14.33 32 32V256z"/></svg>
+                  </div>
+                  <div class="text mt-3">
+                    <span class="d-block">Your door design a few clicks away !</span>
+                  </div>
+               </div>
+            </div>
+            <!-- if design add visual canvas -->
+            <div class="visual-canvas mt-2">Finel door design here.. Remove this text and class mt-2</div>
+            <div class="short-info d-flex">
+              <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div>
+              <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
+            </div>
+            <div class="estimate-quote d-flex justify-content-between">
+               <div class="title d-flex align-items-center"><span class="icon d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M512 96H64C46.33 96 32 110.3 32 128V384C32 401.7 46.33 416 64 416H338.2L330.2 448H64C28.65 448 0 419.3 0 384V128C0 92.65 28.65 64 64 64H512C547.3 64 576 92.65 576 128V192C565.1 191.7 554.2 193.6 544 197.6V128C544 110.3 529.7 96 512 96V96zM256 304C256 295.2 263.2 288 272 288H368C376.8 288 384 295.2 384 304C384 312.8 376.8 320 368 320H272C263.2 320 256 312.8 256 304zM464 192C472.8 192 480 199.2 480 208C480 216.8 472.8 224 464 224H272C263.2 224 256 216.8 256 208C256 199.2 263.2 192 272 192H464zM143.1 144C152.8 144 159.1 151.2 159.1 160V169.6C165.9 170.6 178.1 173.2 184.1 174.5C192.7 176.8 197.7 185.6 195.5 194.1C193.2 202.7 184.4 207.7 175.9 205.5C171.9 204.4 158.2 201.7 153.8 201C140.9 199 130.1 200.6 122.9 203.9C115.7 207.2 112.1 211.4 112.4 214.1C111.7 219.1 112.3 221.2 112.9 222.4C113.5 223.8 114.8 225.5 117.8 227.5C124.6 232.1 134.9 235.3 148.8 239.5L149.4 239.7C161.7 243.4 177.3 248.1 188.9 256.5C195.1 261.1 200.9 267.1 204.5 275.3C208.1 283.6 208.8 292.8 207.2 302.5C204.1 319.1 192.6 331.9 177.9 338.2C172.3 340.6 166.3 342.2 160 343.1V352C160 360.8 152.8 368 144 368C135.2 368 128 360.8 128 352V342.4C118.6 340.6 104.5 335.8 95.55 332.7C93.79 332.1 92.22 331.6 90.95 331.2C82.56 328.4 78.03 319.3 80.82 310.9C83.61 302.6 92.67 298 101.1 300.8C102.1 301.5 105 302.2 107.2 302.9C116.7 306.1 127.9 309.9 134.3 310.1C147.6 313.1 158.3 311.8 165.3 308.8C171.8 306 174.7 302.1 175.6 297C176.4 292.4 175.8 289.7 175.1 288.1C174.4 286.4 172.9 284.5 170 282.4C163.5 277.6 153.3 274.3 139.6 270.1L137.5 269.5C125.7 265.9 110.9 261.5 99.87 254C93.65 249.8 87.7 244 83.93 236.1C80.1 228 79.2 219 80.85 209.5C83.73 192.8 95.57 181.2 109.7 174.8C115.3 172.2 121.5 170.4 128 169.3V160C128 151.2 135.2 144 144 144H143.1zM537.5 241.4C556.3 222.6 586.7 222.6 605.4 241.4L622.8 258.7C641.5 277.5 641.5 307.9 622.8 326.6L469.1 480.3C462.9 486.5 455.2 490.8 446.8 492.1L371.9 511.7C366.4 513 360.7 511.4 356.7 507.5C352.7 503.5 351.1 497.7 352.5 492.3L371.2 417.4C373.3 408.9 377.7 401.2 383.8 395.1L537.5 241.4zM582.8 264C576.5 257.8 566.4 257.8 560.2 264L535.3 288.8L575.3 328.8L600.2 303.1C606.4 297.7 606.4 287.6 600.2 281.4L582.8 264zM402.2 425.1L389.1 474.2L439 461.9C441.8 461.2 444.4 459.8 446.4 457.7L552.7 351.4L512.7 311.5L406.5 417.7C404.4 419.8 402.9 422.3 402.2 425.1L402.2 425.1z"/></svg></span>Quote Estimate</div>
+               <span class="price">$ 989.96</span>
+            </div>
+            <div class="main-info">
+               <ul class="info-list list-none">
+                  <li>
+                     <div class="info">
+                        <div class="row">
+                            <div class="col">
+                                <div class="title"><span>Type of door and company</span></div>
+                                <span class="value">Residential CHI</span>
+                            </div>
+                        </div>
+                     </div>
+                  </li>
+                  <li>
+                    <div class="info">
+                       <div class="row">
+                           <div class="col-6">
+                               <div class="title"><span>Width</span></div>
+                               <span class="value">9'0"</span>
+                           </div>
+                           <div class="col-6">
+                            <div class="title"><span>Height</span></div>
+                            <span class="value">7' 0"</span>
+                        </div>
+                        <div class="col-12 space"></div>
+                        <div class="col-12">
+                          <div class="title"><span>Model</span></div>
+                          <span class="value">Timeless , Raised Panel , Short Panel , 2216 , Graphite</span>
+                        </div>
+                       </div>
+                    </div>
+                 </li>
+                 <li>
+                  <div class="info">
+                     <div class="row">
+                         <div class="col">
+                             <div class="title"><span>Window Details</span></div>
+                             <span class="value">Window Quantity:4 Window Glass:Short Panel SP-INS-Obscure , Window Insert: Plain/No Inserts None</span>
+                         </div>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col">
+                           <div class="title"><span>Spring</span></div>
+                           <span class="value">Torsion</span>
+                       </div>
+                       <div class="col">
+                        <div class="title"><span>Cyclage</span></div>
+                        <span class="value">Minimum 10,000 Cycles (10K CYCLES)</span>
+                    </div>
+                   </div>
+                </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col">
+                           <div class="title"><span>Seals</span></div>
+                           <span class="value">Modern Wood Grain Vinyl Trim</span>
+                       </div>
+                       <div class="col">
+                        <div class="title"><span>Lock</span></div>
+                        <span class="value">1 Inside Slide Lock</span>
+                    </div>
+                   </div>
+                </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col">
+                           <div class="title"><span>Strut</span></div>
+                           <span class="value">Strut Mounted</span>
+                       </div>
+                       <div class="col">
+                        <div class="title"><span>Track</span></div>
+                        <span class="value">Bracket Mounted</span>
+                    </div>
+                   </div>
+                </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col">
+                           <div class="title"><span>Jamb Mount</span></div>
+                           <span class="value">12R</span>
+                       </div>
+                       <div class="col">
+                        <div class="title"><span>Jamb Material</span></div>
+                        <span class="value">Wood</span>
+                    </div>
+                   </div>
+                </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col">
+                           <div class="title"><span>Door Operator</span></div>
+                           <span class="value">LiftMaster 98022, Genie 2028, Marantec 380 Head</span>
+                       </div>
+                   </div>
+                </div>
+               </li>
+               <li>
+                <div class="info">
+                   <div class="row">
+                       <div class="col-6">
+                           <div class="title"><span>Perforated Angle</span></div>
+                           <span class="value">---</span>
+                       </div>
+                       <div class="col-6">
+                        <div class="title"><span>Decorative Items</span></div>
+                        <span class="value">---</span>
+                    </div>
+                   </div>
+                </div>
+               </li>
+               </ul>
+            </div>
+        </div>  
+      </div>
+     </div>
+     
+     <!-- Right Part -->
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="card">
     <div class="card-header text-primary">
       <h2>Door Designer</h2>
     </div>
@@ -346,4 +505,8 @@
       </div>
     </div>
   </div>
+     </div>
+  </div>
+
+</div>
 </div>

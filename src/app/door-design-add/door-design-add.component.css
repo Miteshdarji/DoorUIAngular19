@@ -1,3 +1,123 @@
+
 .active {
   background-color: #0B5ED7 !important;
+}
+
+/* Ps */
+.door-designer-tool .leftbar{
+  border: 1px solid #eee;
+}
+
+.door-designer-tool .leftbar h2{
+  padding: 12px 20px;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.door-designer-tool .leftbar .summary{
+   padding: 20px;
+}
+
+.door-designer-tool .leftbar .summary .visual-canvas-placeholder{
+  background-color: #fcfcfc;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.door-designer-tool .leftbar .summary .visual-canvas-placeholder .inner{
+  min-height: 200px;
+}
+
+.door-designer-tool .leftbar .summary .visual-canvas-placeholder .icon{
+  background-color: var(--tc-secondary);
+  border-radius: 100px;
+  width: 90px;
+  height: 90px;
+  outline: 1px dashed var(--tc-secondary);
+  outline-offset: 3px;
+}
+
+.door-designer-tool .leftbar .summary .visual-canvas-placeholder .icon svg{
+   height: 42px;
+   fill: #fff;
+}
+
+.door-designer-tool .leftbar .summary .visual-canvas{
+  border: 1px solid #eee;
+  border-radius: 3px 3px 0px 0px;
+  overflow: hidden;
+}
+
+.door-designer-tool .leftbar .summary .short-info{
+  padding: 10px 15px;
+  border: 1px solid #eee;
+  border-top: none;
+  margin-bottom: 16px;
+  font-size: 14px;
+  border-radius: 0px 0px 3px 3px;
+}
+
+.door-designer-tool .leftbar .summary .short-info .icon{
+  margin-right: 8px;
+}
+
+.door-designer-tool .leftbar .summary .short-info .icon svg{
+  width: 15px;
+  fill: var(--tc-secondary);
+}
+
+.door-designer-tool .leftbar .summary .estimate-quote{
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 15px 20px;
+  margin: 0 -20px;
+}
+
+.door-designer-tool .leftbar .summary .estimate-quote .title{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.door-designer-tool .leftbar .summary .estimate-quote .title .icon{
+  margin-right: 8px;
+  height: 35px;
+  width: 35px;
+  border-radius: 100px;
+  background-color: #fcfcfc;
+  border: 1px solid #eee;
+  color: #fff;
+}
+
+.door-designer-tool .leftbar .summary .estimate-quote .title .icon svg{
+  height: 18px;
+}
+
+.door-designer-tool .leftbar .summary .estimate-quote .price{
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.door-designer-tool .leftbar .summary .main-info ul.info-list li{
+  border-bottom: 1px solid #eee;
+  padding: 6px 0px;
+}
+
+.door-designer-tool .leftbar .summary .main-info ul.info-list li:last-child{
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .space{
+  height: 10px;
+}
+
+.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .title{
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .value{
+  font-size: 14px;
+  color: #252525;
 }
