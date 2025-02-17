@@ -51,6 +51,10 @@ export class DoorDesignAddComponent implements OnInit {
   colSize = 0; // Default number of columns
   grid: string[][] = [];
   selectedBoxes: boolean[][] = [];
+  fileBackImage: string = '';
+  repeatfilePath: string = '';
+  dynamicLeftBackImageUrl: string = '';
+  bgColor: string = '';
   // ===  Visualize UI [Start] ===== 
 
   constructor(private utilsService: UtilsService) { }
@@ -139,6 +143,15 @@ export class DoorDesignAddComponent implements OnInit {
   getDoorPanels(doorSubCollection: number) {
     this.utilsService.getDoorPanels(doorSubCollection).subscribe((data: any) => {
       this.doorPanelList = data?.payload;
+      console.log('Background Image: ', this.doorPanelList);
+      console.log('Background Image: ', this.doorPanelList[0].repeatfilePath);
+      
+      this.repeatfilePath = this.doorPanelList[0].repeatfilePath;
+      //this.bgColor = this.doorModelList[0]?.lstDoorColor[1]?.colorCode;
+      //this.dynamicLeftBackImageUrl = this.doorPanelList[0].repeatfilePath;
+       console.log('@@@@@@@@@@');
+       console.log(this.bgColor);
+
     }, (error) => {
       console.error('Error During door typeOfDoorsList :', error);
     })
@@ -161,6 +174,9 @@ export class DoorDesignAddComponent implements OnInit {
       console.log('****** Final Column  ', this.doorModelList[0]?.widthSection);   
       this.rowSize = this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail.length;
       this.colSize = this.doorModelList[0]?.widthSection;
+      this.bgColor = this.doorModelList[0]?.lstDoorColor[0]?.colorCode;
+      //this.fileBackImage = this.doorModelList[0]?.lstDoorColor[0]?.fileBackPath;
+      console.log('****** Back Image :  ', this.repeatfilePath);   
       this.initializeGrid();
 
 //       console.log('Data:', this.doorModelList[0]?.noOfSection);
@@ -188,7 +204,7 @@ initializeGrid() {
     this.selectedBoxes[i] = [];
     for (let j = 0; j < this.rowSize; j++) {
       this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
-      this.selectedBoxes[i][j] = false; // Default unchecked
+      this.selectedBoxes[i][j] = true; // Default unchecked
     }
   }
 }

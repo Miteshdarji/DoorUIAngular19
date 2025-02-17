@@ -16,6 +16,7 @@
 }
 
 .grid-container {
+  /* border: 1px solid; */
   display: flex;
   justify-content: center; /* Center align the grids */
   gap: 50px; /* Adjust spacing between grids */
@@ -24,12 +25,23 @@
 
 .grid {
   display: grid;
-  gap: 10px;
+  gap: 1px;
   align-items: center;
   justify-content: center;
 }
 
-.box {
+.box-left {
+  width: 120px;
+  height: 90px;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.box-right {
   width: 100px;
   height: 100px;
   border: 1px solid #000;
@@ -49,7 +61,10 @@
 }
 
 /* Ensure both left and right grids have equal width */
-.left-grid,
+.left-grid{
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 100px);
+}
 .right-grid {
   display: grid;
   grid-template-columns: repeat(var(--columns), 100px);
@@ -59,8 +74,10 @@
 
 /* Mitesh Darji */
 .innerImg {
-  width: 100px;
-  height: 100px;
+  width: 86%;
+  height: 86%;
+  position: absolute;
+  object-fit: cover;
 }
 
 /* for checkbox all logic */
@@ -83,4 +100,11 @@
   .check-all-btn:hover {
     background-color: lightgreen; /* Darker green on hover */
   }
+}
+
+.background-div {
+  width: 50%;
+  height: 50%;
+  background-size: cover;
+  background-position: center;
 }

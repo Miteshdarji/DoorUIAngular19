@@ -1,21 +1,22 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
-        <!-- Left Side Visualization -->
+    <div class="col-md-4">
+      <!-- Left Side Visualization -->
         <div class="container">
           <!-- Dynamic Grid Size Controls -->
-          <div class="grid-controls">
+          <!-- <div class="grid-controls">
             <label>Rows: <input type="number" [(ngModel)]="rowSize" (change)="updateGrid()"></label>
             <label>Columns: <input type="number" [(ngModel)]="colSize" (change)="updateGrid()"></label>
-          </div>
-        
+          </div> -->
+          <label><b>Visualization Summary</b></label>
           <div class="grid-container">
             <!-- Left Side (Display Boxes with Image) -->
-            <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+            <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 120px)'"
+                                   [style.gridTemplateRows]="'repeat(auto-fill, 100px)'">
               <div *ngFor="let row of grid; let rowIndex = index">
-                <div *ngFor="let cell of row; let colIndex = index" class="box">
-                  
-                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="assets/white.png" alt="Selected" class="innerImg">
+                <div *ngFor="let cell of row; let colIndex = index" class="box-left" [ngStyle]="{'background-color': bgColor}">
+                  <!-- <div [style.backgroundImage]="'url(' + dynamicLeftBackImageUrl + ')'" class="background-div"></div> -->
+                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg">
                 </div>
               </div>
             </div>
@@ -23,11 +24,10 @@
             <!-- right side -->
           </div>
         </div>
-       
 
-      <app-door-design-visualize></app-door-design-visualize>
+      <!-- <app-door-design-visualize></app-door-design-visualize> -->
     </div>
-    <div class="col-9">
+    <div class="col-md-8">
       <div class="m-2">
         <div class="card">
           <div class="card-header text-primary">
@@ -219,18 +219,18 @@
           <div class="card-header">
             Windows
           </div>
-          <div class="card-body">
-            <div class="row mt-2">
+          <div class="card-body" style="margin-left:50px;">
+            <div class="row mt-10">
                   <!-- Right Side (Checkbox Grid) -->
             <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
               <div *ngFor="let row of grid; let rowIndex = index">
                  <!-- "Check All" button inside the first row of each column -->
-                <div *ngFor="let cell of row; let colIndex = index" class="box">
+                <div *ngFor="let cell of row; let colIndex = index" class="box-right">
                   <button *ngIf="rowIndex === 0" class="check-all-btn" (click)="toggleColumnSelection(colIndex)">ALL</button>
                   <label>
                     <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
                            (change)="onCheckboxChange(rowIndex, colIndex, $event)">
-                    {{ cell }}
+                    <!-- {{ cell }} -->
                   </label>
                 </div>
               </div>
