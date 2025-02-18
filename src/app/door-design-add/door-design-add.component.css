@@ -1,35 +1,30 @@
-
-.active {
-  background-color: #0B5ED7 !important;
-}
-
 /* Ps */
 .door-designer-tool .leftbar{
   border: 1px solid #eee;
 }
 
-.door-designer-tool .leftbar h2{
+.door-designer-tool .section-title h2{
   padding: 12px 20px;
   margin: 0;
   border-bottom: 1px solid #eee;
 }
 
-.door-designer-tool .leftbar .summary{
+.door-designer-tool .summary{
    padding: 20px;
 }
 
-.door-designer-tool .leftbar .summary .visual-canvas-placeholder{
+.door-designer-tool .summary .visual-canvas-placeholder{
   background-color: #fcfcfc;
   border: 1px solid #eee;
   border-radius: 3px;
   padding: 20px;
 }
 
-.door-designer-tool .leftbar .summary .visual-canvas-placeholder .inner{
+.door-designer-tool .summary .visual-canvas-placeholder .inner{
   min-height: 200px;
 }
 
-.door-designer-tool .leftbar .summary .visual-canvas-placeholder .icon{
+.door-designer-tool .summary .visual-canvas-placeholder .icon{
   background-color: var(--tc-secondary);
   border-radius: 100px;
   width: 90px;
@@ -38,18 +33,18 @@
   outline-offset: 3px;
 }
 
-.door-designer-tool .leftbar .summary .visual-canvas-placeholder .icon svg{
+.door-designer-tool .summary .visual-canvas-placeholder .icon svg{
    height: 42px;
    fill: #fff;
 }
 
-.door-designer-tool .leftbar .summary .visual-canvas{
+.door-designer-tool .summary .visual-canvas{
   border: 1px solid #eee;
   border-radius: 3px 3px 0px 0px;
   overflow: hidden;
 }
 
-.door-designer-tool .leftbar .summary .short-info{
+.door-designer-tool .summary .short-info{
   padding: 10px 15px;
   border: 1px solid #eee;
   border-top: none;
@@ -58,28 +53,28 @@
   border-radius: 0px 0px 3px 3px;
 }
 
-.door-designer-tool .leftbar .summary .short-info .icon{
+.door-designer-tool .summary .short-info .icon{
   margin-right: 8px;
 }
 
-.door-designer-tool .leftbar .summary .short-info .icon svg{
+.door-designer-tool .summary .short-info .icon svg{
   width: 15px;
   fill: var(--tc-secondary);
 }
 
-.door-designer-tool .leftbar .summary .estimate-quote{
+.door-designer-tool .summary .estimate-quote{
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   padding: 15px 20px;
   margin: 0 -20px;
 }
 
-.door-designer-tool .leftbar .summary .estimate-quote .title{
+.door-designer-tool .summary .estimate-quote .title{
   font-weight: 700;
   font-size: 18px;
 }
 
-.door-designer-tool .leftbar .summary .estimate-quote .title .icon{
+.door-designer-tool .summary .estimate-quote .title .icon{
   margin-right: 8px;
   height: 35px;
   width: 35px;
@@ -89,35 +84,176 @@
   color: #fff;
 }
 
-.door-designer-tool .leftbar .summary .estimate-quote .title .icon svg{
+.door-designer-tool .summary .estimate-quote .title .icon svg{
   height: 18px;
 }
 
-.door-designer-tool .leftbar .summary .estimate-quote .price{
+.door-designer-tool .summary .estimate-quote .price{
   font-size: 25px;
   font-weight: 700;
 }
 
-.door-designer-tool .leftbar .summary .main-info ul.info-list li{
+.door-designer-tool .summary .main-info ul.info-list li{
   border-bottom: 1px solid #eee;
   padding: 6px 0px;
 }
 
-.door-designer-tool .leftbar .summary .main-info ul.info-list li:last-child{
+.door-designer-tool .summary .main-info ul.info-list li:last-child{
   padding-bottom: 0;
   border-bottom: none;
 }
 
-.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .space{
+.door-designer-tool .summary .main-info ul.info-list li .info .space{
   height: 10px;
 }
 
-.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .title{
+.door-designer-tool .summary .main-info ul.info-list li .info .title{
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.door-designer-tool .leftbar .summary .main-info ul.info-list li .info .value{
+.door-designer-tool .summary .main-info ul.info-list li .info .value{
   font-size: 14px;
   color: #252525;
+}
+
+.door-designer-tool .right-part{
+  border: 1px solid #eee;
+}
+
+.door-designer-tool .designer{
+  padding: 20px;
+}
+
+.door-designer-tool .designer .info-text{
+  font-size: 14px;
+}
+
+.door-designer-tool .designer .selection-button-list{
+   display: flex;
+   flex-flow: wrap;
+   align-items: center;
+   gap: 10px;
+}
+
+.door-designer-tool .designer .item-box{
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 3px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  
+}
+
+.door-designer-tool .designer .item-box.active{
+   border-color: #ccc;
+   background-color: #eee;
+}
+
+.door-designer-tool .designer .item-box.active:after{
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: var(--tc-secondary);
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+}
+
+.door-designer-tool .designer .item-box .box-title{
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.door-designer-tool .designer .model-box{
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 3px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  padding: 30px 20px;
+}
+
+.door-designer-tool .designer .model-box .box-label{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  background-color: #eee;
+  padding: 3px 12px;
+  font-size: 12px;
+  border-radius: 100px;
+}
+
+.door-designer-tool .designer .model-box.active .box-label{
+  background-color: #fff;
+}
+
+.door-designer-tool .designer .model-box.active{
+   border-color: #ccc;
+   background-color: #eee;
+}
+
+.door-designer-tool .designer .model-box.active:after{
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: var(--tc-secondary);
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+}
+
+
+
+.door-designer-tool .designer .color-box{
+  border: 1px solid #eee;
+  border-radius: 3px;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.door-designer-tool .designer .color-box.active{
+   border-color: #ccc;
+   background-color: #eee;
+}
+
+.door-designer-tool .designer .color-box.active:after{
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: var(--tc-secondary);
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px;
+}
+
+.door-designer-tool .designer .color-box .img-wrap img:not([src]){
+  display: none;
+}
+
+.door-designer-tool .designer .color-box .box-title{
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
 }
