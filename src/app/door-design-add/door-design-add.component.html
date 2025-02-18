@@ -174,7 +174,7 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
               <div class="form-group">
               <label for="dropdown" class="form-label">Door Company </label>
               <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorCompany">
@@ -185,9 +185,9 @@
               </select>
              </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
               <div class="form-group">
-              <label for="dropdown" class="form-label">Types of doors </label>
+              <label for="dropdown" class="form-label">Types of Doors </label>
               <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorType">
                 <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
                   {{ item.doorTypeName }}
@@ -195,7 +195,7 @@
               </select>
               </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
               <div class="form-group mb-0">
               <label for="exampleFormControlInput1" class="form-label">Quantity </label>
               <div class="quantity-box">
