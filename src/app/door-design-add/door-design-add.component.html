@@ -169,9 +169,6 @@
     <div class="designer">
 
       <div class="card">
-        <div class="card-header">
-          Add Title
-        </div>
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-5 col-lg-5">
@@ -253,7 +250,7 @@
           <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
             [(ngModel)]="doorWidthFt">
           <button class="button btn-pluse" type="button" (click)="doorWidthFt = doorWidthFt + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">FT</button>
+          <button class="button btn-label" type="button">Ft</button>
         </div>
         </div>
 
@@ -264,7 +261,7 @@
           <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
             [(ngModel)]="doorWidthInch">
           <button class="button btn-pluse" type="button" (click)="doorWidthInch = doorWidthInch + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">IN</button>
+          <button class="button btn-label" type="button">In</button>
         </div>
         </div>
 
@@ -282,7 +279,7 @@
           <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
             [(ngModel)]="doorHeightFt">
           <button class="button btn-pluse" type="button" (click)="doorHeightFt = doorHeightFt + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">FT</button>
+          <button class="button btn-label" type="button">Ft</button>
         </div>
         </div>
 
@@ -294,7 +291,7 @@
             [(ngModel)]="doorHeightInch">
           <button class="button btn-pluse" type="button" (click)="doorHeightInch = doorHeightInch + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg>
           </button>
-          <button class="button btn-label" type="button">IN</button>
+          <button class="button btn-label" type="button">In</button>
         </div>
       </div>
       </div>
@@ -326,7 +323,7 @@
       <div class="row g-3">
         <ng-container *ngFor="let item of doorSubCollectionList">
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box"
+          <div class="item-box box-active"
             [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}" (click)="selectSubCollection(item)">
             <div class="image-wrap aspect-custom loader" style="--aspect-custom: 78.5%">
               <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
@@ -355,7 +352,7 @@
         <div class="row g-3">
         <ng-container *ngFor="let item of doorPanelList">
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box" [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
+          <div class="item-box box-active" [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
             <div class="image-wrap aspect-custom loader" style="--aspect-custom: 20%">
               <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
             </div>
@@ -372,14 +369,14 @@
       <label class="form-label">Select Model number</label>
        <div class="row g-3">
         <ng-container *ngFor="let item of doorModelList">
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="model-box" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-            <div class="content">
-            <p class="mb-2">{{item?.doorModelName}}</p>
-            <p class="mb-0">{{item?.range}}</p>
-            </div>
+          <div class="col-auto">
+          <div class="model-box d-flex flex-column align-items-center justify-content-center" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
             <div class="box-label">
               <span>{{item?.quality}}</span>
+            </div>
+            <div class="content">
+            <p class="mb-1">{{item?.doorModelName}}</p>
+            <p class="mb-0">{{item?.range}}</p>
             </div>
           </div>
         </div>
@@ -399,9 +396,9 @@
        <label class="form-label">Select Color</label>
        <div class="row g-3">
         <ng-container *ngFor="let item of doorColorList">
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+          <div class="col-auto">
           <div class="color-box" [ngClass]="{'active': doorColor == item.doorColorId}">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 56%" [ngStyle]="{'background-color': item?.colorCode }" (click)="selectColor(item)">
+            <div class="image-wrap aspect-custom loader" [ngStyle]="{'background-color': item?.colorCode }" (click)="selectColor(item)">
               <img [src]="item?.fileBackPath" alt="">
             </div>
             <div class="box-title">
@@ -416,169 +413,397 @@
   </div>
 
   <!-- Window Glass -->
-  <div class="card mt-2" *ngIf="doorWindowGlassCategoryList.length > 0">
+  <div class="card mt-3" *ngIf="doorWindowGlassCategoryList.length > 0">
     <div class="card-header">
       Window Glass
     </div>
     <div class="card-body">
-      <div class="mt-2 d-flex" style="gap: 8px;">
+
+      <div class="form-group">
+      <label class="form-label">Select Window Glass</label>
+      <div class="selection-button-list">
         <ng-container *ngFor="let item of doorWindowGlassCategoryList">
-          <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-            [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
+          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
             (click)="selectWindowGlassCategory(item)">
-            {{ item?.factoryGlazeTypeDesc }}
-          </div>
+            <span>{{ item?.factoryGlazeTypeDesc }}</span>
+          </button>
         </ng-container>
+        </div>
       </div>
 
-      <div class="d-flex mt-2" style="gap: 10px;">
+      <div class="form-group mb-0">
+      <div class="row g-3">
         <ng-container *ngFor="let item of doorWindowGlassSubCategoryList">
-          <div style="background-color: rgb(192, 190, 190);"
-            [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+           <div class="item-box box-active" [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
             (click)="selectWindowGlassSubCategory(item)">
-            <div style="margin: auto;">
+            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 66%;">
               <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
             </div>
-            <p>{{item?.factoryGlazeSizeDesc}}</p>
+            <div class="box-title">
+              <span>{{item?.factoryGlazeSizeDesc}}</span>
+            </div>
+           </div>
           </div>
         </ng-container>
       </div>
+    </div>
+
+
     </div>
   </div>
 
   <!-- Window Insert -->
-  <div class="card mt-2" *ngIf="doorWindowInsertCategoryList.length > 0">
+  <div class="card mt-3" *ngIf="doorWindowInsertCategoryList.length > 0">
     <div class="card-header">
       Window Insert
     </div>
     <div class="card-body">
-      <div class="mt-2 d-flex" style="gap: 8px;">
+
+      <div class="form-group">
+       <label class="form-label">Select Window Insert</label>
+       <div class="selection-button-list">
         <ng-container *ngFor="let item of doorWindowInsertCategoryList">
-          <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-            [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
+          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
             (click)="selectWindowInsertCategory(item)">
-            {{ item?.doorInsulatedTypeName }}
-          </div>
+            <span>{{ item?.doorInsulatedTypeName }}</span>
+          </button>
         </ng-container>
+      </div>
       </div>
 
-      <div class="d-flex mt-2" style="gap: 10px;">
+      
+      <div class="form-group mb-0">
+        <div class="row g-3">
         <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
-          <div style="background-color: rgb(192, 190, 190);"
-            [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
+          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+          <div class="item-box box-active" [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
             (click)="selectWindowInsertSubCategory(item)">
-            <div style="margin: auto;">
+            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 68%;">
               <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
             </div>
-            <p>{{item?.doorInsulatedDesc}}</p>
+            <div class="box-title">
+              <span>{{item?.doorInsulatedDesc}}</span>
+            </div>
+          </div>
           </div>
         </ng-container>
       </div>
+      </div>
+
+
     </div>
   </div>
 
   <!-- Spring -->
-  <div class="card mt-2" *ngIf="doorSpringCategoryTypeList.length > 0">
+  <div class="card mt-3" *ngIf="doorSpringCategoryTypeList.length > 0">
     <div class="card-header">
       Spring
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-6">
-          <p> <b>Spring</b> </p>
-          <div class="mt-1 d-flex" style="gap: 8px;">
+
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+          <div class="form-group mb-0">
+            <label class="form-label">Select Spring</label>
+            <div class="selection-button-list">
             <ng-container *ngFor="let item of doorSpringCategoryTypeList">
-              <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-                [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
+              <button class="button button-grey button-check-icon" [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
                 (click)="selectSpringCategoryType(item)">
-                {{ item?.springCategoryTypeName }}
-              </div>
+                <span>{{ item?.springCategoryTypeName }}</span>
+              </button>
             </ng-container>
           </div>
         </div>
-        <div class="col-6">
-          <div>
-            <label for="dropdown" class="form-label">Cyclage</label>
-            <select id="dropdown" class="form-select" aria-label="Default select example"
+        </div>
+
+
+        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+          <div class="form-group mb-0">
+            <label for="dropdown" class="form-label">Select Cyclage</label>
+            <select id="dropdown" class="form-select-custom" aria-label="Default select example"
               [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
               <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
                 {{ item.springCategoryDesc }}
               </option>
             </select>
-          </div>
+            <div class="info-text text-success" *ngIf="visualizationSpringDetails">Price : <b class="fw-medium">$ {{
+              visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
 
-          <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
-            visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
-          <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+            <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Strut -->
-  <div class="card mt-2" *ngIf="doorStrutCategoryTypeList.length > 0">
+  <div class="card mt-3" *ngIf="doorStrutCategoryTypeList.length > 0">
     <div class="card-header">
       Strut
     </div>
     <div class="card-body">
-      <div class="row">
-        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
-          <h6>Strut Catogary (Height/Ga/KSI):</h6>
-          <ng-container *ngFor="let item of doorStrutCategoryTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
-              (click)="selectStrutCategoryType(item)">
-              {{ item?.sturtCategoryTypeDesc }}
-            </div>
-          </ng-container>
-        </div>
-        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
-          <h6>Strut Type:</h6>
-          <ng-container *ngFor="let item of doorStrutsTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
-              (click)="selectSpringCategoryType(item)">
-              {{ item?.sturtCategoryDesc }}
-            </div>
-          </ng-container>
-        </div>
+
+      <div class="form-group">
+        <label for="dropdown" class="form-label">Select Strut Catogary (Height/Ga/KSI)</label>
+        <div class="selection-button-list">
+       <ng-container *ngFor="let item of doorStrutCategoryTypeList">
+         <button class="button button-grey button-check-icon" [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
+           (click)="selectStrutCategoryType(item)">
+           <span>{{ item?.sturtCategoryTypeDesc }}</span>
+         </button>
+       </ng-container>
+       </div>
       </div>
+
+      <div class="form-group mb-0">
+        <label for="dropdown" class="form-label">Select Strut Type</label>
+        <div class="selection-button-list">
+       <ng-container *ngFor="let item of doorStrutsTypeList">
+         <button class="button button-grey button-check-icon" [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
+           (click)="selectSpringCategoryType(item)">
+           <span>{{ item?.sturtCategoryDesc }}</span>
+         </button>
+       </ng-container>
+       </div>
+     </div>
+
     </div>
   </div>
 
    <!-- Strut -->
-   <div class="card mt-2" *ngIf="doorSealCategoryTypeList.length > 0">
+   <div class="card mt-3" *ngIf="doorSealCategoryTypeList.length > 0">
     <div class="card-header">
       Seals
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-6 mt-1 d-flex" style="gap: 8px;">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+          <div class="form-group mb-0">
+            <label for="dropdown" class="form-label">Select Strut Type</label>
+            <div class="selection-button-list">
           <ng-container *ngFor="let item of doorSealCategoryTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
+            <button class="button button-grey button-check-icon" [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
               (click)="selectSealCategoryType(item)">
-              {{ item?.doorSealTypeDescription }}
-            </div>
+              <span>{{ item?.doorSealTypeDescription }}</span>
+            </button>
           </ng-container>
+          </div>
+          </div>
         </div>
-        <div class="col-6">
-          <div>
+        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+
+          <div class="form-group mb-0">
+            <label for="dropdown" class="form-label">Select Label Here</label>
             <select id="dropdown" class="form-select" aria-label="Default select example"
               [(ngModel)]="doorSealTypeCategory" (change)="changeSpringCategory($event)">
               <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
                 {{ item.springCategoryDesc }}
               </option>
             </select>
+            <div class="info-text text-success" *ngIf="visualizationSpringDetails">Price : <b class="fw-medium">$ {{
+              visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
+              <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</div>
           </div>
 
-          <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
-            visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
-          <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+          
         </div>
       </div>
     </div>
   </div>
+
+
+   
+  <!-- Track -->
+  <div class="card mt-3">
+    <div class="card-header">
+      Track
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label for="dropdown" class="form-label">Select Track</label>
+        <div class="selection-button-list">
+           <button class="button button-grey button-check-icon active"><span>Bracket Mounted</span></button>   
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dropdown" class="form-label">Track Radius</label>
+        <div class="selection-button-list">
+           <button class="button button-grey button-check-icon active"><span>12R</span></button>   
+           <button class="button button-grey button-check-icon"><span>15R</span></button>   
+           <button class="button button-grey button-check-icon"><span>32R</span></button>   
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dropdown" class="form-label">Select Low Headroom</label>
+        <div class="selection-button-list">
+           <button class="button button-grey button-check-icon"><span>DMI 18-TR-LHR-7</span></button>   
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group mb-0">
+             <label for="dropdown" class="form-label">Highlift</label>
+             <input type="number" class="form-control-custom">
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group mb-0">
+             <label for="dropdown" class="form-label">Select Roofpitch</label>
+             <select class="form-select-custom">
+               <option>Select Roofpitch</option>
+               <option>2/12</option>
+               <option>3/12</option>
+               <option>4/12</option>
+             </select>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="form-group mb-0">
+             <label for="dropdown" class="form-label">Select Fullvert</label>
+             <select class="form-select-custom">
+               <option>Select Fullvert</option>
+               <option>Option 1</option>
+               <option>Option 2</option>
+               <option>Option 3</option>
+             </select>
+          </div>
+        </div>
+
+      </div>
+
+  </div>
+ </div>
+
+<!-- Door lock -->
+ <div class="card mt-3">
+  <div class="card-header">
+    Door lock
+  </div>
+  <div class="card-body">
+    <div class="form-group mb-0">
+      <label class="form-label">Select Door lock</label>
+      <div class="row g-3">
+
+
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+          <div class="item-box box-active active">
+            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
+              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
+            </div>
+            <div class="box-title border-top-tc">
+              <span>1 Inside Slide Lock</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+          <div class="item-box box-active">
+            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
+              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
+            </div>
+            <div class="box-title border-top-tc">
+              <span>1 Inside Slide Lock</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+          <div class="item-box box-active">
+            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
+              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
+            </div>
+            <div class="box-title border-top-tc">
+              <span>1 Inside Slide Lock</span>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+        </div>
+  </div>
+  </div>
+
+  <!-- Door Operator -->
+  <div class="card mt-3">
+    <div class="card-header">
+      Door Operator
+    </div>
+    <div class="card-body">
+      <div class="form-group mb-0">
+        <label class="form-label">Select Door Operator</label>
+        <div class="row g-3">
+  
+  
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="item-box box-active active">
+              <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
+                <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
+              </div>
+              <div class="box-select border-top-tc">
+                <div class="operatore">
+                  <select class="form-select-custom form-select-custom-sm">
+                    <option>Select Operator</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select> 
+                </div>
+                <div class="operatore">
+                  <select class="form-select-custom form-select-custom-sm">
+                    <option>Select Operator</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select> 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="item-box box-active">
+              <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
+                <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
+              </div>
+              <div class="box-select border-top-tc">
+                <div class="operatore">
+                  <select class="form-select-custom form-select-custom-sm">
+                    <option>Select Operator</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select> 
+                </div>
+                <div class="operatore">
+                  <select class="form-select-custom form-select-custom-sm">
+                    <option>Select Operator</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select> 
+                </div>
+              </div>
+            </div>
+          </div>
+  
+         
+  
+  
+          </div>
+          </div>
+    </div>
+    </div>
+
+
   </div>
   </div>
   </div>

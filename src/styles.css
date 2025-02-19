@@ -488,6 +488,13 @@ h6,
 	cursor: pointer
 }
 
+.form-select-custom-sm{
+	height: 35px;
+	font-size: 14px;
+	background-position: right 12px center;
+	background-size: 10px;
+}
+
 .custom-checkbox {
 	position: absolute;
 	opacity: 0
@@ -588,16 +595,18 @@ h6,
 
 .card{
 	border-radius: 3px;
-	border: 1px solid #eee;
+	border: 1px solid #ccc;
 	overflow: hidden;
 }
 
 .card-header{
 	padding: 12px 20px;
-    background-color: #fcfcfc;
+    background-color: #5d5d5d;
+	color: #fff;
     border-radius: 0;
     font-weight: 600;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ccc;
+	border-radius: 0 !important;
 }
 
 .card-body{

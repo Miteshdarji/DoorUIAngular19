@@ -127,6 +127,7 @@
 
 .door-designer-tool .designer .info-text{
   font-size: 14px;
+  margin-top: 5px;
 }
 
 .door-designer-tool .designer .selection-button-list{
@@ -146,114 +147,110 @@
   
 }
 
-.door-designer-tool .designer .item-box.active{
-   border-color: #ccc;
-   background-color: #eee;
-}
-
-.door-designer-tool .designer .item-box.active:after{
-  content: "";
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 20px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: var(--tc-secondary);
-	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
-	background-position: center;
-  background-repeat: no-repeat;
-  background-size: 10px;
-}
-
 .door-designer-tool .designer .item-box .box-title{
   text-align: center;
   padding: 10px;
   font-size: 14px;
 }
 
+.door-designer-tool .designer .item-box .box-select.border-top-tc,
+.door-designer-tool .designer .item-box .box-title.border-top-tc{
+    border-top: 1px solid #eee;
+    margin: 0 -5px;
+}
+
+.door-designer-tool .designer .item-box .box-select{
+  padding: 0 10px;
+}
+
+.door-designer-tool .designer .item-box .box-select>div{
+  margin-top: 8px;
+}
+
 .door-designer-tool .designer .model-box{
   border: 1px solid #eee;
-  padding: 5px;
-  border-radius: 3px;
-  height: 100%;
+  border-radius: 50%;
   cursor: pointer;
   position: relative;
   text-align: center;
   overflow: hidden;
   padding: 30px 20px;
+  height: 130px;
+  width: 130px;
 }
 
 .door-designer-tool .designer .model-box .box-label{
-  position: absolute;
-  left: 5px;
-  top: 5px;
   background-color: #eee;
   padding: 3px 12px;
   font-size: 12px;
   border-radius: 100px;
+  margin-bottom: 10px;
 }
 
 .door-designer-tool .designer .model-box.active .box-label{
   background-color: #fff;
 }
 
-.door-designer-tool .designer .model-box.active{
-   border-color: #ccc;
-   background-color: #eee;
-}
-
-.door-designer-tool .designer .model-box.active:after{
-  content: "";
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 20px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: var(--tc-secondary);
-	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
-	background-position: center;
-  background-repeat: no-repeat;
-  background-size: 10px;
-}
-
-
-
 .door-designer-tool .designer .color-box{
-  border: 1px solid #eee;
-  border-radius: 3px;
-  height: 100%;
   cursor: pointer;
   position: relative;
+  max-width: 90px;
 }
 
-.door-designer-tool .designer .color-box.active{
-   border-color: #ccc;
-   background-color: #eee;
+.door-designer-tool .designer .color-box .image-wrap{
+  height: 80px;
+  width: 80px;
+  margin: auto;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
 }
 
-.door-designer-tool .designer .color-box.active:after{
+.door-designer-tool .designer .color-box.active .image-wrap{
+  outline-color: #ccc;
+}
+
+.door-designer-tool .designer .color-box.active .image-wrap:after{
   content: "";
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 50%;
+  left: 50%;
   width: 20px;
   height: 20px;
   border-radius: 100px;
+  transform: translate(-50%, -50%);
   background-color: var(--tc-secondary);
-	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
-	background-position: center;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: 10px;
-}
-
-.door-designer-tool .designer .color-box .img-wrap img:not([src]){
-  display: none;
+  background-size: 10px; 
 }
 
 .door-designer-tool .designer .color-box .box-title{
   text-align: center;
-  padding: 10px;
   font-size: 14px;
+  margin-top: 10px;
+}
+
+
+.door-designer-tool .designer .box-active.active{
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.door-designer-tool .designer .box-active.active:after{
+ content: "";
+ position: absolute;
+ top: 5px;
+ right: 5px;
+ width: 20px;
+ height: 20px;
+ border-radius: 100px;
+ background-color: var(--tc-secondary);
+ background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 448 512"><path d="M443.3 100.7C449.6 106.9 449.6 117.1 443.3 123.3L171.3 395.3C165.1 401.6 154.9 401.6 148.7 395.3L4.686 251.3C-1.562 245.1-1.562 234.9 4.686 228.7C10.93 222.4 21.06 222.4 27.31 228.7L160 361.4L420.7 100.7C426.9 94.44 437.1 94.44 443.3 100.7H443.3z"/></svg>');
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: 10px;
 }
