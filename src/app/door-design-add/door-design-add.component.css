@@ -1,12 +1,14 @@
 /* Ps */
 .door-designer-tool .leftbar{
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
 }
 
 .door-designer-tool .section-title h2{
   padding: 12px 20px;
   margin: 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
+  background-color: #5d5d5d;
+  color: #fff;
 }
 
 .door-designer-tool .summary{
@@ -118,7 +120,7 @@
 }
 
 .door-designer-tool .right-part{
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
 }
 
 .door-designer-tool .designer{
@@ -138,7 +140,7 @@
 }
 
 .door-designer-tool .designer .item-box{
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
   padding: 5px;
   border-radius: 3px;
   height: 100%;
@@ -155,7 +157,7 @@
 
 .door-designer-tool .designer .item-box .box-select.border-top-tc,
 .door-designer-tool .designer .item-box .box-title.border-top-tc{
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ddd;
     margin: 0 -5px;
 }
 
@@ -168,33 +170,87 @@
 }
 
 .door-designer-tool .designer .model-box{
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
+  outline: 1px solid transparent;
+  outline-offset: 2px;
+  background-color: var(--bs-light);
   border-radius: 50%;
   cursor: pointer;
   position: relative;
   text-align: center;
   overflow: hidden;
-  padding: 30px 20px;
+  padding: 20px 20px;
   height: 130px;
   width: 130px;
+  font-size: 14px;
+}
+
+.door-designer-tool .designer .model-box.active{
+  background-color: var(--gray-200);
+  border-color: #ddd;
+  outline-color: #ddd;
 }
 
 .door-designer-tool .designer .model-box .box-label{
-  background-color: #eee;
+  background-color: #5d5d5d;
+  color: #fff;
   padding: 3px 12px;
   font-size: 12px;
   border-radius: 100px;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
-.door-designer-tool .designer .model-box.active .box-label{
-  background-color: #fff;
+.door-designer-tool .designer .model-box .star-rating{
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+.door-designer-tool .designer .model-box .star-rating svg{
+  height: 130px;
+  width: 130px;
+  transform: rotate(180deg);
+}
+
+.door-designer-tool .designer .model-box .star-rating svg textPath{
+  letter-spacing: 3px;
+}
+
+.door-designer-tool .designer .model-box .star-rating svg textPath tspan,
+.door-designer-tool .designer .model-box .star-rating[data-rating="0"] svg textPath tspan{
+  fill: #8b8b8b;
+}
+
+.door-designer-tool .designer .model-box .star-rating[data-rating="1"] svg textPath tspan:nth-child(5){
+  fill: var(--bs-yellow);
+}
+
+.door-designer-tool .designer .model-box .star-rating[data-rating="2"] svg textPath tspan:nth-child(5),
+.door-designer-tool .designer .model-box .star-rating[data-rating="2"] svg textPath tspan:nth-child(4){
+  fill: var(--bs-yellow);
+}
+
+.door-designer-tool .designer .model-box .star-rating[data-rating="3"] svg textPath tspan:nth-child(5),
+.door-designer-tool .designer .model-box .star-rating[data-rating="3"] svg textPath tspan:nth-child(4),
+.door-designer-tool .designer .model-box .star-rating[data-rating="3"] svg textPath tspan:nth-child(3){
+  fill: var(--bs-yellow);
+}
+
+.door-designer-tool .designer .model-box .star-rating[data-rating="4"] svg textPath tspan:nth-child(5),
+.door-designer-tool .designer .model-box .star-rating[data-rating="4"] svg textPath tspan:nth-child(4),
+.door-designer-tool .designer .model-box .star-rating[data-rating="4"] svg textPath tspan:nth-child(3),
+.door-designer-tool .designer .model-box .star-rating[data-rating="4"] svg textPath tspan:nth-child(2){
+  fill: var(--bs-yellow);
+}
+
+.door-designer-tool .designer .model-box .star-rating[data-rating="5"] svg textPath tspan{
+  fill: var(--bs-yellow);
 }
 
 .door-designer-tool .designer .color-box{
   cursor: pointer;
   position: relative;
-  max-width: 90px;
+  width: 90px;
 }
 
 .door-designer-tool .designer .color-box .image-wrap{
@@ -209,7 +265,7 @@
 }
 
 .door-designer-tool .designer .color-box.active .image-wrap{
-  outline-color: #ccc;
+  outline-color: #ddd;
 }
 
 .door-designer-tool .designer .color-box.active .image-wrap:after{
@@ -236,8 +292,8 @@
 
 
 .door-designer-tool .designer .box-active.active{
-  border-color: #ccc;
-  background-color: #ddd;
+  border-color: #ddd;
+  background-color: var(--gray-200);
 }
 
 .door-designer-tool .designer .box-active.active:after{

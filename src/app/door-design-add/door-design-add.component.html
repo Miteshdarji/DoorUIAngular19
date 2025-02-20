@@ -172,7 +172,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-              <div class="form-group">
+              <div class="form-group mb-0">
               <label for="dropdown" class="form-label">Door Company </label>
               <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorCompany">
                 <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
@@ -183,7 +183,7 @@
              </div>
             </div>
             <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="form-group">
+              <div class="form-group mb-0">
               <label for="dropdown" class="form-label">Types of Doors </label>
               <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorType">
                 <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
@@ -194,7 +194,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
               <div class="form-group mb-0">
-              <label for="exampleFormControlInput1" class="form-label">Quantity </label>
+              <label for="exampleFormControlInput1" class="form-label d-flex align-items-center">Quantity <div class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div></label>
               <div class="quantity-box">
                 <button class="button btn-minus" type="button"
                   (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1"> 
@@ -370,13 +370,16 @@
        <div class="row g-3">
         <ng-container *ngFor="let item of doorModelList">
           <div class="col-auto">
-          <div class="model-box d-flex flex-column align-items-center justify-content-center" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-            <div class="box-label">
-              <span>{{item?.quality}}</span>
-            </div>
+          <div class="model-box d-flex flex-column align-items-center" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
             <div class="content">
             <p class="mb-1">{{item?.doorModelName}}</p>
             <p class="mb-0">{{item?.range}}</p>
+            </div>
+            <div class="box-label">
+              <span>{{item?.quality}}</span>
+            </div>
+            <div class="star-rating" data-rating="3">
+              <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <defs> <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent"/> </defs> <text font-size="45"> <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%"> <tspan>★</tspan><tspan>★</tspan><tspan>★</tspan><tspan>★</tspan><tspan>★</tspan> </textPath> </text> </svg>
             </div>
           </div>
         </div>
@@ -520,7 +523,7 @@
 
         <div class="col-12 col-sm-12 col-md-5 col-lg-5">
           <div class="form-group mb-0">
-            <label for="dropdown" class="form-label">Select Cyclage</label>
+            <label for="dropdown" class="form-label d-flex align-items-center">Select Cyclage <div class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div></label>
             <select id="dropdown" class="form-select-custom" aria-label="Default select example"
               [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
               <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">

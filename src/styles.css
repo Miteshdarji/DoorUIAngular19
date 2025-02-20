@@ -4,6 +4,8 @@
 :root {
 	--tc-primary: #303d81;
 	--tc-secondary: #039be5;
+	--gray-100: #f8f9fa;
+	--gray-200: #e9ecef;
 }
 
 body {
@@ -394,13 +396,13 @@ h6,
 }
 
 .button-grey {
-	background-color: #eee;
-	border: 1px solid #ccc;
+	background-color: var(--bs-light);
+	border: 1px solid #ddd;
 	color: #000;
 }
 
 .button-grey:hover{
-	background-color: #ccc;
+	background-color: var(--gray-200);
 }
 
 .button-grey.active{
@@ -427,7 +429,7 @@ h6,
 	display: block;
 	padding: 5px 15px;
 	height: 40px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	background-color: #fff;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -469,7 +471,7 @@ h6,
 	display: block;
 	padding: 5px 15px;
 	height: 40px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -595,7 +597,7 @@ h6,
 
 .card{
 	border-radius: 3px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	overflow: hidden;
 }
 
@@ -605,7 +607,7 @@ h6,
 	color: #fff;
     border-radius: 0;
     font-weight: 600;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
 	border-radius: 0 !important;
 }
 
@@ -617,7 +619,7 @@ h6,
 	display: flex;
     align-items: center;
     justify-content: center;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 3px;
 	overflow: hidden;
 }
@@ -640,7 +642,7 @@ h6,
 
 .quantity-box .btn-minus,
 .quantity-box .btn-pluse {
-	background-color: #eee;
+	background-color: var(--bs-light);
     height: 40px;
     width: 48px;
 	border-radius: 0;
@@ -655,20 +657,29 @@ h6,
 }
 
 .quantity-box .btn-minus{
-	border-right: 1px solid #ccc;
+	border-right: 1px solid #ddd;
 }
 
 .quantity-box .btn-pluse{
-	border-left: 1px solid #ccc;
+	border-left: 1px solid #ddd;
 }
 
 .quantity-box .btn-label{
 	height: 40px;
     padding: 0 12px;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #ddd;
     border-radius: 0;
     font-size: 12px;
-    background-color: #eee;
+    background-color: var(--bs-light);
+}
+
+.info-icon{
+	cursor: pointer;
+}
+
+.info-icon svg{
+	width: 15px;
+    fill: var(--tc-secondary);
 }
 
 /* Developer css Here */
