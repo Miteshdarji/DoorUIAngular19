@@ -66,6 +66,21 @@ export class DoorDesignAddComponent implements OnInit {
     visualize_backWindowInsertImage: ""
   }
 
+   // ===  Visualize UI [Start] ===== 
+   rowArray: string[] = [];
+   column: number = 0;
+   rowSize = 0; // Default number of rows
+   colSize = 0; // Default number of columns
+   grid: string[][] = [];
+   selectedBoxes: boolean[][] = [];
+   fileBackImage: string = '';
+   repeatfilePath: string = '';
+   dynamicLeftBackImageUrl: string = '';
+   bgColor: string = '--';
+   bgImage: string = '--';
+   isBGImage: boolean = false;
+   bgWindowInsertImage:string = '';
+   // ===  Visualize UI [Start] ===== 
   constructor(private utilsService: UtilsService) { }
 
   ngOnInit(): void {
@@ -128,6 +143,21 @@ export class DoorDesignAddComponent implements OnInit {
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
+
+    // Added by Mitesh
+    // this.rowSize = this.visualizationSelection['visualize_row'];
+    // this.colSize = this.visualizationSelection['visualize_column'];
+    // this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
+    // this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'];
+    // console.log('%%%%%%%%%%%%%%');
+    // console.log(this.rowSize);
+    // console.log(this.colSize);
+    // console.log(this.bgColor);
+    // console.log(this.repeatfilePath);
+    //this.initializeGrid();
+    this.setVisualizeArrayValues();
+    // Added by Mitesh
+
   }
 
   selectColor(item: any) {
@@ -143,6 +173,7 @@ export class DoorDesignAddComponent implements OnInit {
     }
     console.log("Click to Color", item);
     console.log("this.visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();
   }
 
   generateImageWoodenColorImage(colorItem: any) {
@@ -167,180 +198,180 @@ export class DoorDesignAddComponent implements OnInit {
 
     if (panelID == 1) {
       // raised short
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/short/modern_woodgrain_raisedshort.jpg" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/short/Classic_Woodgrain_raisedshort.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/short/Walnut_Raised_Short.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/short/Mahogany_Raised_Short.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/Driftwood_Raised_Short.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/short/Cedar_Raised_Short.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/short/Dark_Oak_Raised_Short.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/short/Carbon_Raised_Short.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/modern_woodgrain_raisedshort.jpg" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/Classic_Woodgrain_raisedshort.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/short/Walnut_Raised_Short.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/short/Mahogany_Raised_Short.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/Driftwood_Raised_Short.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/short/Cedar_Raised_Short.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/short/Dark_Oak_Raised_Short.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/short/Carbon_Raised_Short.png" : '';
     }
 
     else if (panelID == 2) {
       // raised long
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/long/modern_woodgrain_raised_long_repeat.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/long/classic_woodgrain_raised_long_repeat.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/long/Walnut_Raised_Long.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/long/Mahogany_Raised_Long.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Driftwood_Raised_Long.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/long/Cedar_Raised_Long.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/long/Dark_Oak_Raised_Long.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/long/Carbon_Raised_Long.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/modern_woodgrain_raised_long_repeat.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/classic_woodgrain_raised_long_repeat.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/long/Walnut_Raised_Long.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/long/Mahogany_Raised_Long.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Driftwood_Raised_Long.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/long/Cedar_Raised_Long.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/long/Dark_Oak_Raised_Long.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/long/Carbon_Raised_Long.png" : '';
     }
     else if (panelID == 3) {
       // stampped carrige house short
 
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/short/modern_woodgrain_SCH_short.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/short/classic_woodgrain_SCH_short.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/short/walnut_SCH_short.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/short/mahogany_SCH_short.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/driftwood_SCH_short.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/short/dakoak_SCH_short.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/short/ceder_SCH_short.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/short/carban_oak_SCH_short.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/modern_woodgrain_SCH_short.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/classic_woodgrain_SCH_short.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/short/walnut_SCH_short.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/short/mahogany_SCH_short.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/driftwood_SCH_short.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/short/dakoak_SCH_short.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/short/ceder_SCH_short.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/short/carban_oak_SCH_short.png" : '';
     }
     else if (panelID == 4) {
       // stampped carrige house long
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/long/Modern_Woodgrain_SCH_Long_Image.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/long/Classic_Woodgrain_SCH_Long_Image.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/long/Walnut_SCH_Long.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/long/Mahogany_SCH_Long.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Driftwood_SCH_Long.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/long/Dark_Oak_SCH_Long.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/long/Cedar_SCH_Long.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/long/Carbon_SCH_Long.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/Modern_Woodgrain_SCH_Long_Image.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/Classic_Woodgrain_SCH_Long_Image.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/long/Walnut_SCH_Long.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/long/Mahogany_SCH_Long.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Driftwood_SCH_Long.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/long/Dark_Oak_SCH_Long.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/long/Cedar_SCH_Long.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/long/Carbon_SCH_Long.png" : '';
     }
     else if (panelID == 5) {
       // stampped shaker shaker
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/long/Modern_Woodgrain_Shaker.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/long/Classic_Woodgrain_Shaker.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/long/Walnut_Shaker_Long.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/long/Mahogany_Shaker_Long.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Driftwood_Shaker_Long.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/long/Dark_Oak_Shaker_Long.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/long/Cedar_Shaker_Long.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/long/Carbon_Shaker_Long.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/Modern_Woodgrain_Shaker.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/Classic_Woodgrain_Shaker.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/long/Walnut_Shaker_Long.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/long/Mahogany_Shaker_Long.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Driftwood_Shaker_Long.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/long/Dark_Oak_Shaker_Long.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/long/Cedar_Shaker_Long.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/long/Carbon_Shaker_Long.png" : '';
     }
     else if (panelID == 7) {
       // planks no or short window
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/short/Walnut_Planks_Short.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/short/Mahogany_Planks_Short.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/Driftwood_Planks_Short.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/short/Dark_Oak_Planks_Short.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/short/Cedar_Planks_Short.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/short/Carbon_Planks_Short.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/short/Walnut_Planks_Short.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/short/Mahogany_Planks_Short.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/Driftwood_Planks_Short.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/short/Dark_Oak_Planks_Short.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/short/Cedar_Planks_Short.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/short/Carbon_Planks_Short.png" : '';
     }
     else if (panelID == 8 || panelID == 9) {
       // planks long window and planks oversized window
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/long/Walnut_Planks_Long.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/long/Mahogany_Planks_Long.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Driftwood_Planks_Long.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/long/Cedar_Planks_Long.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/long/Dark_Oak_Planks_Long.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/long/Carbon_Planks_Long.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/long/Walnut_Planks_Long.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/long/Mahogany_Planks_Long.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Driftwood_Planks_Long.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/long/Cedar_Planks_Long.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/long/Dark_Oak_Planks_Long.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/long/Carbon_Planks_Long.png" : '';
     }
     else if (panelID == 10) {
       // skyline flush short
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/short/sf_modern_woodgrain_short.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/short/sf_classic_woodgrain_short.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/short/Walnut_SF_Short.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/short/Mahogany_SF_Short.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/Driftwood_SF_Short.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/short/Cedar_SF_Short.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/short/Dark_Oak_SF_Short.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/short/Carbon_SF_Short.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/sf_modern_woodgrain_short.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/short/sf_classic_woodgrain_short.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/short/Walnut_SF_Short.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/short/Mahogany_SF_Short.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/Driftwood_SF_Short.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/short/Cedar_SF_Short.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/short/Dark_Oak_SF_Short.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/short/Carbon_SF_Short.png" : '';
     }
     else if (panelID == 11 || panelID == 12) {
       // skyline flush long and oversized window
-      (selected_color_id == modernWoodgrain) ? repeatedImage = "./images/woodenimg/long/sf_modern_woodgrain_long.png" : '';
-      (selected_color_id == classicWoodgrain) ? repeatedImage = "./images/woodenimg/long/sf_classic_woodgrain_long.png" : '';
-      (selected_color_id == walnut) ? repeatedImage = "./images/woodenimg/long/Walnut_SF_Long.png" : '';
-      (selected_color_id == mahogany) ? repeatedImage = "./images/woodenimg/long/Mahogany_SF_Long.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Driftwood_SF_Long.png" : '';
-      (selected_color_id == ceder) ? repeatedImage = "./images/woodenimg/long/Cedar_SF_Long.png" : '';
-      (selected_color_id == darkOak) ? repeatedImage = "./images/woodenimg/long/Dark_Oak_SF_Long.png" : '';
-      (selected_color_id == carbon) ? repeatedImage = "./images/woodenimg/long/Carbon_SF_Long.png" : '';
+      (selected_color_id == modernWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/sf_modern_woodgrain_long.png" : '';
+      (selected_color_id == classicWoodgrain) ? repeatedImage = "assets/images/woodenimg/long/sf_classic_woodgrain_long.png" : '';
+      (selected_color_id == walnut) ? repeatedImage = "assets/images/woodenimg/long/Walnut_SF_Long.png" : '';
+      (selected_color_id == mahogany) ? repeatedImage = "assets/images/woodenimg/long/Mahogany_SF_Long.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Driftwood_SF_Long.png" : '';
+      (selected_color_id == ceder) ? repeatedImage = "assets/images/woodenimg/long/Cedar_SF_Long.png" : '';
+      (selected_color_id == darkOak) ? repeatedImage = "assets/images/woodenimg/long/Dark_Oak_SF_Long.png" : '';
+      (selected_color_id == carbon) ? repeatedImage = "assets/images/woodenimg/long/Carbon_SF_Long.png" : '';
     }
 
     // safeway
     else if (panelID == 28 || panelID == 47) {
-      (selected_color_id == oak) ? repeatedImage = "./images/woodenimg/short/Safeway_oak.png" : '';
-      (selected_color_id == roosewood) ? repeatedImage = "./images/woodenimg/short/Safeway_Rose_Short_Panel.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/Safeway_driftwood_Short_Panel.png" : '';
+      (selected_color_id == oak) ? repeatedImage = "assets/images/woodenimg/short/Safeway_oak.png" : '';
+      (selected_color_id == roosewood) ? repeatedImage = "assets/images/woodenimg/short/Safeway_Rose_Short_Panel.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/Safeway_driftwood_Short_Panel.png" : '';
     }
     else if (panelID == 29 || panelID == 48) {
-      (selected_color_id == oak) ? repeatedImage = "./images/woodenimg/long/Safeway_Oak_Long_Panel.png" : '';
-      (selected_color_id == roosewood) ? repeatedImage = "./images/woodenimg/long/Safeway_Rose_Long_Panel.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Safeway_driftwood_Long_Panel.png" : '';
+      (selected_color_id == oak) ? repeatedImage = "assets/images/woodenimg/long/Safeway_Oak_Long_Panel.png" : '';
+      (selected_color_id == roosewood) ? repeatedImage = "assets/images/woodenimg/long/Safeway_Rose_Long_Panel.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Safeway_driftwood_Long_Panel.png" : '';
     }
     else if (panelID == 30 || panelID == 49) {
-      (selected_color_id == oak) ? repeatedImage = "./images/woodenimg/short/Safeway_SCH_Oak_Short_Panel.png" : '';
-      (selected_color_id == roosewood) ? repeatedImage = "./images/woodenimg/short/Safeway_SCH_Rose_Short_Panel.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/short/Safeway_SCH_driftwood_Short_Panel.png" : '';
+      (selected_color_id == oak) ? repeatedImage = "assets/images/woodenimg/short/Safeway_SCH_Oak_Short_Panel.png" : '';
+      (selected_color_id == roosewood) ? repeatedImage = "assets/images/woodenimg/short/Safeway_SCH_Rose_Short_Panel.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/short/Safeway_SCH_driftwood_Short_Panel.png" : '';
     }
     else if (panelID == 31 || panelID == 50) {
-      (selected_color_id == oak) ? repeatedImage = "./images/woodenimg/long/Safeway_SCH_Oak_Long_Panel.png" : '';
-      (selected_color_id == roosewood) ? repeatedImage = "./images/woodenimg/long/Safeway_SCH_Rose_Long_Panel.png" : '';
-      (selected_color_id == driftWood) ? repeatedImage = "./images/woodenimg/long/Safeway_SCH_driftwood_Long_Panel.png" : '';
+      (selected_color_id == oak) ? repeatedImage = "assets/images/woodenimg/long/Safeway_SCH_Oak_Long_Panel.png" : '';
+      (selected_color_id == roosewood) ? repeatedImage = "assets/images/woodenimg/long/Safeway_SCH_Rose_Long_Panel.png" : '';
+      (selected_color_id == driftWood) ? repeatedImage = "assets/images/woodenimg/long/Safeway_SCH_driftwood_Long_Panel.png" : '';
     }
     else if (panelID == 66) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey_Long.png" : '';
     }
     else if (panelID == 76) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Flush_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey__Flush_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Flush_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey__Flush_Long.png" : '';
     } else if (panelID == 65 || panelID == 81 || panelID == 105) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/short/Dark_Walnut.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/short/Weathered_Grey_Short.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/short/Dark_Walnut.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/short/Weathered_Grey_Short.png" : '';
     }
     else if (panelID == 90 || panelID == 114 || panelID == 74) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Moderno_Eco_Slim.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey__Moderno_Eco_Slim.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Moderno_Eco_Slim.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey__Moderno_Eco_Slim.png" : '';
     }
     else if (panelID == 82 || panelID == 106) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey_Long.png" : '';
     } else if (panelID == 83 || panelID == 107 || panelID == 67) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/short/Dark_Walnut_CS_Short.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/short/Weathered_Grey_CS_Short.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/short/Dark_Walnut_CS_Short.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/short/Weathered_Grey_CS_Short.png" : '';
     } else if (panelID == 84 || panelID == 108 || panelID == 68) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_CS_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey_CS_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_CS_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey_CS_Long.png" : '';
     } else if (panelID == 85 || panelID == 109 || panelID == 69) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Xsmall.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey_Xsmall.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Xsmall.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey_Xsmall.png" : '';
     } else if (panelID == 86 || panelID == 110 || panelID == 70) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/short/Dark_Walnut_Flat_Short.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/short/Weathered_Grey__Flat_Short.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/short/Dark_Walnut_Flat_Short.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/short/Weathered_Grey__Flat_Short.png" : '';
     } else if (panelID == 87 || panelID == 111 || panelID == 71) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Flat_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey__Flat_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Flat_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey__Flat_Long.png" : '';
     } else if (panelID == 88 || panelID == 112 || panelID == 72) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/short/Dark_Walnut_Moderno_Eco_Short.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/short/Weathered_Grey__Moderno_Eco_Short.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/short/Dark_Walnut_Moderno_Eco_Short.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/short/Weathered_Grey__Moderno_Eco_Short.png" : '';
     } else if (panelID == 89 || panelID == 113 || panelID == 73) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Moderno_Eco_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey__Moderno_Eco_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Moderno_Eco_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey__Moderno_Eco_Long.png" : '';
     } else if (panelID == 94 || panelID == 118 || panelID == 78) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Slat_Two.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey_Slat_Two.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Slat_Two.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey_Slat_Two.png" : '';
     } else if (panelID == 95 || panelID == 119 || panelID == 79) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Slat_Four.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey_Slat_Four.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Slat_Four.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey_Slat_Four.png" : '';
     } else if (panelID == 91 || panelID == 115 || panelID == 75) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/short/Dark_Walnut_Flush_Short.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/short/Weathered_Grey__Flush_Short.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/short/Dark_Walnut_Flush_Short.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/short/Weathered_Grey__Flush_Short.png" : '';
     } else if (panelID == 92 || panelID == 116) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/long/Dark_Walnut_Flush_Long.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/long/Weathered_Grey__Flat_Long.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/long/Dark_Walnut_Flush_Long.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/long/Weathered_Grey__Flat_Long.png" : '';
     } else if (panelID == 93 || panelID == 117 || panelID == 77) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Flush_Slim.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey__Flush_Slim.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Flush_Slim.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey__Flush_Slim.png" : '';
     } else if (panelID == 96 || panelID == 120 || panelID == 80) {
-      (selected_color_id == darkWalnut) ? repeatedImage = "./images/woodenimg/garga/Dark_Walnut_Vog.png" : '';
-      (selected_color_id == weatheredGrey) ? repeatedImage = "./images/woodenimg/garga/Weathered_Grey_Vog.png" : '';
+      (selected_color_id == darkWalnut) ? repeatedImage = "assets/images/woodenimg/garga/Dark_Walnut_Vog.png" : '';
+      (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey_Vog.png" : '';
     }
     this.visualizationSelection['visualize_backSelectedImage'] = repeatedImage;
     // return repeatedImage;
@@ -438,42 +469,42 @@ export class DoorDesignAddComponent implements OnInit {
     let pannel;
 
     if (window_type_foldername === "short") {
-      pannel = 'Short'
+      pannel = 'short'
     } else if (window_type_foldername === "long") {
-      pannel = 'Long'
+      pannel = 'long'
     } else if (window_type_foldername === "slim") {
       window_type_name = ''
-      pannel = 'Slim'
+      pannel = 'slim'
     }
 
-    (color == white[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + white[1] + window_type_name + '.png' : '';
-    (color == almond[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + almond[1] + window_type_name + '.png' : '';
-    (color == sandstone[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + sandstone[1] + window_type_name + '.png' : '';
-    (color == brown[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + brown[1] + window_type_name + '.png' : '';
-    (color == black[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + black[1] + window_type_name + '.png' : '';
-    (color == grey[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + grey[1] + window_type_name + '.png' : '';
-    (color == bronze[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + bronze[1] + window_type_name + '.png' : '';
-    (color == graphite[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + graphite[1] + window_type_name + '.png' : '';
-    (color == desertTan[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + desertTan[1] + window_type_name + '.png' : '';
-    (color == evergreen[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + evergreen[1] + window_type_name + '.png' : '';
-    (color == modernWoodgrain[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + modernWoodgrain[1] + window_type_name + '.png' : '';
-    (color == walnut[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + walnut[1] + window_type_name + '.png' : '';
-    (color == mahogany[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + mahogany[1] + window_type_name + '.png' : '';
-    (color == driftWood[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + driftWood[1] + window_type_name + '.png' : '';
-    (color == ceder[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + ceder[1] + window_type_name + '.png' : '';
-    (color == darkOak[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + darkOak[1] + window_type_name + '.png' : '';
-    (color == carbon[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + carbon[1] + window_type_name + '.png' : '';
-    (color == classicWoodgrain[0]) ? windowurl = './images/window/' + window_type_foldername + '/' + classicWoodgrain[1] + window_type_name + '.png' : '';
-    (color == gargaWhite[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaWhite[1] + '.png' : '';
-    (color == gargaAlmond[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaAlmond[1] + '.png' : '';
-    (color == gargaSahara[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaSahara[1] + '.png' : '';
-    (color == gargaSandstone[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaSandstone[1] + '.png' : '';
-    (color == gargaTerrastone[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaTerrastone[1] + '.png' : '';
-    (color == gargaBrown[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaBrown[1] + '.png' : '';
-    (color == gargaBlackIce[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaBlackIce[1] + '.png' : '';
-    (color == gargaCharcoal[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaCharcoal[1] + '.png' : '';
-    (color == gargaDarkWalnut[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaDarkWalnut[1] + '.png' : '';
-    (color == gargaWeatheredGrey[0]) ? windowurl = './images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaWeatheredGrey[1] + '.png' : '';
+    (color == white[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + white[1] + window_type_name + '.png' : '';
+    (color == almond[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + almond[1] + window_type_name + '.png' : '';
+    (color == sandstone[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + sandstone[1] + window_type_name + '.png' : '';
+    (color == brown[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + brown[1] + window_type_name + '.png' : '';
+    (color == black[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + black[1] + window_type_name + '.png' : '';
+    (color == grey[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + grey[1] + window_type_name + '.png' : '';
+    (color == bronze[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + bronze[1] + window_type_name + '.png' : '';
+    (color == graphite[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + graphite[1] + window_type_name + '.png' : '';
+    (color == desertTan[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + desertTan[1] + window_type_name + '.png' : '';
+    (color == evergreen[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + evergreen[1] + window_type_name + '.png' : '';
+    (color == modernWoodgrain[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + modernWoodgrain[1] + window_type_name + '.png' : '';
+    (color == walnut[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + walnut[1] + window_type_name + '.png' : '';
+    (color == mahogany[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + mahogany[1] + window_type_name + '.png' : '';
+    (color == driftWood[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + driftWood[1] + window_type_name + '.png' : '';
+    (color == ceder[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + ceder[1] + window_type_name + '.png' : '';
+    (color == darkOak[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + darkOak[1] + window_type_name + '.png' : '';
+    (color == carbon[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + carbon[1] + window_type_name + '.png' : '';
+    (color == classicWoodgrain[0]) ? windowurl = 'assets/images/window/' + window_type_foldername + '/' + classicWoodgrain[1] + window_type_name + '.png' : '';
+    (color == gargaWhite[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaWhite[1] + '.png' : '';
+    (color == gargaAlmond[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaAlmond[1] + '.png' : '';
+    (color == gargaSahara[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaSahara[1] + '.png' : '';
+    (color == gargaSandstone[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaSandstone[1] + '.png' : '';
+    (color == gargaTerrastone[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaTerrastone[1] + '.png' : '';
+    (color == gargaBrown[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaBrown[1] + '.png' : '';
+    (color == gargaBlackIce[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaBlackIce[1] + '.png' : '';
+    (color == gargaCharcoal[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaCharcoal[1] + '.png' : '';
+    (color == gargaDarkWalnut[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaDarkWalnut[1] + '.png' : '';
+    (color == gargaWeatheredGrey[0]) ? windowurl = 'assets/images/window/garga/' + window_type_foldername + '/' + 'GA_' + pannel + window_type_name + gargaWeatheredGrey[1] + '.png' : '';
 
     let selectedFamily = this.doorSubCollection;
 
@@ -496,6 +527,8 @@ export class DoorDesignAddComponent implements OnInit {
     this.visualizationSelection['visualize_backGlassImage'] = item?.filePath;
     console.log("Click to glass", item);
     console.log("visualizationSelection", this.visualizationSelection);
+
+    this.setVisualizeArrayValues();
   }
 
   // Select the window insert category
@@ -510,6 +543,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.visualizationSelection['visualize_backWindowInsertImage'] = this.generateWindowImagePath();
     console.log("Click to insert", item);
     console.log("Select insert visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();
   }
 
   // Select spring category type
@@ -586,9 +620,6 @@ export class DoorDesignAddComponent implements OnInit {
     this.utilsService.getVisualizationModel(payload).subscribe((data: any) => {
       this.doorModelList = data?.payload;
       console.log('** Row ', this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail[0]);
-
-
-
     }, (error) => {
       console.error('Error During door getVisualizationModel :', error);
     });
@@ -752,4 +783,111 @@ export class DoorDesignAddComponent implements OnInit {
       console.error('Error During door getDoorSealTypeCategory :', error);
     })
   }
+
+  
+
+
+
+  // ====== Dynamic Window Binding ( Row and Column )===== 
+
+initializeGrid() {
+  this.grid = [];
+  this.selectedBoxes = [];
+
+  for (let i = 0; i < this.colSize; i++) {
+    this.grid[i] = [];
+    this.selectedBoxes[i] = [];
+    for (let j = 0; j < this.rowSize; j++) {
+      this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
+      this.selectedBoxes[i][j] = true; // Default unchecked
+    }
+  }
+}
+
+onCheckboxChange(row: number, col: number, event: Event) {
+  const isChecked = (event.target as HTMLInputElement).checked;
+  this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
+  console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+}
+
+updateGrid() {
+  this.initializeGrid(); // Reinitialize grid when row/column values change
+}
+
+// To select all checkbox logic
+toggleColumnSelection(col: number) {
+  const allChecked = this.selectedBoxes.every(row => row[col]);
+  this.selectedBoxes.forEach(row => row[col] = !allChecked);
+}
+
+getBackgroundStyle() {
+  if(this.bgColor === '--'){
+    return { 'background-image': `url(${this.bgImage}) !important` }
+  }
+  else
+  {
+    return { 'background-color': this.bgColor }
+  }
+  // return this.bgColor == '--'
+  // ? { 'background-image': `url(${this.bgImage}) !important` }
+  // : { 'background-color': this.bgColor };
+}
+
+setVisualizeArrayValues(){
+  
+  if (this.visualizationSelection['visualize_row']){
+    this.rowSize = this.visualizationSelection['visualize_row'];
+  }
+  if (this.visualizationSelection['visualize_column']){
+    this.colSize = this.visualizationSelection['visualize_column'];
+  }
+  if (this.visualizationSelection['visualize_backSelectedColor']){
+    if(this.visualizationSelection['visualize_backSelectedColor'] == '--'){
+      //this.bgImage = 'assets' + this.visualizationSelection['visualize_backSelectedImage'].substring(1);
+      this.bgImage = this.visualizationSelection['visualize_backSelectedImage'];
+      this.bgColor = '--';
+      // console.log('Mitesh IF Condition :::');
+      // console.log(this.bgImage);
+      // console.log(this.bgColor);
+     }
+    else{
+      this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
+      this.bgImage = '--';
+      // console.log('Mitesh ELSE Condition :::');
+      // console.log(this.bgImage);
+      // console.log(this.bgColor);
+    }
+
+    // console.log('Mitesh :::');
+    // console.log(this.bgImage);
+
+  }
+  if (this.visualizationSelection['visualize_backSelectedImage']){
+  }
+  if (this.visualizationSelection['visualize_backRepeatImage']){
+    this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'];
+  }
+  if (this.visualizationSelection['visualize_noOfSections']){
+
+  }
+  if (this.visualizationSelection['visualize_backGlassImage']){
+    this.repeatfilePath = this.visualizationSelection['visualize_backGlassImage'];
+  }
+  if (this.visualizationSelection['visualize_backWindowInsertImage']){
+    this.bgWindowInsertImage = this.visualizationSelection['visualize_backWindowInsertImage'];
+  }
+  
+  console.log('$$$$$$$$$$$$$$$$$$$$$$$$');
+  console.log('bgWindowInsertImage', this.bgWindowInsertImage);
+  console.log('repeatfilePath', this.repeatfilePath);
+  // console.log('%%%%%%%%%%%%%%');
+  // console.log(this.rowSize);
+  // console.log(this.colSize);
+  // console.log(this.bgColor);
+  // console.log(this.repeatfilePath);
+
+  this.initializeGrid();
+  console.log(this.bgColor == '--')
+  console.log('Final Image:',this.getBackgroundStyle());
+}
 }

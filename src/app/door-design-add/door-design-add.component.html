@@ -1,349 +1,404 @@
-<div style="margin-left: 5%; margin-right: 5%;" class="mt-2">
-  <div class="card">
-    <div class="card-header text-primary">
-      <h2>Door Designer</h2>
-    </div>
-    <div class="card-body">
-      <div class="d-flex" style="gap: 30px;">
-        <div>
-          <label for="dropdown" class="form-label">Door Company </label>
-          <select id="dropdown" class="form-select" aria-label="Default select example" [(ngModel)]="doorCompany">
-            <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
-              [disable]="item.doorCompanyName == 'Safeway'">
-              {{ item.doorCompanyName }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="dropdown" class="form-label">Types of doors </label>
-          <select id="dropdown" class="form-select" aria-label="Default select example" [(ngModel)]="doorType">
-            <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
-              {{ item.doorTypeName }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="exampleFormControlInput1" class="form-label">Quantity </label>
-          <div class="d-flex" style="gap: 3px;">
-            <button class="btn btn-sm btn-secondary" type="button"
-              (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1"> -
-            </button>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
-              [(ngModel)]="doorQuantity">
-            <button class="btn btn-sm btn-secondary" type="button" (click)="doorQuantity = doorQuantity + 1"> +
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Door Size -->
-  <div class="card mt-2">
-    <div class="card-header">
-      Door Size
-    </div>
-    <div class="card-body">
-      <p>Select a Standard garage door size <b>Or</b> enter your exact garage door size</p>
-      <div class="d-flex" style="gap: 3px;" *ngIf="doorType == 1">
-        <ng-container *ngFor="let size of DoorSizeList.Residential.width_arr; let index = index">
-          <button class="btn btn-secondary" (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index])">
-            {{size}}' x {{DoorSizeList.Residential.height_arr[index]}}' </button>
-        </ng-container>
-      </div>
-      <div class="d-flex" style="gap: 3px;" *ngIf="doorType == 2">
-        <ng-container *ngFor="let size of DoorSizeList.Commercial.width_arr; let index = index">
-          <button class="btn btn-secondary"
-            (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index], DoorSizeList.Commercial.width_arr_inch[index])">
-            {{size}}'{{DoorSizeList.Commercial.width_arr_inch[index]}}" x
-            {{DoorSizeList.Commercial.height_arr[index]}}'</button>
-        </ng-container>
-      </div>
-      <p class="mt-2">Select Door Width</p>
-      <div class="d-flex" style="gap: 10px;">
-        <div class="d-flex" style="gap: 3px;">
-          <button class="btn btn-sm btn-secondary" type="button"
-            (click)="doorWidthFt = doorWidthFt - 1 < 0 ? 0 : doorWidthFt - 1"> - </button>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorWidthFt">
-          <button class="btn btn-sm btn-secondary" type="button" (click)="doorWidthFt = doorWidthFt + 1"> + </button>
-          <button class="btn btn-sm btn-primary" type="button"> ft </button>
-        </div>
-        <div class="d-flex" style="gap: 3px;">
-          <button class="btn btn-sm btn-secondary" type="button"
-            (click)="doorWidthInch = doorWidthInch - 1 < 0 ? 0 : doorWidthInch - 1"> - </button>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorWidthInch">
-          <button class="btn btn-sm btn-secondary" type="button" (click)="doorWidthInch = doorWidthInch + 1"> +
-          </button>
-          <button class="btn btn-sm btn-primary" type="button"> in </button>
-        </div>
-      </div>
-      <p class="mt-2">Select Door Height</p>
-      <div class="d-flex" style="gap: 10px;">
-        <div class="d-flex" style="gap: 3px;">
-          <button class="btn btn-sm btn-secondary" type="button"
-            (click)="doorHeightFt = doorHeightFt - 1 < 0 ? 0 : doorHeightFt - 1"> - </button>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorHeightFt">
-          <button class="btn btn-sm btn-secondary" type="button" (click)="doorHeightFt = doorHeightFt + 1"> + </button>
-          <button class="btn btn-sm btn-primary" type="button"> ft </button>
-        </div>
-        <div class="d-flex" style="gap: 3px;">
-          <button class="btn btn-sm btn-secondary" type="button"
-            (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"> - </button>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorHeightInch">
-          <button class="btn btn-sm btn-secondary" type="button" (click)="doorHeightInch = doorHeightInch + 1"> +
-          </button>
-          <button class="btn btn-sm btn-primary" type="button"> in </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Collection And Family -->
-  <div class="card mt-2">
-    <div class="card-header">
-      Collection & Family
-    </div>
-    <div class="card-body">
-      <div class="d-flex" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorCollectionList">
-          <button class="btn btn btn-outline-primary" [ngClass]="{'active': doorCollection == item.doorCollectionId}"
-            type="button" (click)="doorCollection = item.doorCollectionId"> {{ item.doorCollectionName }} </button>
-        </ng-container>
-      </div>
-      <div class="d-flex mt-2" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorSubCollectionList">
-          <div style="background-color: rgb(192, 190, 190); flex-direction: column;align-items: center;display: flex;"
-            [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}" (click)="selectSubCollection(item)">
-            <div style="margin: auto;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <p>{{item?.doorSubCollectionName}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <!-- Panel style and model number -->
-  <div class="card mt-2" *ngIf="doorPanelList.length > 0">
-    <div class="card-header">
-      Panel Style And Model Number
-    </div>
-    <div class="card-body">
-      <div class="d-flex" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorPanelList">
-          <div
-            style="background-color: rgb(192, 190, 190); text-align: center; flex-direction: column;align-items: center;display: flex;"
-            [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
-            <div style="margin: auto;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
-            </div>
-            <p>{{item?.doorPanelName}}</p>
-          </div>
-        </ng-container>
-      </div>
-      <p class="mb-2 mt-2">Model number</p>
-      <div class="d-flex mt-2" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorModelList">
-          <div class="p-4" style="background-color: rgb(192, 190, 190); border-radius: 10px;"
-            [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-            <p>{{item?.doorModelName}}</p>
-            <p>{{item?.quality}}</p>
-            <p>{{item?.range}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <!-- Colors -->
-  <div class="card mt-2" *ngIf="doorColorList.length > 0">
-    <div class="card-header">
-      Color
-    </div>
-    <div class="card-body">
-      <div class="row mt-2">
-        <ng-container *ngFor="let item of doorColorList">
-          <div class="col-2 m-1"  [ngClass]="{'active': doorColor == item.doorColorId}"
-            style="border-radius: 10px; text-align: center; flex-direction: column;align-items: center;display: flex;">
-            <div style="border-radius: 50%; height: 100px; width: 100px;"
-              [ngStyle]="{'background-color': item?.colorCode }"
-              (click)="selectColor(item)">
-              <img [src]="item?.fileBackPath" alt="" style="border-radius: 50%; height: 100px; width: 100px;">
-            </div>
-            <p>{{item?.doorColorAliasName}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <!-- Window Glass -->
-  <div class="card mt-2" *ngIf="doorWindowGlassCategoryList.length > 0">
-    <div class="card-header">
-      Window Glass
-    </div>
-    <div class="card-body">
-      <div class="mt-2 d-flex" style="gap: 8px;">
-        <ng-container *ngFor="let item of doorWindowGlassCategoryList">
-          <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-            [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
-            (click)="selectWindowGlassCategory(item)">
-            {{ item?.factoryGlazeTypeDesc }}
-          </div>
-        </ng-container>
-      </div>
-
-      <div class="d-flex mt-2" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorWindowGlassSubCategoryList">
-          <div style="background-color: rgb(192, 190, 190);"
-            [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
-            (click)="selectWindowGlassSubCategory(item)">
-            <div style="margin: auto;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <p>{{item?.factoryGlazeSizeDesc}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <!-- Window Insert -->
-  <div class="card mt-2" *ngIf="doorWindowInsertCategoryList.length > 0">
-    <div class="card-header">
-      Window Insert
-    </div>
-    <div class="card-body">
-      <div class="mt-2 d-flex" style="gap: 8px;">
-        <ng-container *ngFor="let item of doorWindowInsertCategoryList">
-          <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-            [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
-            (click)="selectWindowInsertCategory(item)">
-            {{ item?.doorInsulatedTypeName }}
-          </div>
-        </ng-container>
-      </div>
-
-      <div class="d-flex mt-2" style="gap: 10px;">
-        <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
-          <div style="background-color: rgb(192, 190, 190);"
-            [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
-            (click)="selectWindowInsertSubCategory(item)">
-            <div style="margin: auto;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <p>{{item?.doorInsulatedDesc}}</p>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <!-- Spring -->
-  <div class="card mt-2" *ngIf="doorSpringCategoryTypeList.length > 0">
-    <div class="card-header">
-      Spring
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-6">
-          <p> <b>Spring</b> </p>
-          <div class="mt-1 d-flex" style="gap: 8px;">
-            <ng-container *ngFor="let item of doorSpringCategoryTypeList">
-              <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-                [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
-                (click)="selectSpringCategoryType(item)">
-                {{ item?.springCategoryTypeName }}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Left Side Visualization -->
+        <div class="container" *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+        <label><b>Visualization Summary</b></label>
+          <div class="grid-container">
+            <!-- Left Side (Display Boxes with Image) -->
+            <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 120px)'"
+                                   [style.gridTemplateRows]="'repeat(auto-fill, 100px)'">
+              <div *ngFor="let row of grid; let rowIndex = index">
+                <div *ngFor="let cell of row; let colIndex = index" class="box-left" 
+                  [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" />
+                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{bgWindowInsertImage}}" class="innerImg" />
+                </div>
               </div>
-            </ng-container>
+            </div>
           </div>
         </div>
-        <div class="col-6">
-          <div>
-            <label for="dropdown" class="form-label">Cyclage</label>
-            <select id="dropdown" class="form-select" aria-label="Default select example"
-              [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
-              <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
-                {{ item.springCategoryDesc }}
-              </option>
-            </select>
+    </div>
+    <div class="col-md-8">
+        <!-- Right Side  -->
+         
+        <div style="margin-left: 5%; margin-right: 5%;" class="mt-2">
+          <div class="card">
+            <div class="card-header text-primary">
+              <h2>Door Designer</h2>
+            </div>
+            <div class="card-body">
+              <div class="d-flex" style="gap: 30px;">
+                <div>
+                  <label for="dropdown" class="form-label">Door Company </label>
+                  <select id="dropdown" class="form-select" aria-label="Default select example" [(ngModel)]="doorCompany">
+                    <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
+                      [disable]="item.doorCompanyName == 'Safeway'">
+                      {{ item.doorCompanyName }}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label for="dropdown" class="form-label">Types of doors </label>
+                  <select id="dropdown" class="form-select" aria-label="Default select example" [(ngModel)]="doorType">
+                    <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
+                      {{ item.doorTypeName }}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label for="exampleFormControlInput1" class="form-label">Quantity </label>
+                  <div class="d-flex" style="gap: 3px;">
+                    <button class="btn btn-sm btn-secondary" type="button"
+                      (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1"> -
+                    </button>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
+                      [(ngModel)]="doorQuantity">
+                    <button class="btn btn-sm btn-secondary" type="button" (click)="doorQuantity = doorQuantity + 1"> +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
-            visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
-          <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Strut -->
-  <div class="card mt-2" *ngIf="doorStrutCategoryTypeList.length > 0">
-    <div class="card-header">
-      Strut
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
-          <h6>Strut Catogary (Height/Ga/KSI):</h6>
-          <ng-container *ngFor="let item of doorStrutCategoryTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
-              (click)="selectStrutCategoryType(item)">
-              {{ item?.sturtCategoryTypeDesc }}
+          <!-- Door Size -->
+          <div class="card mt-2">
+            <div class="card-header">
+              Door Size
             </div>
-          </ng-container>
-        </div>
-        <div class="col-12 mt-1 d-flex" style="gap: 8px;">
-          <h6>Strut Type:</h6>
-          <ng-container *ngFor="let item of doorStrutsTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
-              (click)="selectSpringCategoryType(item)">
-              {{ item?.sturtCategoryDesc }}
+            <div class="card-body">
+              <p>Select a Standard garage door size <b>Or</b> enter your exact garage door size</p>
+              <div class="d-flex" style="gap: 3px;" *ngIf="doorType == 1">
+                <ng-container *ngFor="let size of DoorSizeList.Residential.width_arr; let index = index">
+                  <button class="btn btn-secondary" (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index])">
+                    {{size}}' x {{DoorSizeList.Residential.height_arr[index]}}' </button>
+                </ng-container>
+              </div>
+              <div class="d-flex" style="gap: 3px;" *ngIf="doorType == 2">
+                <ng-container *ngFor="let size of DoorSizeList.Commercial.width_arr; let index = index">
+                  <button class="btn btn-secondary"
+                    (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index], DoorSizeList.Commercial.width_arr_inch[index])">
+                    {{size}}'{{DoorSizeList.Commercial.width_arr_inch[index]}}" x
+                    {{DoorSizeList.Commercial.height_arr[index]}}'</button>
+                </ng-container>
+              </div>
+              <p class="mt-2">Select Door Width</p>
+              <div class="d-flex" style="gap: 10px;">
+                <div class="d-flex" style="gap: 3px;">
+                  <button class="btn btn-sm btn-secondary" type="button"
+                    (click)="doorWidthFt = doorWidthFt - 1 < 0 ? 0 : doorWidthFt - 1"> - </button>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
+                    [(ngModel)]="doorWidthFt">
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="doorWidthFt = doorWidthFt + 1"> + </button>
+                  <button class="btn btn-sm btn-primary" type="button"> ft </button>
+                </div>
+                <div class="d-flex" style="gap: 3px;">
+                  <button class="btn btn-sm btn-secondary" type="button"
+                    (click)="doorWidthInch = doorWidthInch - 1 < 0 ? 0 : doorWidthInch - 1"> - </button>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
+                    [(ngModel)]="doorWidthInch">
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="doorWidthInch = doorWidthInch + 1"> +
+                  </button>
+                  <button class="btn btn-sm btn-primary" type="button"> in </button>
+                </div>
+              </div>
+              <p class="mt-2">Select Door Height</p>
+              <div class="d-flex" style="gap: 10px;">
+                <div class="d-flex" style="gap: 3px;">
+                  <button class="btn btn-sm btn-secondary" type="button"
+                    (click)="doorHeightFt = doorHeightFt - 1 < 0 ? 0 : doorHeightFt - 1"> - </button>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
+                    [(ngModel)]="doorHeightFt">
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="doorHeightFt = doorHeightFt + 1"> + </button>
+                  <button class="btn btn-sm btn-primary" type="button"> ft </button>
+                </div>
+                <div class="d-flex" style="gap: 3px;">
+                  <button class="btn btn-sm btn-secondary" type="button"
+                    (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"> - </button>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Quantity"
+                    [(ngModel)]="doorHeightInch">
+                  <button class="btn btn-sm btn-secondary" type="button" (click)="doorHeightInch = doorHeightInch + 1"> +
+                  </button>
+                  <button class="btn btn-sm btn-primary" type="button"> in </button>
+                </div>
+              </div>
             </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <!-- Strut -->
-   <div class="card mt-2" *ngIf="doorSealCategoryTypeList.length > 0">
-    <div class="card-header">
-      Seals
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-6 mt-1 d-flex" style="gap: 8px;">
-          <ng-container *ngFor="let item of doorSealCategoryTypeList">
-            <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
-              [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
-              (click)="selectSealCategoryType(item)">
-              {{ item?.doorSealTypeDescription }}
-            </div>
-          </ng-container>
-        </div>
-        <div class="col-6">
-          <div>
-            <select id="dropdown" class="form-select" aria-label="Default select example"
-              [(ngModel)]="doorSealTypeCategory" (change)="changeSpringCategory($event)">
-              <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
-                {{ item.springCategoryDesc }}
-              </option>
-            </select>
           </div>
 
-          <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
-            visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
-          <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+          <!-- Collection And Family -->
+          <div class="card mt-2">
+            <div class="card-header">
+              Collection & Family
+            </div>
+            <div class="card-body">
+              <div class="d-flex" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorCollectionList">
+                  <button class="btn btn btn-outline-primary" [ngClass]="{'active': doorCollection == item.doorCollectionId}"
+                    type="button" (click)="doorCollection = item.doorCollectionId"> {{ item.doorCollectionName }} </button>
+                </ng-container>
+              </div>
+              <div class="d-flex mt-2" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorSubCollectionList">
+                  <div style="background-color: rgb(192, 190, 190); flex-direction: column;align-items: center;display: flex;"
+                    [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}" (click)="selectSubCollection(item)">
+                    <div style="margin: auto;">
+                      <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                    </div>
+                    <p>{{item?.doorSubCollectionName}}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel style and model number -->
+          <div class="card mt-2" *ngIf="doorPanelList.length > 0">
+            <div class="card-header">
+              Panel Style And Model Number
+            </div>
+            <div class="card-body">
+              <div class="d-flex" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorPanelList">
+                  <div
+                    style="background-color: rgb(192, 190, 190); text-align: center; flex-direction: column;align-items: center;display: flex;"
+                    [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
+                    <div style="margin: auto;">
+                      <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
+                    </div>
+                    <p>{{item?.doorPanelName}}</p>
+                  </div>
+                </ng-container>
+              </div>
+              <p class="mb-2 mt-2">Model number</p>
+              <div class="d-flex mt-2" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorModelList">
+                  <div class="p-4" style="background-color: rgb(192, 190, 190); border-radius: 10px;"
+                    [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
+                    <p>{{item?.doorModelName}}</p>
+                    <p>{{item?.quality}}</p>
+                    <p>{{item?.range}}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Colors -->
+          <div class="card mt-2" *ngIf="doorColorList.length > 0">
+            <div class="card-header">
+              Color
+            </div>
+            <div class="card-body">
+              <div class="row mt-2">
+                <ng-container *ngFor="let item of doorColorList">
+                  <div class="col-2 m-1"  [ngClass]="{'active': doorColor == item.doorColorId}"
+                    style="border-radius: 10px; text-align: center; flex-direction: column;align-items: center;display: flex;">
+                    <div style="border-radius: 50%; height: 100px; width: 100px;"
+                      [ngStyle]="{'background-color': item?.colorCode }"
+                      (click)="selectColor(item)">
+                      <img [src]="item?.fileBackPath" alt="" style="border-radius: 50%; height: 100px; width: 100px;">
+                    </div>
+                    <p>{{item?.doorColorAliasName}}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Window Glass -->
+          <div class="card mt-2" *ngIf="doorWindowGlassCategoryList.length > 0">
+            <div class="card-header">
+              Window Glass
+            </div>
+            <div class="card-body">
+              <div class="mt-2 d-flex" style="gap: 8px;">
+                <ng-container *ngFor="let item of doorWindowGlassCategoryList">
+                  <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                    [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
+                    (click)="selectWindowGlassCategory(item)">
+                    {{ item?.factoryGlazeTypeDesc }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="d-flex mt-2" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorWindowGlassSubCategoryList">
+                  <div style="background-color: rgb(192, 190, 190);"
+                    [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
+                    (click)="selectWindowGlassSubCategory(item)">
+                    <div style="margin: auto;">
+                      <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                    </div>
+                    <p>{{item?.factoryGlazeSizeDesc}}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Window Insert -->
+          <div class="card mt-2" *ngIf="doorWindowInsertCategoryList.length > 0">
+            <div class="card-header">
+              Window Insert
+            </div>
+            <div class="card-body">
+              <div class="mt-2 d-flex" style="gap: 8px;">
+                <ng-container *ngFor="let item of doorWindowInsertCategoryList">
+                  <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                    [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
+                    (click)="selectWindowInsertCategory(item)">
+                    {{ item?.doorInsulatedTypeName }}
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="d-flex mt-2" style="gap: 10px;">
+                <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
+                  <div style="background-color: rgb(192, 190, 190);"
+                    [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
+                    (click)="selectWindowInsertSubCategory(item)">
+                    <div style="margin: auto;">
+                      <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                    </div>
+                    <p>{{item?.doorInsulatedDesc}}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spring -->
+          <div class="card mt-2" *ngIf="doorSpringCategoryTypeList.length > 0">
+            <div class="card-header">
+              Spring
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <p> <b>Spring</b> </p>
+                  <div class="mt-1 d-flex" style="gap: 8px;">
+                    <ng-container *ngFor="let item of doorSpringCategoryTypeList">
+                      <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                        [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
+                        (click)="selectSpringCategoryType(item)">
+                        {{ item?.springCategoryTypeName }}
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div>
+                    <label for="dropdown" class="form-label">Cyclage</label>
+                    <select id="dropdown" class="form-select" aria-label="Default select example"
+                      [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
+                      <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
+                        {{ item.springCategoryDesc }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
+                    visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
+                  <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Strut -->
+          <div class="card mt-2" *ngIf="doorStrutCategoryTypeList.length > 0">
+            <div class="card-header">
+              Strut
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 mt-1 d-flex" style="gap: 8px;">
+                  <h6>Strut Catogary (Height/Ga/KSI):</h6>
+                  <ng-container *ngFor="let item of doorStrutCategoryTypeList">
+                    <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                      [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
+                      (click)="selectStrutCategoryType(item)">
+                      {{ item?.sturtCategoryTypeDesc }}
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="col-12 mt-1 d-flex" style="gap: 8px;">
+                  <h6>Strut Type:</h6>
+                  <ng-container *ngFor="let item of doorStrutsTypeList">
+                    <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                      [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
+                      (click)="selectSpringCategoryType(item)">
+                      {{ item?.sturtCategoryDesc }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Strut -->
+          <div class="card mt-2" *ngIf="doorSealCategoryTypeList.length > 0">
+            <div class="card-header">
+              Seals
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6 mt-1 d-flex" style="gap: 8px;">
+                  <ng-container *ngFor="let item of doorSealCategoryTypeList">
+                    <div class="m-1" style="border: 1px solid gray; padding: 6px; text-align: center;"
+                      [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
+                      (click)="selectSealCategoryType(item)">
+                      {{ item?.doorSealTypeDescription }}
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="col-6">
+                  <div>
+                    <select id="dropdown" class="form-select" aria-label="Default select example"
+                      [(ngModel)]="doorSealTypeCategory" (change)="changeSpringCategory($event)">
+                      <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
+                        {{ item.springCategoryDesc }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <p class="text-primary" *ngIf="visualizationSpringDetails">Price : $ {{
+                    visualizationSpringDetails?.springSalesPrice || "0.00" }}</p>
+                  <p class="text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Window -->
+          <div class="card mt-2" *ngIf="doorSealCategoryTypeList.length > 0">
+            <div class="card-header">
+              Dynamic Window
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+                  <div *ngFor="let row of grid; let rowIndex = index">
+                     <!-- "Check All" button inside the first row of each column -->
+                    <div *ngFor="let cell of row; let colIndex = index" class="box-right">
+                      <button *ngIf="rowIndex === 0" class="check-all-btn" (click)="toggleColumnSelection(colIndex)">ALL</button>
+                      <label>
+                        <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
+                               (change)="onCheckboxChange(rowIndex, colIndex, $event)">
+                        <!-- {{ cell }} -->
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!-- Window -->
         </div>
-      </div>
+        <!-- Right Side  -->
     </div>
-  </div>
 </div>
+
+
