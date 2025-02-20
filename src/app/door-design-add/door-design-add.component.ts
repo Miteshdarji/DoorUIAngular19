@@ -698,6 +698,10 @@ export class DoorDesignAddComponent implements OnInit {
     this.strutType();
   }
 
+  selectStrutType(item : any) {
+    this.doorStrutsType = item?.sturtCategoryId;
+  }
+
   doorStrutsTypeList: any[] = [];
   doorStrutsType!: number;
   // Function to get strut details;

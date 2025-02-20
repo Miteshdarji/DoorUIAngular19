@@ -1,5 +1,5 @@
 <!-- ps code -->
-<div class="door-designer-tool"> 
+<div class="door-designer-tool">
 <div class="container">
   <div class="row">
     <!-- Left Part -->
@@ -156,10 +156,10 @@
                </li>
                </ul>
             </div>
-        </div>  
+        </div>
       </div>
      </div>
-     
+
      <!-- Right Part -->
     <div class="col-12 col-sm-12 col-md-8 col-lg-8">
     <div class="right-part">
@@ -197,7 +197,7 @@
               <label for="exampleFormControlInput1" class="form-label d-flex align-items-center">Quantity <div class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div></label>
               <div class="quantity-box">
                 <button class="button btn-minus" type="button"
-                  (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1"> 
+                  (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg>
                 </button>
                 <input type="number" class="form-control-custom" id="exampleFormControlInput1" [(ngModel)]="doorQuantity">
@@ -208,8 +208,8 @@
           </div>
         </div>
       </div>
-     
-      
+
+
 
   <!-- Door Size -->
   <div class="card mt-3">
@@ -286,7 +286,7 @@
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
           <div class="quantity-box">
           <button class="button btn-minus" type="button"
-            (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><<path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
+            (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
           <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
             [(ngModel)]="doorHeightInch">
           <button class="button btn-pluse" type="button" (click)="doorHeightInch = doorHeightInch + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg>
@@ -475,7 +475,7 @@
       </div>
       </div>
 
-      
+
       <div class="form-group mb-0">
         <div class="row g-3">
         <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
@@ -564,7 +564,7 @@
         <div class="selection-button-list">
        <ng-container *ngFor="let item of doorStrutsTypeList">
          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
-           (click)="selectSpringCategoryType(item)">
+           (click)="selectStrutType(item)">
            <span>{{ item?.sturtCategoryDesc }}</span>
          </button>
        </ng-container>
@@ -574,7 +574,7 @@
     </div>
   </div>
 
-   <!-- Strut -->
+   <!-- Seals -->
    <div class="card mt-3" *ngIf="doorSealCategoryTypeList.length > 0">
     <div class="card-header">
       Seals
@@ -595,7 +595,6 @@
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-
           <div class="form-group mb-0">
             <label for="dropdown" class="form-label">Select Label Here</label>
             <select id="dropdown" class="form-select" aria-label="Default select example"
@@ -608,15 +607,13 @@
               visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
               <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</div>
           </div>
-
-          
         </div>
       </div>
     </div>
   </div>
 
 
-   
+
   <!-- Track -->
   <div class="card mt-3">
     <div class="card-header">
@@ -627,23 +624,23 @@
       <div class="form-group">
         <label for="dropdown" class="form-label">Select Track</label>
         <div class="selection-button-list">
-           <button class="button button-grey button-check-icon active"><span>Bracket Mounted</span></button>   
+           <button class="button button-grey button-check-icon active"><span>Bracket Mounted</span></button>
         </div>
       </div>
 
       <div class="form-group">
         <label for="dropdown" class="form-label">Track Radius</label>
         <div class="selection-button-list">
-           <button class="button button-grey button-check-icon active"><span>12R</span></button>   
-           <button class="button button-grey button-check-icon"><span>15R</span></button>   
-           <button class="button button-grey button-check-icon"><span>32R</span></button>   
+           <button class="button button-grey button-check-icon active"><span>12R</span></button>
+           <button class="button button-grey button-check-icon"><span>15R</span></button>
+           <button class="button button-grey button-check-icon"><span>32R</span></button>
         </div>
       </div>
 
       <div class="form-group">
         <label for="dropdown" class="form-label">Select Low Headroom</label>
         <div class="selection-button-list">
-           <button class="button button-grey button-check-icon"><span>DMI 18-TR-LHR-7</span></button>   
+           <button class="button button-grey button-check-icon"><span>DMI 18-TR-LHR-7</span></button>
         </div>
       </div>
 
@@ -744,8 +741,8 @@
       <div class="form-group mb-0">
         <label class="form-label">Select Door Operator</label>
         <div class="row g-3">
-  
-  
+
+
           <div class="col-12 col-sm-12 col-md-3 col-lg-3">
             <div class="item-box box-active active">
               <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
@@ -758,7 +755,7 @@
                     <option>Option 1</option>
                     <option>Option 2</option>
                     <option>Option 3</option>
-                  </select> 
+                  </select>
                 </div>
                 <div class="operatore">
                   <select class="form-select-custom form-select-custom-sm">
@@ -766,7 +763,7 @@
                     <option>Option 1</option>
                     <option>Option 2</option>
                     <option>Option 3</option>
-                  </select> 
+                  </select>
                 </div>
               </div>
             </div>
@@ -784,7 +781,7 @@
                     <option>Option 1</option>
                     <option>Option 2</option>
                     <option>Option 3</option>
-                  </select> 
+                  </select>
                 </div>
                 <div class="operatore">
                   <select class="form-select-custom form-select-custom-sm">
@@ -792,15 +789,15 @@
                     <option>Option 1</option>
                     <option>Option 2</option>
                     <option>Option 3</option>
-                  </select> 
+                  </select>
                 </div>
               </div>
             </div>
           </div>
-  
-         
-  
-  
+
+
+
+
           </div>
           </div>
     </div>
@@ -810,6 +807,6 @@
   </div>
   </div>
   </div>
-</div> 
+</div>
 </div>
 </div>
