@@ -12,14 +12,35 @@
             <!-- Door Visual Canvas -->
             <!-- if no design -->
             <div class="visual-canvas-placeholder">
-               <div class="inner d-flex flex-column align-items-center justify-content-center">
+               <!-- <div class="inner d-flex flex-column align-items-center justify-content-center">
                   <div class="icon d-flex align-items-center justify-content-center">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M496 480H480V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v416H16C7.164 480 0 487.2 0 496C0 504.8 7.164 512 16 512h480c8.836 0 16-7.164 16-16C512 487.2 504.8 480 496 480zM240 480H64V288h176V480zM240 256H64V64c0-17.67 14.33-32 32-32h144V256zM448 480h-176V288H448V480zM448 256h-176V32H416c17.67 0 32 14.33 32 32V256z"/></svg>
                   </div>
                   <div class="text mt-3">
                     <span class="d-block">Your door design a few clicks away !</span>
                   </div>
-               </div>
+               </div> -->
+               <!-- Mitesh Code  -->
+               <div class="container" *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+                <label><b>Visualization Summary</b></label>
+                  <div class="grid-container">
+                    <!-- Left Side (Display Boxes with Image) -->
+                    <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 120px)'"
+                                           [style.gridTemplateRows]="'repeat(auto-fill, 100px)'">
+                      <div *ngFor="let row of grid; let rowIndex = index">
+                        <div *ngFor="let cell of row; let colIndex = index" class="box-left" 
+                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                          <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
+                          <img src="{{repeatfilePath}}" alt="Selected" class="innerImg" />
+                          <img src="{{bgGlassImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" alt="Selected" class="innerImg" />
+                          <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="innerImg" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- Mitesh Code  -->
             </div>
             <!-- End  if no design -->
             <!-- if design add visual canvas -->
@@ -412,6 +433,32 @@
         </ng-container>
       </div>
     </div>
+    </div>
+  </div>
+
+  <!-- Windows Dynamic Checkbox -->
+  <div class="card mt-3" *ngIf="doorColorList.length > 0">
+    <div class="card-header">
+      Windows
+    </div>
+    <div class="card-body">
+      <!-- Mitesh Code       -->
+      <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+        <div *ngFor="let row of grid; let rowIndex = index">
+           <!-- "Check All" button inside the first row of each column -->
+          <div *ngFor="let cell of row; let colIndex = index" class="box-right">
+            <button *ngIf="rowIndex === 0" class="check-all-btn" (click)="toggleColumnSelection(colIndex)">ALL</button>
+            <label>
+              <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
+                     (change)="onCheckboxChange(rowIndex, colIndex, $event)">
+              <!-- {{ cell }} -->
+            </label>
+          </div>
+        </div>
+      </div>
+      <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p>
+      <img src="assets/images/window/short/almond_casecade.png">
+       <!-- Mitesh Code       -->
     </div>
   </div>
 
