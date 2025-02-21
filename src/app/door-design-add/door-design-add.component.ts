@@ -80,6 +80,8 @@ export class DoorDesignAddComponent implements OnInit {
    bgImage: string = '--';
    isBGImage: boolean = false;
    bgWindowInsertImage:string = '';
+   bgGlassImage = '';
+   checkboxSelectedCount: number = 0;
    // ===  Visualize UI [Start] ===== 
   constructor(private utilsService: UtilsService) { }
 
@@ -154,7 +156,7 @@ export class DoorDesignAddComponent implements OnInit {
     // console.log(this.colSize);
     // console.log(this.bgColor);
     // console.log(this.repeatfilePath);
-    //this.initializeGrid();
+    this.initializeGrid();
     this.setVisualizeArrayValues();
     // Added by Mitesh
 
@@ -524,7 +526,7 @@ export class DoorDesignAddComponent implements OnInit {
   // Select the window glass sub category
   selectWindowGlassSubCategory(item: any) {
     this.doorWindowGlassSubCategory = item?.factoryGlazeSizeId;
-    this.visualizationSelection['visualize_backGlassImage'] = item?.filePath;
+    this.visualizationSelection['visualize_backGlassImage'] = item?.fileRawPath;
     console.log("Click to glass", item);
     console.log("visualizationSelection", this.visualizationSelection);
 
@@ -799,7 +801,7 @@ initializeGrid() {
     this.selectedBoxes[i] = [];
     for (let j = 0; j < this.rowSize; j++) {
       this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
-      this.selectedBoxes[i][j] = true; // Default unchecked
+      this.selectedBoxes[i][j] = false; // Default unchecked
     }
   }
 }
@@ -807,9 +809,14 @@ initializeGrid() {
 onCheckboxChange(row: number, col: number, event: Event) {
   const isChecked = (event.target as HTMLInputElement).checked;
   this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
-  console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+  //console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+  this.getSelectedCheckboxCount();
+  console.log('Count',this.getSelectedCheckboxCount())
 }
-
+getSelectedCheckboxCount(): number {
+  this.checkboxSelectedCount = this.selectedBoxes.flat().filter(isChecked => isChecked).length;
+  return this.checkboxSelectedCount;
+}
 updateGrid() {
   this.initializeGrid(); // Reinitialize grid when row/column values change
 }
@@ -818,6 +825,7 @@ updateGrid() {
 toggleColumnSelection(col: number) {
   const allChecked = this.selectedBoxes.every(row => row[col]);
   this.selectedBoxes.forEach(row => row[col] = !allChecked);
+  this.getSelectedCheckboxCount();
 }
 
 getBackgroundStyle() {
@@ -828,9 +836,6 @@ getBackgroundStyle() {
   {
     return { 'background-color': this.bgColor }
   }
-  // return this.bgColor == '--'
-  // ? { 'background-image': `url(${this.bgImage}) !important` }
-  // : { 'background-color': this.bgColor };
 }
 
 setVisualizeArrayValues(){
@@ -843,7 +848,6 @@ setVisualizeArrayValues(){
   }
   if (this.visualizationSelection['visualize_backSelectedColor']){
     if(this.visualizationSelection['visualize_backSelectedColor'] == '--'){
-      //this.bgImage = 'assets' + this.visualizationSelection['visualize_backSelectedImage'].substring(1);
       this.bgImage = this.visualizationSelection['visualize_backSelectedImage'];
       this.bgColor = '--';
       // console.log('Mitesh IF Condition :::');
@@ -853,13 +857,7 @@ setVisualizeArrayValues(){
     else{
       this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
       this.bgImage = '--';
-      // console.log('Mitesh ELSE Condition :::');
-      // console.log(this.bgImage);
-      // console.log(this.bgColor);
     }
-
-    // console.log('Mitesh :::');
-    // console.log(this.bgImage);
 
   }
   if (this.visualizationSelection['visualize_backSelectedImage']){
@@ -871,7 +869,7 @@ setVisualizeArrayValues(){
 
   }
   if (this.visualizationSelection['visualize_backGlassImage']){
-    this.repeatfilePath = this.visualizationSelection['visualize_backGlassImage'];
+    this.bgGlassImage = this.visualizationSelection['visualize_backGlassImage'];
   }
   if (this.visualizationSelection['visualize_backWindowInsertImage']){
     this.bgWindowInsertImage = this.visualizationSelection['visualize_backWindowInsertImage'];
@@ -886,8 +884,8 @@ setVisualizeArrayValues(){
   // console.log(this.bgColor);
   // console.log(this.repeatfilePath);
 
-  this.initializeGrid();
-  console.log(this.bgColor == '--')
-  console.log('Final Image:',this.getBackgroundStyle());
+   this.initializeGrid();
+  // console.log(this.bgColor == '--')
+  // console.log('Final Image:',this.getBackgroundStyle());
 }
 }

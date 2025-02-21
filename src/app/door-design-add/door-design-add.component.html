@@ -11,8 +11,10 @@
               <div *ngFor="let row of grid; let rowIndex = index">
                 <div *ngFor="let cell of row; let colIndex = index" class="box-left" 
                   [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
-                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" />
-                  <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{bgWindowInsertImage}}" class="innerImg" />
+                  <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
+                  <img src="{{repeatfilePath}}" alt="Selected" class="innerImg" />
+                  <img src="{{bgGlassImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" alt="Selected" class="innerImg" />
+                  <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="innerImg" />
                 </div>
               </div>
             </div>
@@ -394,6 +396,7 @@
                 </div>
               </div>
             </div>
+            <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p>
           </div>
            <!-- Window -->
         </div>
