@@ -310,6 +310,19 @@ h6,
 	width: 100%;
 	border: 1px solid rgba(0, 0, 0, 0);
 	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button span small.price{
+	margin-left: 5px;
+	display: block;
+	color: #252525;
+}
+
+.button span small.price em{
+	font-style: normal;
 }
 
 .button-rounded {
@@ -411,6 +424,10 @@ h6,
 	color: #fff;
 }
 
+.button-grey.active span small.price{
+	color: #fff;
+}
+
 .button-grey.active::before{
 	opacity: 1;
 	visibility: visible;
@@ -493,8 +510,9 @@ h6,
 .form-select-custom-sm{
 	height: 35px;
 	font-size: 14px;
-	background-position: right 12px center;
-	background-size: 10px;
+	background-position: right 8px center;
+    background-size: 10px;
+    padding: 5px 25px 5px 8px;
 }
 
 .custom-checkbox {

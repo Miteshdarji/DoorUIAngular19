@@ -11,40 +11,41 @@
         <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder">
-               <!-- <div class="inner d-flex flex-column align-items-center justify-content-center">
+            <div class="visual-canvas-placeholder d-none">
+              <div class="inner d-flex flex-column align-items-center justify-content-center">
                   <div class="icon d-flex align-items-center justify-content-center">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M496 480H480V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v416H16C7.164 480 0 487.2 0 496C0 504.8 7.164 512 16 512h480c8.836 0 16-7.164 16-16C512 487.2 504.8 480 496 480zM240 480H64V288h176V480zM240 256H64V64c0-17.67 14.33-32 32-32h144V256zM448 480h-176V288H448V480zM448 256h-176V32H416c17.67 0 32 14.33 32 32V256z"/></svg>
                   </div>
                   <div class="text mt-3">
                     <span class="d-block">Your door design a few clicks away !</span>
                   </div>
-               </div> -->
-               <!-- Mitesh Code  -->
-               <div class="container" *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
-                <label><b>Visualization Summary</b></label>
-                  <div class="grid-container">
-                    <!-- Left Side (Display Boxes with Image) -->
-                    <div class="left-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 120px)'"
-                                           [style.gridTemplateRows]="'repeat(auto-fill, 100px)'">
-                      <div *ngFor="let row of grid; let rowIndex = index">
-                        <div *ngFor="let cell of row; let colIndex = index" class="box-left" 
-                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
-                          <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
-                          <img src="{{repeatfilePath}}" alt="Selected" class="innerImg" />
-                          <img src="{{bgGlassImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" alt="Selected" class="innerImg" />
-                          <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="innerImg" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              <!-- Mitesh Code  -->
+               </div>
             </div>
             <!-- End  if no design -->
             <!-- if design add visual canvas -->
-            <div class="visual-canvas mt-2">Finel door design here.. Remove this text and class mt-2</div>
+            <div class="visual-canvas">
+                <!-- Mitesh Code  -->
+                <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+                  <div class="visualization-main" style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
+                    <!-- Left Side (Display Boxes with Image) -->
+                    <div class="cover-bg" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                     <div class="main-grid">
+                      <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
+                        <div *ngFor="let cell of row; let colIndex = index" class="design-box" 
+                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                          <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
+                          <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
+                          <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" class="glass-image" style="background-image: url('{{bgGlassImage}}');">
+                            <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="window-image" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                   </div>
+                  </div>
+                </div>
+              <!-- Mitesh Code  -->
+            </div>
             <div class="short-info d-flex">
               <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div>
               <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
@@ -427,6 +428,9 @@
             </div>
             <div class="box-title">
               <span>{{item?.doorColorAliasName}}</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
           </div>
         </div>
@@ -436,6 +440,22 @@
     </div>
   </div>
 
+    <!-- Door Operator -->
+    <div class="card mt-3">
+      <div class="card-header">
+        Windows New
+      </div>
+      <div class="card-body">
+        <div class="windows-edit">
+            <div class="row">
+               <div class="col-4"><div>Button</div></div>
+               <div class="col-4"><div>Grid</div></div>
+               <div class="col-4"><div>21 - value</div></div>
+            </div>
+        </div>  
+      </div>
+      </div>
+
   <!-- Windows Dynamic Checkbox -->
   <div class="card mt-3" *ngIf="doorColorList.length > 0">
     <div class="card-header">
@@ -443,11 +463,11 @@
     </div>
     <div class="card-body">
       <!-- Mitesh Code       -->
-      <div class="right-grid" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+      <div class="windows-edit" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
         <div *ngFor="let row of grid; let rowIndex = index">
            <!-- "Check All" button inside the first row of each column -->
-          <div *ngFor="let cell of row; let colIndex = index" class="box-right">
-            <button *ngIf="rowIndex === 0" class="check-all-btn" (click)="toggleColumnSelection(colIndex)">ALL</button>
+          <div *ngFor="let cell of row; let colIndex = index" class="editable-box">
+            <button *ngIf="rowIndex === 0" class="button" (click)="toggleColumnSelection(colIndex)"><span>ALL</span></button>
             <label>
               <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
                      (change)="onCheckboxChange(rowIndex, colIndex, $event)">
@@ -456,9 +476,7 @@
           </div>
         </div>
       </div>
-      <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p>
-      <img src="assets/images/window/short/almond_casecade.png">
-       <!-- Mitesh Code       -->
+      <!-- <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p> -->
     </div>
   </div>
 
@@ -492,6 +510,9 @@
             </div>
             <div class="box-title">
               <span>{{item?.factoryGlazeSizeDesc}}</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
            </div>
           </div>
@@ -534,6 +555,9 @@
             </div>
             <div class="box-title">
               <span>{{item?.doorInsulatedDesc}}</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
           </div>
           </div>
@@ -678,8 +702,8 @@
       <div class="form-group">
         <label for="dropdown" class="form-label">Track Radius</label>
         <div class="selection-button-list">
-           <button class="button button-grey button-check-icon active"><span>12R</span></button>
-           <button class="button button-grey button-check-icon"><span>15R</span></button>
+           <button class="button button-grey button-check-icon active"><span>12R <small class="price">($<em>12</em>)</small></span></button>
+           <button class="button button-grey button-check-icon"><span>15R <small class="price">($<em>12</em>)</small></span></button>
            <button class="button button-grey button-check-icon"><span>32R</span></button>
         </div>
       </div>
@@ -747,6 +771,9 @@
             </div>
             <div class="box-title border-top-tc">
               <span>1 Inside Slide Lock</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
           </div>
         </div>
@@ -758,6 +785,9 @@
             </div>
             <div class="box-title border-top-tc">
               <span>1 Inside Slide Lock</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
           </div>
         </div>
@@ -769,6 +799,9 @@
             </div>
             <div class="box-title border-top-tc">
               <span>1 Inside Slide Lock</span>
+              <div class="price">
+                <span class="currency text-danger">$</span><span>212</span>
+              </div>
             </div>
           </div>
         </div>
@@ -796,22 +829,43 @@
                 <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
               </div>
               <div class="box-select border-top-tc">
+
                 <div class="operatore">
-                  <select class="form-select-custom form-select-custom-sm">
-                    <option>Select Operator</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
+                  <div class="row g-1 align-items-center">
+                     <div class="col-8">
+                      <select class="form-select-custom form-select-custom-sm">
+                        <option>Select Operator</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                     </div>
+                     <div class="col-4">
+                        <div class="price">
+                           <span class="text-danger">$</span><span>454</span>
+                        </div>
+                     </div>
+                  </div>
                 </div>
+
                 <div class="operatore">
-                  <select class="form-select-custom form-select-custom-sm">
-                    <option>Select Operator</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
+                  <div class="row g-1 align-items-center">
+                     <div class="col-8">
+                      <select class="form-select-custom form-select-custom-sm">
+                        <option>Select Operator</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                     </div>
+                     <div class="col-4">
+                        <div class="price">
+                           <span class="text-danger">$</span><span>454</span>
+                        </div>
+                     </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -822,28 +876,46 @@
                 <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
               </div>
               <div class="box-select border-top-tc">
+
                 <div class="operatore">
-                  <select class="form-select-custom form-select-custom-sm">
-                    <option>Select Operator</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
+                  <div class="row g-1 align-items-center">
+                     <div class="col-8">
+                      <select class="form-select-custom form-select-custom-sm">
+                        <option>Select Operator</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                     </div>
+                     <div class="col-4">
+                        <div class="price">
+                           <span class="text-danger">$</span><span>454</span>
+                        </div>
+                     </div>
+                  </div>
                 </div>
+
                 <div class="operatore">
-                  <select class="form-select-custom form-select-custom-sm">
-                    <option>Select Operator</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
+                  <div class="row g-1 align-items-center">
+                     <div class="col-8">
+                      <select class="form-select-custom form-select-custom-sm">
+                        <option>Select Operator</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                      </select>
+                     </div>
+                     <div class="col-4">
+                        <div class="price">
+                           <span class="text-danger">$</span><span>454</span>
+                        </div>
+                     </div>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
-
-
-
 
           </div>
           </div>
