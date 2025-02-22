@@ -143,4 +143,35 @@ export class UtilsService {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationSealCategory`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
+
+  // Track APIs
+  getVisulizationTrackType(doorType: number) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationTrackType?DoorTypeId=${doorType}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getVisulizationTrackPrice(payload : any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationTrackPrice`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getVisulizationUpgradeTrackPrice(payload : any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationUpgradeTrackPrice`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getVisulizationPriceLHR(payload : any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationPriceLHR`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getVisulizationPriceRoofPitch(payload : any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationPriceRoofPitch`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getDoorLock() {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `DoorLock/DoorLock`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
 }
