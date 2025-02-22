@@ -66,23 +66,23 @@ export class DoorDesignAddComponent implements OnInit {
     visualize_backWindowInsertImage: ""
   }
 
-     // ===  Visualize UI [Start] ===== 
-     rowArray: string[] = [];
-     column: number = 0;
-     rowSize = 0; // Default number of rows
-     colSize = 0; // Default number of columns
-     grid: string[][] = [];
-     selectedBoxes: boolean[][] = [];
-     fileBackImage: string = '';
-     repeatfilePath: string = '';
-     dynamicLeftBackImageUrl: string = '';
-     bgColor: string = '--';
-     bgImage: string = '--';
-     isBGImage: boolean = false;
-     bgWindowInsertImage:string = '';
-     bgGlassImage = '';
-     checkboxSelectedCount: number = 0;
-     // ===  Visualize UI [Start] ===== 
+  // ===  Visualize UI [Start] =====
+  rowArray: string[] = [];
+  column: number = 0;
+  rowSize = 0; // Default number of rows
+  colSize = 0; // Default number of columns
+  grid: string[][] = [];
+  selectedBoxes: boolean[][] = [];
+  fileBackImage: string = '';
+  repeatfilePath: string = '';
+  dynamicLeftBackImageUrl: string = '';
+  bgColor: string = '--';
+  bgImage: string = '--';
+  isBGImage: boolean = false;
+  bgWindowInsertImage: string = '';
+  bgGlassImage = '';
+  checkboxSelectedCount: number = 0;
+  // ===  Visualize UI [Start] =====
 
   constructor(private utilsService: UtilsService) { }
 
@@ -143,6 +143,8 @@ export class DoorDesignAddComponent implements OnInit {
     this.getSpringCategoryType();
     this.getStrutCategoryTypes();
     this.getDoorSealType();
+    this.getVisulizationTrackType();
+    this.getDoorLock();
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
@@ -578,7 +580,13 @@ export class DoorDesignAddComponent implements OnInit {
     })
   }
 
+  selectDooorCollection(item: any) {
+    this.doorCollection = item?.doorCollectionId;
+    this.getDoorSubCollection(this.doorCollection);
+  }
+
   getDoorSubCollection(doorCollection: number) {
+    this.doorSubCollectionList = [];
     this.utilsService.getDoorSubCollection(doorCollection).subscribe((data: any) => {
       this.doorSubCollectionList = data?.payload;
     }, (error) => {
@@ -587,6 +595,7 @@ export class DoorDesignAddComponent implements OnInit {
   }
 
   getDoorPanels(doorSubCollection: number) {
+    this.doorPanelList = [];
     this.utilsService.getDoorPanels(doorSubCollection).subscribe((data: any) => {
       this.doorPanelList = data?.payload;
     }, (error) => {
@@ -606,9 +615,6 @@ export class DoorDesignAddComponent implements OnInit {
     this.utilsService.getVisualizationModel(payload).subscribe((data: any) => {
       this.doorModelList = data?.payload;
       console.log('** Row ', this.doorModelList[0]?.lstDoorColor[0]?.noOfSectionDetail[0]);
-
-
-
     }, (error) => {
       console.error('Error During door getVisualizationModel :', error);
     });
@@ -718,7 +724,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.strutType();
   }
 
-  selectStrutType(item : any) {
+  selectStrutType(item: any) {
     this.doorStrutsType = item?.sturtCategoryId;
   }
 
@@ -756,12 +762,13 @@ export class DoorDesignAddComponent implements OnInit {
   // Function to be used for selection seal category
   selectSealCategoryType(item: any) {
     this.doorSealCategoryType = item?.doorSealTypeId;
+    this.doorSealCategorySalesPrice = null;
     this.getDoorSealTypeCategory();
   }
 
   doorSealTypeCategoryList: any[] = [];
-  doorSealTypeCategory: any;
   selectedSealCategory: any;
+  doorSealCategorySalesPrice: any;
 
   getDoorSealTypeCategory() {
     const payload = {
@@ -770,112 +777,262 @@ export class DoorDesignAddComponent implements OnInit {
       doorWidth: String(this.doorWidthFt) + '.0'
     }
     this.utilsService.getDoorSealTypeCategory(payload).subscribe((data: any) => {
-      this.doorStrutsTypeList = data?.payload;
-      this.doorStrutsType = this.doorStrutsTypeList[0]?.sturtCategoryId;
+      this.doorSealTypeCategoryList = data?.payload;
+      this.selectedSealCategory = this.doorSealTypeCategoryList[0]?.doorSealCategoryId;
+      // Set default price for default selected
+      const selectedSealCategoryPrice = this.doorSealTypeCategoryList.find(c => c.doorSealCategoryId === Number(this.selectedSealCategory));
+      this.doorSealCategorySalesPrice = selectedSealCategoryPrice?.doorSealCategorySalesPrice;
     }, (error) => {
       console.error('Error During door getDoorSealTypeCategory :', error);
     })
   }
 
+  changeSealCategory(event: any) {
+    this.selectedSealCategory = event.target.value;
+    const selectedSealCategoryPrice = this.doorSealTypeCategoryList.find(c => c.doorSealCategoryId === Number(event.target.value));
+    this.doorSealCategorySalesPrice = selectedSealCategoryPrice?.doorSealCategorySalesPrice;
+  }
+
+  deSelectSeal() {
+    this.selectedSealCategory = null;
+    this.doorSealCategorySalesPrice = null;
+    this.doorSealCategoryType = 0;
+  }
+
+  // Track Integration
+  doorTrackTypeList: any[] = [];
+  doorTrackType!: number;
+  doorTrackTypePriceList: any[] = [];
+  doorTrackPrice!: number;
+
+  getVisulizationTrackType() {
+    this.utilsService.getVisulizationTrackType(this.doorType).subscribe((data: any) => {
+      this.doorTrackTypeList = data?.payload;
+      this.doorTrackType = this.doorTrackTypeList[0]?.trackTypeId;
+      this.getVisulizationTrackPrice();
+    }, (error) => {
+      console.error('Error During door getVisulizationTrackType :', error);
+    })
+  }
+
+  selectTractType(item: any) {
+    this.doorTrackType = item?.trackTypeId;
+    this.getVisulizationTrackPrice();
+  }
+
+  getVisulizationTrackPrice() {
+    const payload = {
+      trackTypeId: this.doorTrackType,
+      doorHeight: String(this.doorHeightFt) + '.0',
+      doorWidth: String(this.doorWidthFt) + '.0',
+    }
+    this.utilsService.getVisulizationTrackPrice(payload).subscribe((data: any) => {
+      this.doorTrackTypePriceList = data?.payload;
+    }, (error) => {
+      console.error('Error During door getVisulizationTrackPrice :', error);
+    })
+  }
+
+  selectTrackPrice(item: any) {
+    this.doorTrackPrice = item?.trackPriceId;
+    this.getVisulizationUpgradeTrackPrice();
+    this.getVisulizationPriceRoofPitch();
+    if (item?.trackCategoryName == '12R') {
+      this.getVisulizationPriceLHR();
+    } else {
+      this.doorTractLHRList = [];
+    }
+  }
+
+  doorUpgradTrackList: any[] = [];
+  doorUpgradTrack!: number;
+
+  getVisulizationUpgradeTrackPrice() {
+    const salePriceObj = this.doorTrackTypePriceList.find((element) => element.trackPriceId == this.doorTrackPrice);
+    const payload = {
+      priceId: this.doorTrackPrice,
+      salesPrice: salePriceObj?.salesPrice,
+    }
+    this.doorUpgradTrackList = [];
+    this.utilsService.getVisulizationUpgradeTrackPrice(payload).subscribe((data: any) => {
+      this.doorUpgradTrackList = data?.payload || [];
+      if (this.doorUpgradTrackList?.length > 0) {
+        this.doorUpgradTrack = this.doorUpgradTrackList[0]?.trackUpdatePriceId;
+      }
+    }, (error) => {
+      console.error('Error During door getVisulizationUpgradeTrackPrice :', error);
+    })
+  }
+
+  selectUpgradTrackPrice(item: any) {
+    this.doorUpgradTrack = item?.trackUpdatePriceId
+  }
+
+  doorTractLHRList: any[] = [];
+  doorTractLHR!: number;
+
+  getVisulizationPriceLHR() {
+    const payload = {
+      doorHeight: String(this.doorHeightFt) + '.0',
+      categoeryTypeId: this.doorTrackType,
+      trackTypeId: this.doorTrackPrice
+    }
+    console.log("testeing", payload);
+    this.utilsService.getVisulizationPriceLHR(payload).subscribe((data: any) => {
+      this.doorTractLHRList = data?.payload;
+    }, (error) => {
+      console.error('Error During door getVisulizationPriceLHR :', error);
+    });
+  }
+
+  selectTractLHR(item: any) {
+    this.doorTractLHR = item?.lhrId;
+  }
+
+  doorTrackRoofPitchList: any = [];
+  doorTrackRoofPitch!: any;
+  selectedDoorTrackRoofPitch!: any;
+  trackHighlift!: any;
+  doorTrackRoofPitchSalesPrice!: any;
+
+  getVisulizationPriceRoofPitch() {
+    const payload = {
+      doorHeight: String(this.doorHeightFt) + '.0',
+      doorWidth: String(this.doorWidthFt) + '.0'
+    }
+    this.utilsService.getVisulizationPriceRoofPitch(payload).subscribe((data: any) => {
+      this.doorTrackRoofPitchList = data?.payload;
+    }, (error) => {
+      console.error('Error During door getVisulizationPriceRoofPitch :', error);
+    });
+  }
+
+  changeTackRoofPitch(event: any) {
+    this.doorTrackRoofPitch = event.target.value;
+    const roofDetails = this.doorTrackRoofPitchList.find((element: any) => element.roofPitchId == this.doorTrackRoofPitch);
+    this.doorTrackRoofPitchSalesPrice = roofDetails.salesPrice;
+  }
+
+  // Door lock
+  doorLockList: any = [];
+  doorLock!: any;
+  getDoorLock() {
+    this.doorLockList = [];
+    this.utilsService.getDoorLock().subscribe((data: any) => {
+      this.doorLockList = data?.payload;
+    }, (error) => {
+      console.error('Error During door getDoorLock :', error);
+    });
+  }
+
+  selectDoorLock(item: any) {
+    this.doorLock = item?.doorLockId;
+  }
+
+  // Get selected Item values and details
+  getTypeOfDoorAndCompany() {
+
+  }
+
+
+
   // Mitesh Code Start
-   // ====== Dynamic Window Binding ( Row and Column )===== 
+  // ====== Dynamic Window Binding ( Row and Column )=====
 
-initializeGrid() {
-  this.grid = [];
-  this.selectedBoxes = [];
+  initializeGrid() {
+    this.grid = [];
+    this.selectedBoxes = [];
 
-  for (let i = 0; i < this.colSize; i++) {
-    this.grid[i] = [];
-    this.selectedBoxes[i] = [];
-    for (let j = 0; j < this.rowSize; j++) {
-      this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
-      this.selectedBoxes[i][j] = false; // Default unchecked
+    for (let i = 0; i < this.colSize; i++) {
+      this.grid[i] = [];
+      this.selectedBoxes[i] = [];
+      for (let j = 0; j < this.rowSize; j++) {
+        this.grid[i][j] = `Row ${i + 1} Col ${j + 1}`;
+        this.selectedBoxes[i][j] = false; // Default unchecked
+      }
     }
   }
-}
 
-onCheckboxChange(row: number, col: number, event: Event) {
-  const isChecked = (event.target as HTMLInputElement).checked;
-  this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
-  //console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
-  this.getSelectedCheckboxCount();
-  console.log('Count',this.getSelectedCheckboxCount())
-}
-getSelectedCheckboxCount(): number {
-  this.checkboxSelectedCount = this.selectedBoxes.flat().filter(isChecked => isChecked).length;
-  return this.checkboxSelectedCount;
-}
-updateGrid() {
-  this.initializeGrid(); // Reinitialize grid when row/column values change
-}
+  onCheckboxChange(row: number, col: number, event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
+    //console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+    this.getSelectedCheckboxCount();
+    console.log('Count', this.getSelectedCheckboxCount())
+  }
+  getSelectedCheckboxCount(): number {
+    this.checkboxSelectedCount = this.selectedBoxes.flat().filter(isChecked => isChecked).length;
+    return this.checkboxSelectedCount;
+  }
+  updateGrid() {
+    this.initializeGrid(); // Reinitialize grid when row/column values change
+  }
 
-// To select all checkbox logic
-toggleColumnSelection(col: number) {
-  const allChecked = this.selectedBoxes.every(row => row[col]);
-  this.selectedBoxes.forEach(row => row[col] = !allChecked);
-  this.getSelectedCheckboxCount();
-}
+  // To select all checkbox logic
+  toggleColumnSelection(col: number) {
+    const allChecked = this.selectedBoxes.every(row => row[col]);
+    this.selectedBoxes.forEach(row => row[col] = !allChecked);
+    this.getSelectedCheckboxCount();
+  }
 
-getBackgroundStyle() {
-  if(this.bgColor === '--'){
-    return { 'background-image': `url(${this.bgImage}) !important` }
+  getBackgroundStyle() {
+    if (this.bgColor === '--') {
+      return { 'background-image': `url(${this.bgImage}) !important` }
+    }
+    else {
+      return { 'background-color': this.bgColor }
+    }
   }
-  else
-  {
-    return { 'background-color': this.bgColor }
-  }
-}
 
-setVisualizeArrayValues(){
-  
-  if (this.visualizationSelection['visualize_row']){
-    this.rowSize = this.visualizationSelection['visualize_row'];
-  }
-  if (this.visualizationSelection['visualize_column']){
-    this.colSize = this.visualizationSelection['visualize_column'];
-  }
-  if (this.visualizationSelection['visualize_backSelectedColor']){
-    if(this.visualizationSelection['visualize_backSelectedColor'] == '--'){
-      this.bgImage = this.visualizationSelection['visualize_backSelectedImage'];
-      this.bgColor = '--';
-      // console.log('Mitesh IF Condition :::');
-      // console.log(this.bgImage);
-      // console.log(this.bgColor);
-     }
-    else{
-      this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
-      this.bgImage = '--';
+  setVisualizeArrayValues() {
+
+    if (this.visualizationSelection['visualize_row']) {
+      this.rowSize = this.visualizationSelection['visualize_row'];
+    }
+    if (this.visualizationSelection['visualize_column']) {
+      this.colSize = this.visualizationSelection['visualize_column'];
+    }
+    if (this.visualizationSelection['visualize_backSelectedColor']) {
+      if (this.visualizationSelection['visualize_backSelectedColor'] == '--') {
+        this.bgImage = this.visualizationSelection['visualize_backSelectedImage'];
+        this.bgColor = '--';
+        // console.log('Mitesh IF Condition :::');
+        // console.log(this.bgImage);
+        // console.log(this.bgColor);
+      }
+      else {
+        this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
+        this.bgImage = '--';
+      }
+
+    }
+    if (this.visualizationSelection['visualize_backSelectedImage']) {
+    }
+    if (this.visualizationSelection['visualize_backRepeatImage']) {
+      this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'].toLowerCase();
+    }
+    if (this.visualizationSelection['visualize_noOfSections']) {
+
+    }
+    if (this.visualizationSelection['visualize_backGlassImage']) {
+      this.bgGlassImage = this.visualizationSelection['visualize_backGlassImage'].toLowerCase();
+    }
+    if (this.visualizationSelection['visualize_backWindowInsertImage']) {
+      this.bgWindowInsertImage = this.visualizationSelection['visualize_backWindowInsertImage'].toLowerCase();
     }
 
-  }
-  if (this.visualizationSelection['visualize_backSelectedImage']){
-  }
-  if (this.visualizationSelection['visualize_backRepeatImage']){
-    this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'].toLowerCase();
-  }
-  if (this.visualizationSelection['visualize_noOfSections']){
+    console.log('$$$$$$$$$$$$$$$$$$$$$$$$');
+    console.log('bgWindowInsertImage', this.bgWindowInsertImage);
+    console.log('repeatfilePath', this.repeatfilePath);
+    // console.log('%%%%%%%%%%%%%%');
+    // console.log(this.rowSize);
+    // console.log(this.colSize);
+    // console.log(this.bgColor);
+    // console.log(this.repeatfilePath);
 
+    this.initializeGrid();
+    // console.log(this.bgColor == '--')
+    // console.log('Final Image:',this.getBackgroundStyle());
   }
-  if (this.visualizationSelection['visualize_backGlassImage']){
-    this.bgGlassImage = this.visualizationSelection['visualize_backGlassImage'].toLowerCase();
-  }
-  if (this.visualizationSelection['visualize_backWindowInsertImage']){
-    this.bgWindowInsertImage = this.visualizationSelection['visualize_backWindowInsertImage'].toLowerCase();
-  }
-  
-  console.log('$$$$$$$$$$$$$$$$$$$$$$$$');
-  console.log('bgWindowInsertImage', this.bgWindowInsertImage);
-  console.log('repeatfilePath', this.repeatfilePath);
-  // console.log('%%%%%%%%%%%%%%');
-  // console.log(this.rowSize);
-  // console.log(this.colSize);
-  // console.log(this.bgColor);
-  // console.log(this.repeatfilePath);
-
-   this.initializeGrid();
-  // console.log(this.bgColor == '--')
-  // console.log('Final Image:',this.getBackgroundStyle());
- }
   // Mitesh Code End
-
 }

@@ -1,931 +1,1031 @@
 <!-- ps code -->
 <div class="door-designer-tool">
-<div class="container">
-  <div class="row">
-    <!-- Left Part -->
-     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-      <div class="leftbar">
-        <div class="section-title">
-          <h2 class="h3">Door Summary</h2>
-        </div>
-        <div class="summary">
+  <div class="container">
+    <div class="row">
+      <!-- Left Part -->
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="leftbar">
+          <div class="section-title">
+            <h2 class="h3">Door Summary</h2>
+          </div>
+          <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
             <div class="visual-canvas-placeholder d-none">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
-                  <div class="icon d-flex align-items-center justify-content-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M496 480H480V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v416H16C7.164 480 0 487.2 0 496C0 504.8 7.164 512 16 512h480c8.836 0 16-7.164 16-16C512 487.2 504.8 480 496 480zM240 480H64V288h176V480zM240 256H64V64c0-17.67 14.33-32 32-32h144V256zM448 480h-176V288H448V480zM448 256h-176V32H416c17.67 0 32 14.33 32 32V256z"/></svg>
-                  </div>
-                  <div class="text mt-3">
-                    <span class="d-block">Your door design a few clicks away !</span>
-                  </div>
-               </div>
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                      d="M496 480H480V64c0-35.35-28.65-64-64-64H96C60.65 0 32 28.65 32 64v416H16C7.164 480 0 487.2 0 496C0 504.8 7.164 512 16 512h480c8.836 0 16-7.164 16-16C512 487.2 504.8 480 496 480zM240 480H64V288h176V480zM240 256H64V64c0-17.67 14.33-32 32-32h144V256zM448 480h-176V288H448V480zM448 256h-176V32H416c17.67 0 32 14.33 32 32V256z" />
+                  </svg>
+                </div>
+                <div class="text mt-3">
+                  <span class="d-block">Your door design a few clicks away !</span>
+                </div>
+              </div>
             </div>
             <!-- End  if no design -->
             <!-- if design add visual canvas -->
             <div class="visual-canvas">
-                <!-- Mitesh Code  -->
-                <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
-                  <div class="visualization-main" style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
-                    <!-- Left Side (Display Boxes with Image) -->
-                    <div class="cover-bg" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
-                     <div class="main-grid">
+              <!-- Mitesh Code  -->
+              <div
+                *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+                <div class="visualization-main"
+                  style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
+                  <!-- Left Side (Display Boxes with Image) -->
+                  <div class="cover-bg"
+                    style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                    <div class="main-grid">
                       <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
-                        <div *ngFor="let cell of row; let colIndex = index" class="design-box" 
+                        <div *ngFor="let cell of row; let colIndex = index" class="design-box"
                           [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
                           <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
                           <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
-                          <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" class="glass-image" style="background-image: url('{{bgGlassImage}}');">
-                            <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="window-image" />
+                          <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                            class="glass-image" style="background-image: url('{{bgGlassImage}}');">
+                            <img src="{{bgWindowInsertImage}}"
+                              *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                              class="window-image" />
                           </div>
                         </div>
                       </div>
                     </div>
-                   </div>
                   </div>
                 </div>
+              </div>
               <!-- Mitesh Code  -->
             </div>
             <div class="short-info d-flex">
-              <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div>
+              <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path
+                    d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z" />
+                </svg></div>
               <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
             </div>
             <!-- End if design add visual canvas -->
             <div class="estimate-quote d-flex justify-content-between">
-               <div class="title d-flex align-items-center"><span class="icon d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M512 96H64C46.33 96 32 110.3 32 128V384C32 401.7 46.33 416 64 416H338.2L330.2 448H64C28.65 448 0 419.3 0 384V128C0 92.65 28.65 64 64 64H512C547.3 64 576 92.65 576 128V192C565.1 191.7 554.2 193.6 544 197.6V128C544 110.3 529.7 96 512 96V96zM256 304C256 295.2 263.2 288 272 288H368C376.8 288 384 295.2 384 304C384 312.8 376.8 320 368 320H272C263.2 320 256 312.8 256 304zM464 192C472.8 192 480 199.2 480 208C480 216.8 472.8 224 464 224H272C263.2 224 256 216.8 256 208C256 199.2 263.2 192 272 192H464zM143.1 144C152.8 144 159.1 151.2 159.1 160V169.6C165.9 170.6 178.1 173.2 184.1 174.5C192.7 176.8 197.7 185.6 195.5 194.1C193.2 202.7 184.4 207.7 175.9 205.5C171.9 204.4 158.2 201.7 153.8 201C140.9 199 130.1 200.6 122.9 203.9C115.7 207.2 112.1 211.4 112.4 214.1C111.7 219.1 112.3 221.2 112.9 222.4C113.5 223.8 114.8 225.5 117.8 227.5C124.6 232.1 134.9 235.3 148.8 239.5L149.4 239.7C161.7 243.4 177.3 248.1 188.9 256.5C195.1 261.1 200.9 267.1 204.5 275.3C208.1 283.6 208.8 292.8 207.2 302.5C204.1 319.1 192.6 331.9 177.9 338.2C172.3 340.6 166.3 342.2 160 343.1V352C160 360.8 152.8 368 144 368C135.2 368 128 360.8 128 352V342.4C118.6 340.6 104.5 335.8 95.55 332.7C93.79 332.1 92.22 331.6 90.95 331.2C82.56 328.4 78.03 319.3 80.82 310.9C83.61 302.6 92.67 298 101.1 300.8C102.1 301.5 105 302.2 107.2 302.9C116.7 306.1 127.9 309.9 134.3 310.1C147.6 313.1 158.3 311.8 165.3 308.8C171.8 306 174.7 302.1 175.6 297C176.4 292.4 175.8 289.7 175.1 288.1C174.4 286.4 172.9 284.5 170 282.4C163.5 277.6 153.3 274.3 139.6 270.1L137.5 269.5C125.7 265.9 110.9 261.5 99.87 254C93.65 249.8 87.7 244 83.93 236.1C80.1 228 79.2 219 80.85 209.5C83.73 192.8 95.57 181.2 109.7 174.8C115.3 172.2 121.5 170.4 128 169.3V160C128 151.2 135.2 144 144 144H143.1zM537.5 241.4C556.3 222.6 586.7 222.6 605.4 241.4L622.8 258.7C641.5 277.5 641.5 307.9 622.8 326.6L469.1 480.3C462.9 486.5 455.2 490.8 446.8 492.1L371.9 511.7C366.4 513 360.7 511.4 356.7 507.5C352.7 503.5 351.1 497.7 352.5 492.3L371.2 417.4C373.3 408.9 377.7 401.2 383.8 395.1L537.5 241.4zM582.8 264C576.5 257.8 566.4 257.8 560.2 264L535.3 288.8L575.3 328.8L600.2 303.1C606.4 297.7 606.4 287.6 600.2 281.4L582.8 264zM402.2 425.1L389.1 474.2L439 461.9C441.8 461.2 444.4 459.8 446.4 457.7L552.7 351.4L512.7 311.5L406.5 417.7C404.4 419.8 402.9 422.3 402.2 425.1L402.2 425.1z"/></svg></span>Quote Estimate</div>
-               <span class="price">$ 989.96</span>
+              <div class="title d-flex align-items-center"><span
+                  class="icon d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 512">
+                    <path
+                      d="M512 96H64C46.33 96 32 110.3 32 128V384C32 401.7 46.33 416 64 416H338.2L330.2 448H64C28.65 448 0 419.3 0 384V128C0 92.65 28.65 64 64 64H512C547.3 64 576 92.65 576 128V192C565.1 191.7 554.2 193.6 544 197.6V128C544 110.3 529.7 96 512 96V96zM256 304C256 295.2 263.2 288 272 288H368C376.8 288 384 295.2 384 304C384 312.8 376.8 320 368 320H272C263.2 320 256 312.8 256 304zM464 192C472.8 192 480 199.2 480 208C480 216.8 472.8 224 464 224H272C263.2 224 256 216.8 256 208C256 199.2 263.2 192 272 192H464zM143.1 144C152.8 144 159.1 151.2 159.1 160V169.6C165.9 170.6 178.1 173.2 184.1 174.5C192.7 176.8 197.7 185.6 195.5 194.1C193.2 202.7 184.4 207.7 175.9 205.5C171.9 204.4 158.2 201.7 153.8 201C140.9 199 130.1 200.6 122.9 203.9C115.7 207.2 112.1 211.4 112.4 214.1C111.7 219.1 112.3 221.2 112.9 222.4C113.5 223.8 114.8 225.5 117.8 227.5C124.6 232.1 134.9 235.3 148.8 239.5L149.4 239.7C161.7 243.4 177.3 248.1 188.9 256.5C195.1 261.1 200.9 267.1 204.5 275.3C208.1 283.6 208.8 292.8 207.2 302.5C204.1 319.1 192.6 331.9 177.9 338.2C172.3 340.6 166.3 342.2 160 343.1V352C160 360.8 152.8 368 144 368C135.2 368 128 360.8 128 352V342.4C118.6 340.6 104.5 335.8 95.55 332.7C93.79 332.1 92.22 331.6 90.95 331.2C82.56 328.4 78.03 319.3 80.82 310.9C83.61 302.6 92.67 298 101.1 300.8C102.1 301.5 105 302.2 107.2 302.9C116.7 306.1 127.9 309.9 134.3 310.1C147.6 313.1 158.3 311.8 165.3 308.8C171.8 306 174.7 302.1 175.6 297C176.4 292.4 175.8 289.7 175.1 288.1C174.4 286.4 172.9 284.5 170 282.4C163.5 277.6 153.3 274.3 139.6 270.1L137.5 269.5C125.7 265.9 110.9 261.5 99.87 254C93.65 249.8 87.7 244 83.93 236.1C80.1 228 79.2 219 80.85 209.5C83.73 192.8 95.57 181.2 109.7 174.8C115.3 172.2 121.5 170.4 128 169.3V160C128 151.2 135.2 144 144 144H143.1zM537.5 241.4C556.3 222.6 586.7 222.6 605.4 241.4L622.8 258.7C641.5 277.5 641.5 307.9 622.8 326.6L469.1 480.3C462.9 486.5 455.2 490.8 446.8 492.1L371.9 511.7C366.4 513 360.7 511.4 356.7 507.5C352.7 503.5 351.1 497.7 352.5 492.3L371.2 417.4C373.3 408.9 377.7 401.2 383.8 395.1L537.5 241.4zM582.8 264C576.5 257.8 566.4 257.8 560.2 264L535.3 288.8L575.3 328.8L600.2 303.1C606.4 297.7 606.4 287.6 600.2 281.4L582.8 264zM402.2 425.1L389.1 474.2L439 461.9C441.8 461.2 444.4 459.8 446.4 457.7L552.7 351.4L512.7 311.5L406.5 417.7C404.4 419.8 402.9 422.3 402.2 425.1L402.2 425.1z" />
+                  </svg></span>Quote Estimate</div>
+              <span class="price">$ 989.96</span>
             </div>
             <div class="main-info">
-               <ul class="info-list list-none">
-                  <li>
-                     <div class="info">
-                        <div class="row">
-                            <div class="col">
-                                <div class="title"><span>Type of door and company</span></div>
-                                <span class="value">Residential CHI</span>
-                            </div>
-                        </div>
-                     </div>
-                  </li>
-                  <li>
-                    <div class="info">
-                       <div class="row">
-                           <div class="col-6">
-                               <div class="title"><span>Width</span></div>
-                               <span class="value">9'0"</span>
-                           </div>
-                           <div class="col-6">
-                            <div class="title"><span>Height</span></div>
-                            <span class="value">7' 0"</span>
-                        </div>
-                        <div class="col-12 space"></div>
-                        <div class="col-12">
-                          <div class="title"><span>Model</span></div>
-                          <span class="value">Timeless , Raised Panel , Short Panel , 2216 , Graphite</span>
-                        </div>
-                       </div>
-                    </div>
-                 </li>
-                 <li>
+              <ul class="info-list list-none">
+                <li>
                   <div class="info">
-                     <div class="row">
-                         <div class="col">
-                             <div class="title"><span>Window Details</span></div>
-                             <span class="value">Window Quantity:4 Window Glass:Short Panel SP-INS-Obscure , Window Insert: Plain/No Inserts None</span>
-                         </div>
-                     </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Type of door and company</span></div>
+                        <span class="value">Residential CHI</span>
+                      </div>
+                    </div>
                   </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col">
-                           <div class="title"><span>Spring</span></div>
-                           <span class="value">Torsion</span>
-                       </div>
-                       <div class="col">
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="title"><span>Width</span></div>
+                        <span class="value">9'0"</span>
+                      </div>
+                      <div class="col-6">
+                        <div class="title"><span>Height</span></div>
+                        <span class="value">7' 0"</span>
+                      </div>
+                      <div class="col-12 space"></div>
+                      <div class="col-12">
+                        <div class="title"><span>Model</span></div>
+                        <span class="value">Timeless , Raised Panel , Short Panel , 2216 , Graphite</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Window Details</span></div>
+                        <span class="value">Window Quantity:4 Window Glass:Short Panel SP-INS-Obscure , Window Insert:
+                          Plain/No Inserts None</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Spring</span></div>
+                        <span class="value">Torsion</span>
+                      </div>
+                      <div class="col">
                         <div class="title"><span>Cyclage</span></div>
                         <span class="value">Minimum 10,000 Cycles (10K CYCLES)</span>
+                      </div>
                     </div>
-                   </div>
-                </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col">
-                           <div class="title"><span>Seals</span></div>
-                           <span class="value">Modern Wood Grain Vinyl Trim</span>
-                       </div>
-                       <div class="col">
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Seals</span></div>
+                        <span class="value">Modern Wood Grain Vinyl Trim</span>
+                      </div>
+                      <div class="col">
                         <div class="title"><span>Lock</span></div>
                         <span class="value">1 Inside Slide Lock</span>
+                      </div>
                     </div>
-                   </div>
-                </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col">
-                           <div class="title"><span>Strut</span></div>
-                           <span class="value">Strut Mounted</span>
-                       </div>
-                       <div class="col">
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Strut</span></div>
+                        <span class="value">Strut Mounted</span>
+                      </div>
+                      <div class="col">
                         <div class="title"><span>Track</span></div>
                         <span class="value">Bracket Mounted</span>
+                      </div>
                     </div>
-                   </div>
-                </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col">
-                           <div class="title"><span>Jamb Mount</span></div>
-                           <span class="value">12R</span>
-                       </div>
-                       <div class="col">
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Jamb Mount</span></div>
+                        <span class="value">12R</span>
+                      </div>
+                      <div class="col">
                         <div class="title"><span>Jamb Material</span></div>
                         <span class="value">Wood</span>
+                      </div>
                     </div>
-                   </div>
-                </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col">
-                           <div class="title"><span>Door Operator</span></div>
-                           <span class="value">LiftMaster 98022, Genie 2028, Marantec 380 Head</span>
-                       </div>
-                   </div>
-                </div>
-               </li>
-               <li>
-                <div class="info">
-                   <div class="row">
-                       <div class="col-6">
-                           <div class="title"><span>Perforated Angle</span></div>
-                           <span class="value">---</span>
-                       </div>
-                       <div class="col-6">
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col">
+                        <div class="title"><span>Door Operator</span></div>
+                        <span class="value">LiftMaster 98022, Genie 2028, Marantec 380 Head</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="info">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="title"><span>Perforated Angle</span></div>
+                        <span class="value">---</span>
+                      </div>
+                      <div class="col-6">
                         <div class="title"><span>Decorative Items</span></div>
                         <span class="value">---</span>
+                      </div>
                     </div>
-                   </div>
-                </div>
-               </li>
-               </ul>
-            </div>
-        </div>
-      </div>
-     </div>
-
-     <!-- Right Part -->
-    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
-    <div class="right-part">
-      <div class="section-title">
-        <h2 class="h3">Door Designer</h2>
-      </div>
-    <div class="designer">
-
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-              <div class="form-group mb-0">
-              <label for="dropdown" class="form-label">Door Company </label>
-              <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorCompany">
-                <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
-                  [disable]="item.doorCompanyName == 'Safeway'">
-                  {{ item.doorCompanyName }}
-                </option>
-              </select>
-             </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="form-group mb-0">
-              <label for="dropdown" class="form-label">Types of Doors </label>
-              <select id="dropdown" class="form-select-custom" aria-label="Default select example" [(ngModel)]="doorType">
-                <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
-                  {{ item.doorTypeName }}
-                </option>
-              </select>
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-              <div class="form-group mb-0">
-              <label for="exampleFormControlInput1" class="form-label d-flex align-items-center">Quantity <div class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div></label>
-              <div class="quantity-box">
-                <button class="button btn-minus" type="button"
-                  (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg>
-                </button>
-                <input type="number" class="form-control-custom" id="exampleFormControlInput1" [(ngModel)]="doorQuantity">
-                   <button class="button btn-pluse" type="button" (click)="doorQuantity = doorQuantity + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-                </div>
-              </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
-
-
-  <!-- Door Size -->
-  <div class="card mt-3">
-    <div class="card-header">
-      Door Size
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-        <label class="form-label">Select a Standard garage door size <b>Or</b> enter your exact garage door size</label>
-      <div class="selection-button-list" *ngIf="doorType == 1">
-        <ng-container *ngFor="let size of DoorSizeList.Residential.width_arr; let index = index">
-          <button class="button button-grey button-check-icon" (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index])">
-            <span>{{size}}' x {{DoorSizeList.Residential.height_arr[index]}}'</span> </button>
-        </ng-container>
-      </div>
-
-      <div class="selection-button-list" *ngIf="doorType == 2">
-        <ng-container *ngFor="let size of DoorSizeList.Commercial.width_arr; let index = index">
-          <button class="button button-grey button-check-icon"
-            (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index], DoorSizeList.Commercial.width_arr_inch[index])">
-          <span>{{size}}'{{DoorSizeList.Commercial.width_arr_inch[index]}}" x
-            {{DoorSizeList.Commercial.height_arr[index]}}'</span>
-          </button>
-        </ng-container>
-      </div>
-
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Select Door Width</label>
-      <div class="row">
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="quantity-box">
-          <button class="button btn-minus" type="button"
-            (click)="doorWidthFt = doorWidthFt - 1 < 0 ? 0 : doorWidthFt - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><<path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
-          <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorWidthFt">
-          <button class="button btn-pluse" type="button" (click)="doorWidthFt = doorWidthFt + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">Ft</button>
-        </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="quantity-box">
-          <button class="button btn-minus" type="button"
-            (click)="doorWidthInch = doorWidthInch - 1 < 0 ? 0 : doorWidthInch - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><<path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
-          <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorWidthInch">
-          <button class="button btn-pluse" type="button" (click)="doorWidthInch = doorWidthInch + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">In</button>
-        </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="form-group mb-0">
-      <label class="form-label">Select Door Height</label>
-      <div class="row">
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="quantity-box">
-          <button class="button btn-minus" type="button"
-            (click)="doorHeightFt = doorHeightFt - 1 < 0 ? 0 : doorHeightFt - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><<path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
-          <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorHeightFt">
-          <button class="button btn-pluse" type="button" (click)="doorHeightFt = doorHeightFt + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg></button>
-          <button class="button btn-label" type="button">Ft</button>
-        </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="quantity-box">
-          <button class="button btn-minus" type="button"
-            (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z"/></svg></button>
-          <input type="number" class="form-control-custom" id="exampleFormControlInput1" placeholder="Quantity"
-            [(ngModel)]="doorHeightInch">
-          <button class="button btn-pluse" type="button" (click)="doorHeightInch = doorHeightInch + 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z"/></svg>
-          </button>
-          <button class="button btn-label" type="button">In</button>
-        </div>
-      </div>
-      </div>
-      </div>
-
-
-    </div>
-  </div>
-
-  <!-- Collection And Family -->
-  <div class="card mt-3">
-    <div class="card-header">
-      Collection & Family
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-      <label class="form-label">Select Collection</label>
-      <div class="selection-button-list">
-        <ng-container *ngFor="let item of doorCollectionList">
-          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorCollection == item.doorCollectionId}"
-            type="button" (click)="doorCollection = item.doorCollectionId"><span>{{ item.doorCollectionName }}</span></button>
-        </ng-container>
-      </div>
-    </div>
-
-    <div class="form-group mb-0">
-      <label class="form-label">Select Family</label>
-      <div class="row g-3">
-        <ng-container *ngFor="let item of doorSubCollectionList">
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box box-active"
-            [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}" (click)="selectSubCollection(item)">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 78.5%">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <div class="box-title">
-              <span>{{item?.doorSubCollectionName}}</span>
-            </div>
+      <!-- Right Part -->
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="right-part">
+          <div class="section-title">
+            <h2 class="h3">Door Designer</h2>
           </div>
-        </div>
-        </ng-container>
-      </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Panel style and model number -->
-  <div class="card mt-3" *ngIf="doorPanelList.length > 0">
-    <div class="card-header">
-      Panel Style And Model Number
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-        <label class="form-label">Select Panel Style</label>
-        <div class="row g-3">
-        <ng-container *ngFor="let item of doorPanelList">
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box box-active" [ngClass]="{'active': doorPanel == item.doorPanelId}" (click)="selectPanel(item)">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 20%">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
-            </div>
-            <div class="box-title">
-              <span>{{item?.doorPanelName}}</span>
-            </div>
-          </div>
-          </div>
-        </ng-container>
-      </div>
-      </div>
-
-      <div class="form-group mb-0">
-      <label class="form-label">Select Model number</label>
-       <div class="row g-3">
-        <ng-container *ngFor="let item of doorModelList">
-          <div class="col-auto">
-          <div class="model-box d-flex flex-column align-items-center" [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-            <div class="content">
-            <p class="mb-1">{{item?.doorModelName}}</p>
-            <p class="mb-0">{{item?.range}}</p>
-            </div>
-            <div class="box-label">
-              <span>{{item?.quality}}</span>
-            </div>
-            <div class="star-rating" data-rating="3">
-              <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <defs> <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent"/> </defs> <text font-size="45"> <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%"> <tspan>★</tspan><tspan>★</tspan><tspan>★</tspan><tspan>★</tspan><tspan>★</tspan> </textPath> </text> </svg>
-            </div>
-          </div>
-        </div>
-        </ng-container>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Colors -->
-  <div class="card mt-3" *ngIf="doorColorList.length > 0">
-    <div class="card-header">
-      Color
-    </div>
-    <div class="card-body">
-      <div class="form-group mb-0">
-       <label class="form-label">Select Color</label>
-       <div class="row g-3">
-        <ng-container *ngFor="let item of doorColorList">
-          <div class="col-auto">
-          <div class="color-box" [ngClass]="{'active': doorColor == item.doorColorId}">
-            <div class="image-wrap aspect-custom loader" [ngStyle]="{'background-color': item?.colorCode }" (click)="selectColor(item)">
-              <img [src]="item?.fileBackPath" alt="">
-            </div>
-            <div class="box-title">
-              <span>{{item?.doorColorAliasName}}</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ng-container>
-      </div>
-    </div>
-    </div>
-  </div>
-
-    <!-- Door Operator -->
-    <div class="card mt-3">
-      <div class="card-header">
-        Windows New
-      </div>
-      <div class="card-body">
-        <div class="windows-edit">
-            <div class="row">
-               <div class="col-4"><div>Button</div></div>
-               <div class="col-4"><div>Grid</div></div>
-               <div class="col-4"><div>21 - value</div></div>
-            </div>
-        </div>  
-      </div>
-      </div>
-
-  <!-- Windows Dynamic Checkbox -->
-  <div class="card mt-3" *ngIf="doorColorList.length > 0">
-    <div class="card-header">
-      Windows
-    </div>
-    <div class="card-body">
-      <!-- Mitesh Code       -->
-      <div class="windows-edit" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
-        <div *ngFor="let row of grid; let rowIndex = index">
-           <!-- "Check All" button inside the first row of each column -->
-          <div *ngFor="let cell of row; let colIndex = index" class="editable-box">
-            <button *ngIf="rowIndex === 0" class="button" (click)="toggleColumnSelection(colIndex)"><span>ALL</span></button>
-            <label>
-              <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]" 
-                     (change)="onCheckboxChange(rowIndex, colIndex, $event)">
-              <!-- {{ cell }} -->
-            </label>
-          </div>
-        </div>
-      </div>
-      <!-- <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p> -->
-    </div>
-  </div>
-
-  <!-- Window Glass -->
-  <div class="card mt-3" *ngIf="doorWindowGlassCategoryList.length > 0">
-    <div class="card-header">
-      Window Glass
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-      <label class="form-label">Select Window Glass</label>
-      <div class="selection-button-list">
-        <ng-container *ngFor="let item of doorWindowGlassCategoryList">
-          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
-            (click)="selectWindowGlassCategory(item)">
-            <span>{{ item?.factoryGlazeTypeDesc }}</span>
-          </button>
-        </ng-container>
-        </div>
-      </div>
-
-      <div class="form-group mb-0">
-      <div class="row g-3">
-        <ng-container *ngFor="let item of doorWindowGlassSubCategoryList">
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-           <div class="item-box box-active" [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
-            (click)="selectWindowGlassSubCategory(item)">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 66%;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <div class="box-title">
-              <span>{{item?.factoryGlazeSizeDesc}}</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-           </div>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-
-
-    </div>
-  </div>
-
-  <!-- Window Insert -->
-  <div class="card mt-3" *ngIf="doorWindowInsertCategoryList.length > 0">
-    <div class="card-header">
-      Window Insert
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-       <label class="form-label">Select Window Insert</label>
-       <div class="selection-button-list">
-        <ng-container *ngFor="let item of doorWindowInsertCategoryList">
-          <button class="button button-grey button-check-icon" [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
-            (click)="selectWindowInsertCategory(item)">
-            <span>{{ item?.doorInsulatedTypeName }}</span>
-          </button>
-        </ng-container>
-      </div>
-      </div>
-
-
-      <div class="form-group mb-0">
-        <div class="row g-3">
-        <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
-          <div class="col-12 col-sm-12 col-md-2 col-lg-2">
-          <div class="item-box box-active" [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
-            (click)="selectWindowInsertSubCategory(item)">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 68%;">
-              <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
-            </div>
-            <div class="box-title">
-              <span>{{item?.doorInsulatedDesc}}</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-          </div>
-          </div>
-        </ng-container>
-      </div>
-      </div>
-
-
-    </div>
-  </div>
-
-  <!-- Spring -->
-  <div class="card mt-3" *ngIf="doorSpringCategoryTypeList.length > 0">
-    <div class="card-header">
-      Spring
-    </div>
-    <div class="card-body">
-      <div class="row">
-
-        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-          <div class="form-group mb-0">
-            <label class="form-label">Select Spring</label>
-            <div class="selection-button-list">
-            <ng-container *ngFor="let item of doorSpringCategoryTypeList">
-              <button class="button button-grey button-check-icon" [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
-                (click)="selectSpringCategoryType(item)">
-                <span>{{ item?.springCategoryTypeName }}</span>
-              </button>
-            </ng-container>
-          </div>
-        </div>
-        </div>
-
-
-        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-          <div class="form-group mb-0">
-            <label for="dropdown" class="form-label d-flex align-items-center">Select Cyclage <div class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg></div></label>
-            <select id="dropdown" class="form-select-custom" aria-label="Default select example"
-              [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
-              <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
-                {{ item.springCategoryDesc }}
-              </option>
-            </select>
-            <div class="info-text text-success" *ngIf="visualizationSpringDetails">Price : <b class="fw-medium">$ {{
-              visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
-
-            <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Strut -->
-  <div class="card mt-3" *ngIf="doorStrutCategoryTypeList.length > 0">
-    <div class="card-header">
-      Strut
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-        <label for="dropdown" class="form-label">Select Strut Catogary (Height/Ga/KSI)</label>
-        <div class="selection-button-list">
-       <ng-container *ngFor="let item of doorStrutCategoryTypeList">
-         <button class="button button-grey button-check-icon" [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
-           (click)="selectStrutCategoryType(item)">
-           <span>{{ item?.sturtCategoryTypeDesc }}</span>
-         </button>
-       </ng-container>
-       </div>
-      </div>
-
-      <div class="form-group mb-0">
-        <label for="dropdown" class="form-label">Select Strut Type</label>
-        <div class="selection-button-list">
-       <ng-container *ngFor="let item of doorStrutsTypeList">
-         <button class="button button-grey button-check-icon" [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}"
-           (click)="selectStrutType(item)">
-           <span>{{ item?.sturtCategoryDesc }}</span>
-         </button>
-       </ng-container>
-       </div>
-     </div>
-
-    </div>
-  </div>
-
-   <!-- Seals -->
-   <div class="card mt-3" *ngIf="doorSealCategoryTypeList.length > 0">
-    <div class="card-header">
-      Seals
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-          <div class="form-group mb-0">
-            <label for="dropdown" class="form-label">Select Strut Type</label>
-            <div class="selection-button-list">
-          <ng-container *ngFor="let item of doorSealCategoryTypeList">
-            <button class="button button-grey button-check-icon" [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
-              (click)="selectSealCategoryType(item)">
-              <span>{{ item?.doorSealTypeDescription }}</span>
-            </button>
-          </ng-container>
-          </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-          <div class="form-group mb-0">
-            <label for="dropdown" class="form-label">Select Label Here</label>
-            <select id="dropdown" class="form-select" aria-label="Default select example"
-              [(ngModel)]="doorSealTypeCategory" (change)="changeSpringCategory($event)">
-              <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
-                {{ item.springCategoryDesc }}
-              </option>
-            </select>
-            <div class="info-text text-success" *ngIf="visualizationSpringDetails">Price : <b class="fw-medium">$ {{
-              visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
-              <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door Master</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Track -->
-  <div class="card mt-3">
-    <div class="card-header">
-      Track
-    </div>
-    <div class="card-body">
-
-      <div class="form-group">
-        <label for="dropdown" class="form-label">Select Track</label>
-        <div class="selection-button-list">
-           <button class="button button-grey button-check-icon active"><span>Bracket Mounted</span></button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="dropdown" class="form-label">Track Radius</label>
-        <div class="selection-button-list">
-           <button class="button button-grey button-check-icon active"><span>12R <small class="price">($<em>12</em>)</small></span></button>
-           <button class="button button-grey button-check-icon"><span>15R <small class="price">($<em>12</em>)</small></span></button>
-           <button class="button button-grey button-check-icon"><span>32R</span></button>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="dropdown" class="form-label">Select Low Headroom</label>
-        <div class="selection-button-list">
-           <button class="button button-grey button-check-icon"><span>DMI 18-TR-LHR-7</span></button>
-        </div>
-      </div>
-
-      <div class="row">
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="form-group mb-0">
-             <label for="dropdown" class="form-label">Highlift</label>
-             <input type="number" class="form-control-custom">
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="form-group mb-0">
-             <label for="dropdown" class="form-label">Select Roofpitch</label>
-             <select class="form-select-custom">
-               <option>Select Roofpitch</option>
-               <option>2/12</option>
-               <option>3/12</option>
-               <option>4/12</option>
-             </select>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-          <div class="form-group mb-0">
-             <label for="dropdown" class="form-label">Select Fullvert</label>
-             <select class="form-select-custom">
-               <option>Select Fullvert</option>
-               <option>Option 1</option>
-               <option>Option 2</option>
-               <option>Option 3</option>
-             </select>
-          </div>
-        </div>
-
-      </div>
-
-  </div>
- </div>
-
-<!-- Door lock -->
- <div class="card mt-3">
-  <div class="card-header">
-    Door lock
-  </div>
-  <div class="card-body">
-    <div class="form-group mb-0">
-      <label class="form-label">Select Door lock</label>
-      <div class="row g-3">
-
-
-        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box box-active active">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
-              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
-            </div>
-            <div class="box-title border-top-tc">
-              <span>1 Inside Slide Lock</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box box-active">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
-              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
-            </div>
-            <div class="box-title border-top-tc">
-              <span>1 Inside Slide Lock</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-          <div class="item-box box-active">
-            <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
-              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorLock/1/Lock.png" alt="#" height="1px" width="1px">
-            </div>
-            <div class="box-title border-top-tc">
-              <span>1 Inside Slide Lock</span>
-              <div class="price">
-                <span class="currency text-danger">$</span><span>212</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        </div>
-        </div>
-  </div>
-  </div>
-
-  <!-- Door Operator -->
-  <div class="card mt-3">
-    <div class="card-header">
-      Door Operator
-    </div>
-    <div class="card-body">
-      <div class="form-group mb-0">
-        <label class="form-label">Select Door Operator</label>
-        <div class="row g-3">
-
-
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="item-box box-active active">
-              <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
-                <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
-              </div>
-              <div class="box-select border-top-tc">
-
-                <div class="operatore">
-                  <div class="row g-1 align-items-center">
-                     <div class="col-8">
-                      <select class="form-select-custom form-select-custom-sm">
-                        <option>Select Operator</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+          <div class="designer">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Door Company </label>
+                      <select id="dropdown" class="form-select-custom" aria-label="Default select example"
+                        [(ngModel)]="doorCompany">
+                        <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
+                          [disable]="item.doorCompanyName == 'Safeway'">
+                          {{ item.doorCompanyName }}
+                        </option>
                       </select>
-                     </div>
-                     <div class="col-4">
-                        <div class="price">
-                           <span class="text-danger">$</span><span>454</span>
-                        </div>
-                     </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Types of Doors </label>
+                      <select id="dropdown" class="form-select-custom" aria-label="Default select example"
+                        [(ngModel)]="doorType">
+                        <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
+                          {{ item.doorTypeName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="form-group mb-0">
+                      <label for="exampleFormControlInput1" class="form-label d-flex align-items-center">Quantity <div
+                          class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path
+                              d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z" />
+                          </svg></div></label>
+                      <div class="quantity-box">
+                        <button class="button btn-minus" type="button"
+                          (click)="doorQuantity = doorQuantity - 1 < 0 ? 0 : doorQuantity - 1">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
+                          </svg>
+                        </button>
+                        <input type="number" class="form-control-custom" id="exampleFormControlInput1"
+                          [(ngModel)]="doorQuantity">
+                        <button class="button btn-pluse" type="button" (click)="doorQuantity = doorQuantity + 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Door Size -->
+            <div class="card mt-3">
+              <div class="card-header">
+                Door Size
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                  <label class="form-label">Select a Standard garage door size <b>Or</b> enter your exact garage door
+                    size</label>
+                  <div class="selection-button-list" *ngIf="doorType == 1">
+                    <ng-container *ngFor="let size of DoorSizeList.Residential.width_arr; let index = index">
+                      <button class="button button-grey button-check-icon"
+                        (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index])">
+                        <span>{{size}}' x {{DoorSizeList.Residential.height_arr[index]}}'</span> </button>
+                    </ng-container>
+                  </div>
+
+                  <div class="selection-button-list" *ngIf="doorType == 2">
+                    <ng-container *ngFor="let size of DoorSizeList.Commercial.width_arr; let index = index">
+                      <button class="button button-grey button-check-icon"
+                        (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index], DoorSizeList.Commercial.width_arr_inch[index])">
+                        <span>{{size}}'{{DoorSizeList.Commercial.width_arr_inch[index]}}" x
+                          {{DoorSizeList.Commercial.height_arr[index]}}'</span>
+                      </button>
+                    </ng-container>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Select Door Width</label>
+                  <div class="row">
+
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                      <div class="quantity-box">
+                        <button class="button btn-minus" type="button"
+                          (click)="doorWidthFt = doorWidthFt - 1 < 0 ? 0 : doorWidthFt - 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <<path
+                              d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <input type="number" class="form-control-custom" id="exampleFormControlInput1"
+                          placeholder="Quantity" [(ngModel)]="doorWidthFt">
+                        <button class="button btn-pluse" type="button" (click)="doorWidthFt = doorWidthFt + 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <button class="button btn-label" type="button">Ft</button>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                      <div class="quantity-box">
+                        <button class="button btn-minus" type="button"
+                          (click)="doorWidthInch = doorWidthInch - 1 < 0 ? 0 : doorWidthInch - 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <<path
+                              d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <input type="number" class="form-control-custom" id="exampleFormControlInput1"
+                          placeholder="Quantity" [(ngModel)]="doorWidthInch">
+                        <button class="button btn-pluse" type="button" (click)="doorWidthInch = doorWidthInch + 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <button class="button btn-label" type="button">In</button>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
-                <div class="operatore">
-                  <div class="row g-1 align-items-center">
-                     <div class="col-8">
-                      <select class="form-select-custom form-select-custom-sm">
-                        <option>Select Operator</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-                     </div>
-                     <div class="col-4">
-                        <div class="price">
-                           <span class="text-danger">$</span><span>454</span>
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Door Height</label>
+                  <div class="row">
+
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                      <div class="quantity-box">
+                        <button class="button btn-minus" type="button"
+                          (click)="doorHeightFt = doorHeightFt - 1 < 0 ? 0 : doorHeightFt - 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <<path
+                              d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <input type="number" class="form-control-custom" id="exampleFormControlInput1"
+                          placeholder="Quantity" [(ngModel)]="doorHeightFt">
+                        <button class="button btn-pluse" type="button" (click)="doorHeightFt = doorHeightFt + 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <button class="button btn-label" type="button">Ft</button>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                      <div class="quantity-box">
+                        <button class="button btn-minus" type="button"
+                          (click)="doorHeightInch = doorHeightInch - 1 < 0 ? 0 : doorHeightInch - 1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
+                          </svg></button>
+                        <input type="number" class="form-control-custom" id="exampleFormControlInput1"
+                          placeholder="Quantity" [(ngModel)]="doorHeightInch">
+                        <button class="button btn-pluse" type="button"
+                          (click)="doorHeightInch = doorHeightInch + 1"><svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512">
+                            <path
+                              d="M432 256C432 264.8 424.8 272 416 272h-176V448c0 8.844-7.156 16.01-16 16.01S208 456.8 208 448V272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h176V64c0-8.844 7.156-15.99 16-15.99S240 55.16 240 64v176H416C424.8 240 432 247.2 432 256z" />
+                          </svg>
+                        </button>
+                        <button class="button btn-label" type="button">In</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!-- Collection And Family -->
+            <div class="card mt-3">
+              <div class="card-header">
+                Collection & Family
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                  <label class="form-label">Select Collection</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorCollectionList">
+                      <button class="button button-grey button-check-icon" (click)="selectDooorCollection(item)"
+                        [ngClass]="{'active': doorCollection == item.doorCollectionId}" type="button"
+                        (click)="doorCollection = item.doorCollectionId"><span>{{ item.doorCollectionName
+                          }}</span></button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Family</label>
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorSubCollectionList">
+                      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="item-box box-active"
+                          [ngClass]="{'active': doorSubCollection == item.doorSubCollectionId}"
+                          (click)="selectSubCollection(item)">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 78.5%">
+                            <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                          </div>
+                          <div class="box-title">
+                            <span>{{item?.doorSubCollectionName}}</span>
+                          </div>
                         </div>
-                     </div>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
 
               </div>
             </div>
-          </div>
 
-          <div class="col-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="item-box box-active">
-              <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
-                <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg" alt="#" height="1px" width="1px">
+            <!-- Panel style and model number -->
+            <div class="card mt-3" *ngIf="doorPanelList.length > 0">
+              <div class="card-header">
+                Panel Style And Model Number
               </div>
-              <div class="box-select border-top-tc">
+              <div class="card-body">
 
-                <div class="operatore">
-                  <div class="row g-1 align-items-center">
-                     <div class="col-8">
-                      <select class="form-select-custom form-select-custom-sm">
-                        <option>Select Operator</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-                     </div>
-                     <div class="col-4">
-                        <div class="price">
-                           <span class="text-danger">$</span><span>454</span>
+                <div class="form-group">
+                  <label class="form-label">Select Panel Style</label>
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorPanelList">
+                      <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="item-box box-active" [ngClass]="{'active': doorPanel == item.doorPanelId}"
+                          (click)="selectPanel(item)">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 20%">
+                            <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
+                          </div>
+                          <div class="box-title">
+                            <span>{{item?.doorPanelName}}</span>
+                          </div>
                         </div>
-                     </div>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
 
-                <div class="operatore">
-                  <div class="row g-1 align-items-center">
-                     <div class="col-8">
-                      <select class="form-select-custom form-select-custom-sm">
-                        <option>Select Operator</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-                     </div>
-                     <div class="col-4">
-                        <div class="price">
-                           <span class="text-danger">$</span><span>454</span>
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Model number</label>
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorModelList">
+                      <div class="col-auto">
+                        <div class="model-box d-flex flex-column align-items-center"
+                          [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
+                          <div class="content">
+                            <p class="mb-1">{{item?.doorModelName}}</p>
+                            <p class="mb-0">{{item?.range}}</p>
+                          </div>
+                          <div class="box-label">
+                            <span>{{item?.quality}}</span>
+                          </div>
+                          <div class="star-rating" data-rating="3">
+                            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <defs>
+                                <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent" />
+                              </defs> <text font-size="45">
+                                <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%">
+                                  <tspan>★</tspan>
+                                  <tspan>★</tspan>
+                                  <tspan>★</tspan>
+                                  <tspan>★</tspan>
+                                  <tspan>★</tspan>
+                                </textPath>
+                              </text>
+                            </svg>
+                          </div>
                         </div>
-                     </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Colors -->
+            <div class="card mt-3" *ngIf="doorColorList.length > 0">
+              <div class="card-header">
+                Color
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Color</label>
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorColorList">
+                      <div class="col-auto">
+                        <div class="color-box" [ngClass]="{'active': doorColor == item.doorColorId}">
+                          <div class="image-wrap aspect-custom loader"
+                            [ngStyle]="{'background-color': item?.colorCode }" (click)="selectColor(item)">
+                            <img [src]="item?.fileBackPath" alt="">
+                          </div>
+                          <div class="box-title">
+                            <span>{{item?.doorColorAliasName}}</span>
+                            <div class="price">
+                              <span class="currency text-danger">$</span><span>212</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Door Operator -->
+            <div class="card mt-3">
+              <div class="card-header">
+                Windows New
+              </div>
+              <div class="card-body">
+                <div class="windows-edit">
+                  <div class="row">
+                    <div class="col-4">
+                      <div>Button</div>
+                    </div>
+                    <div class="col-4">
+                      <div>Grid</div>
+                    </div>
+                    <div class="col-4">
+                      <div>21 - value</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Windows Dynamic Checkbox -->
+            <div class="card mt-3" *ngIf="doorColorList.length > 0">
+              <div class="card-header">
+                Windows
+              </div>
+              <div class="card-body">
+                <!-- Mitesh Code       -->
+                <div class="windows-edit" [style.gridTemplateColumns]="'repeat(' + colSize + ', 100px)'">
+                  <div *ngFor="let row of grid; let rowIndex = index">
+                    <!-- "Check All" button inside the first row of each column -->
+                    <div *ngFor="let cell of row; let colIndex = index" class="editable-box">
+                      <button *ngIf="rowIndex === 0" class="button"
+                        (click)="toggleColumnSelection(colIndex)"><span>ALL</span></button>
+                      <label>
+                        <input type="checkbox" [checked]="selectedBoxes[rowIndex][colIndex]"
+                          (change)="onCheckboxChange(rowIndex, colIndex, $event)">
+                        <!-- {{ cell }} -->
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- <p>Selected Checkboxes: {{ checkboxSelectedCount }}</p> -->
+              </div>
+            </div>
+
+            <!-- Window Glass -->
+            <div class="card mt-3" *ngIf="doorWindowGlassCategoryList.length > 0">
+              <div class="card-header">
+                Window Glass
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                  <label class="form-label">Select Window Glass</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorWindowGlassCategoryList">
+                      <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorWindowGlassCategory == item.factoryGlazeTypeId}"
+                        (click)="selectWindowGlassCategory(item)">
+                        <span>{{ item?.factoryGlazeTypeDesc }}</span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorWindowGlassSubCategoryList">
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="item-box box-active"
+                          [ngClass]="{'active': doorWindowGlassSubCategory == item.factoryGlazeSizeId}"
+                          (click)="selectWindowGlassSubCategory(item)">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 66%;">
+                            <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                          </div>
+                          <div class="box-title">
+                            <span>{{item?.factoryGlazeSizeDesc}}</span>
+                            <div class="price">
+                              <span class="currency text-danger">$</span><span>212</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!-- Window Insert -->
+            <div class="card mt-3" *ngIf="doorWindowInsertCategoryList.length > 0">
+              <div class="card-header">
+                Window Insert
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                  <label class="form-label">Select Window Insert</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorWindowInsertCategoryList">
+                      <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorWindowInsertCategory == item.doorInsulatedTypeId}"
+                        (click)="selectWindowInsertCategory(item)">
+                        <span>{{ item?.doorInsulatedTypeName }}</span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="form-group mb-0">
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorWindowInsertSubCategoryList">
+                      <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="item-box box-active"
+                          [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
+                          (click)="selectWindowInsertSubCategory(item)">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 68%;">
+                            <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
+                          </div>
+                          <div class="box-title">
+                            <span>{{item?.doorInsulatedDesc}}</span>
+                            <div class="price">
+                              <span class="currency text-danger">$</span><span>212</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!-- Spring -->
+            <div class="card mt-3" *ngIf="doorSpringCategoryTypeList.length > 0">
+              <div class="card-header">
+                Spring
+              </div>
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                    <div class="form-group mb-0">
+                      <label class="form-label">Select Spring</label>
+                      <div class="selection-button-list">
+                        <ng-container *ngFor="let item of doorSpringCategoryTypeList">
+                          <button class="button button-grey button-check-icon"
+                            [ngClass]="{'active': doorSpringCategoryType == item.springCategoryTypeId}"
+                            (click)="selectSpringCategoryType(item)">
+                            <span>{{ item?.springCategoryTypeName }}</span>
+                          </button>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label d-flex align-items-center">Select Cyclage <div
+                          class="info-icon ms-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path
+                              d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z" />
+                          </svg></div></label>
+                      <select id="dropdown" class="form-select-custom" aria-label="Default select example"
+                        [(ngModel)]="doorSpringCategory" (change)="changeSpringCategory($event)">
+                        <option *ngFor="let item of doorSpringCategoryList" [value]="item.springCategoryId">
+                          {{ item.springCategoryDesc }}
+                        </option>
+                      </select>
+                      <div class="info-text text-success" *ngIf="visualizationSpringDetails">Price : <b
+                          class="fw-medium">$ {{
+                          visualizationSpringDetails?.springSalesPrice || "0.00" }}</b></div>
+
+                      <div class="info-text text-danger" *ngIf="!visualizationSpringDetails">Please Contact to Door
+                        Master</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Strut -->
+            <div class="card mt-3" *ngIf="doorStrutCategoryTypeList.length > 0">
+              <div class="card-header">
+                Strut
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="dropdown" class="form-label">Select Strut Catogary (Height/Ga/KSI)</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorStrutCategoryTypeList">
+                      <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorStrutCategoryType == item.sturtCategoryTypeId}"
+                        (click)="selectStrutCategoryType(item)">
+                        <span>{{ item?.sturtCategoryTypeDesc }}</span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group mb-0">
+                  <label for="dropdown" class="form-label">Select Strut Type</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorStrutsTypeList">
+                      <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorStrutsType == item.sturtCategoryId}" (click)="selectStrutType(item)">
+                        <span>{{ item?.sturtCategoryDesc }}</span>
+                      </button>
+                    </ng-container>
                   </div>
                 </div>
 
               </div>
             </div>
-          </div>
 
+            <!-- Seals -->
+            <div class="card mt-3" *ngIf="doorSealCategoryTypeList.length > 0">
+              <div class="card-header">
+                Seals
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Select Seal Type</label>
+                      <div class="selection-button-list">
+                        <ng-container *ngFor="let item of doorSealCategoryTypeList">
+                          <button class="button button-grey button-check-icon"
+                            [ngClass]="{'active': doorSealCategoryType == item.doorSealTypeId}"
+                            (click)="selectSealCategoryType(item)">
+                            <span>{{ item?.doorSealTypeDescription }}</span>
+                          </button>
+                        </ng-container>
+                        <button *ngIf="selectedSealCategory" type="button" class="btn btn-sm"
+                          (click)="deSelectSeal()">X</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Select Seal Category</label>
+                      <select id="dropdown" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedSealCategory" (change)="changeSealCategory($event)">
+                        <option *ngFor="let item of doorSealTypeCategoryList" [value]="item.doorSealCategoryId">
+                          {{ item.doorSealCategoryDesc }}
+                        </option>
+                      </select>
+                      <div class="info-text text-success" *ngIf="doorSealCategorySalesPrice">Price : <b
+                          class="fw-medium">$ {{
+                          doorSealCategorySalesPrice || "0.00" }}</b></div>
+                      <!-- <div class="info-text text-danger" *ngIf="!doorSealCategorySalesPrice">Please Contact to Door
+                        Master</div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Track -->
+            <div class="card mt-3" *ngIf="doorTrackTypeList.length > 0">
+              <div class="card-header">
+                Track
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="dropdown" class="form-label">Select Track</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorTrackTypeList">
+                      <button class="button button-grey button-check-icon" (click)="selectTractType(item)"
+                        [ngClass]="{'active': doorTrackType == item.trackTypeId}"><span>{{item?.trackName}}</span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dropdown" class="form-label">Track Radius</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorTrackTypePriceList">
+                      <button class="button button-grey button-check-icon" (click)="selectTrackPrice(item)"
+                        [ngClass]="{'active': doorTrackPrice == item.trackPriceId}">
+                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em> {{ item?.salesPrice
+                              }}</em>)</small></span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="doorTractLHRList.length > 0">
+                  <label for="dropdown" class="form-label">Select Low Headroom</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorTractLHRList">
+                      <button class="button button-grey button-check-icon" (click)="selectTractLHR(item)"
+                        [ngClass]="{'active': doorTractLHR == item.lhrId}">
+                        <span> {{item?.lhrName}} <small class="price"> ($<em> {{ item?.salePrice
+                              }}</em>)</small></span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="form-group" *ngIf="doorUpgradTrackList.length > 0">
+                  <label for="dropdown" class="form-label">Upgrade Track Detail</label>
+                  <div class="selection-button-list">
+                    <ng-container *ngFor="let item of doorUpgradTrackList">
+                      <button class="button button-grey button-check-icon" (click)="selectUpgradTrackPrice(item)"
+                        [ngClass]="{'active': doorUpgradTrack == item.trackUpdatePriceId}">
+                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em> {{ item?.salesPrice
+                              }}</em>)</small></span>
+                      </button>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Highlift</label>
+                      <input type="number" class="form-control-custom" [(ngModel)]="trackHighlift">
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Select Roofpitch</label>
+                      <select id="dropdown" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedDoorTrackRoofPitch" (change)="changeTackRoofPitch($event)">
+                        <option *ngFor="let item of doorTrackRoofPitchList" [value]="item.roofPitchId">
+                          {{ item.roofPitchName }}
+                        </option>
+                      </select>
+                      <div class="info-text text-success" *ngIf="doorTrackRoofPitchSalesPrice">Price : <b
+                          class="fw-medium">$ {{
+                          doorTrackRoofPitchSalesPrice || "0.00" }}</b></div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group mb-0">
+                      <label for="dropdown" class="form-label">Select Fullvert</label>
+                      <select class="form-select-custom">
+                        <!-- <option>Select Fullvert</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option> -->
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Door lock -->
+            <div class="card mt-3" *ngIf="doorLockList.length > 0">
+              <div class="card-header">
+                Door lock
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Door lock</label>
+                  <div class="row g-3">
+                    <ng-container *ngFor="let item of doorLockList">
+                      <div class="col-12 col-sm-12 col-md-3 col-lg-3" (click)="selectDoorLock(item)">
+                        <div class="item-box box-active" [ngClass]="{'active': doorLock == item.doorLockId }">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
+                            <img [src]="item.filePath" alt="#" height="1px" width="1px">
+                          </div>
+                          <div class="box-title border-top-tc">
+                            <span> {{ item?.doorLockName }}</span>
+                            <div class="price">
+                              <span class="currency text-danger">$</span><span> {{ item?.lockSalePrice }} </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Door Operator -->
+            <div class="card mt-3" style="display: none;">
+              <div class="card-header">
+                Door Operator
+              </div>
+              <div class="card-body">
+                <div class="form-group mb-0">
+                  <label class="form-label">Select Door Operator</label>
+                  <div class="row g-3">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                      <div class="item-box box-active active">
+                        <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
+                          <img
+                            src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg"
+                            alt="#" height="1px" width="1px">
+                        </div>
+                        <div class="box-select border-top-tc">
+
+                          <div class="operatore">
+                            <div class="row g-1 align-items-center">
+                              <div class="col-8">
+                                <select class="form-select-custom form-select-custom-sm">
+                                  <option>Select Operator</option>
+                                  <option>Option 1</option>
+                                  <option>Option 2</option>
+                                  <option>Option 3</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <div class="price">
+                                  <span class="text-danger">$</span><span>454</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="operatore">
+                            <div class="row g-1 align-items-center">
+                              <div class="col-8">
+                                <select class="form-select-custom form-select-custom-sm">
+                                  <option>Select Operator</option>
+                                  <option>Option 1</option>
+                                  <option>Option 2</option>
+                                  <option>Option 3</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <div class="price">
+                                  <span class="text-danger">$</span><span>454</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                      <div class="item-box box-active">
+                        <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
+                          <img
+                            src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg"
+                            alt="#" height="1px" width="1px">
+                        </div>
+                        <div class="box-select border-top-tc">
+
+                          <div class="operatore">
+                            <div class="row g-1 align-items-center">
+                              <div class="col-8">
+                                <select class="form-select-custom form-select-custom-sm">
+                                  <option>Select Operator</option>
+                                  <option>Option 1</option>
+                                  <option>Option 2</option>
+                                  <option>Option 3</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <div class="price">
+                                  <span class="text-danger">$</span><span>454</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="operatore">
+                            <div class="row g-1 align-items-center">
+                              <div class="col-8">
+                                <select class="form-select-custom form-select-custom-sm">
+                                  <option>Select Operator</option>
+                                  <option>Option 1</option>
+                                  <option>Option 2</option>
+                                  <option>Option 3</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <div class="price">
+                                  <span class="text-danger">$</span><span>454</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          </div>
+        </div>
+      </div>
     </div>
-    </div>
-
-
   </div>
-  </div>
-  </div>
-</div>
-</div>
 </div>
