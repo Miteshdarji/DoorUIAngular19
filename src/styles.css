@@ -480,6 +480,12 @@ h6,
 	outline: none
 }
 
+.form-control-custom-sm {
+	padding: 5px 10px;
+	height: 35px;
+	font-size: 14px;
+}
+
 .form-control-custom::-webkit-input-placeholder {
 	color: #000;
 	opacity: .4
@@ -648,6 +654,12 @@ h6,
 
 .card-body{
 	padding: 20px;
+}
+
+.card-footer{
+	border-top: 1px solid #ddd;
+	background-color: #fff;
+	padding: 8px 20px;
 }
 
 .quantity-box{

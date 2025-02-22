@@ -578,6 +578,34 @@
   font-weight: 600;
 }
 
+.door-designer-tool .designer .additional-discount .col-form-label{
+  font-size: 14px;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom{
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom[type=number]::-webkit-inner-spin-button,
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .input-group-text{
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0 0.75rem;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: var(--bs-light);
+} 
+
 /* .door-designer-tool .designer .windows-edit .editable-box {
   width: 100px;
   height: 100px;
