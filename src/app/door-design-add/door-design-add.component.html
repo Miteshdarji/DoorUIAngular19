@@ -26,13 +26,19 @@
             <div class="visual-canvas">
                 <!-- Mitesh Code  -->
                 <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
-                  <div class="visualization-main" style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
+                  <!-- <div class="visualization-main" style="--visualization-height: 350px; --hr-column: {rowSize}; --vr-column: {colSize}; --partition-line-color: #000"> -->
+                  <div class="visualization-main" 
+                  [style.--visualization-height.px]="350"
+                  [style.--hr-column]="rowSize"
+                  [style.--vr-column]="colSize"
+                  [style.--partition-line-color]="bgColor === '--' ? '#000' : bgColor">
                     <!-- Left Side (Display Boxes with Image) -->
-                    <div class="cover-bg" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                    <!-- <div class="cover-bg" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);"> -->
+                    <div class="cover-bg" [style.background-image]="'url(' + bgDefaultImage + ')'">
                      <div class="main-grid">
                       <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
-                        <div *ngFor="let cell of row; let colIndex = index" class="design-box" 
-                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                        <div *ngFor="let cell of row; let colIndex = index" class="design-box">
+                          <!-- [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}"> -->
                           <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
                           <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
                           <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" class="glass-image" style="background-image: url('{{bgGlassImage}}');">

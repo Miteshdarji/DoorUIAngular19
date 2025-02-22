@@ -82,6 +82,7 @@ export class DoorDesignAddComponent implements OnInit {
      bgWindowInsertImage:string = '';
      bgGlassImage = '';
      checkboxSelectedCount: number = 0;
+     bgDefaultImage: string = '';
      // ===  Visualize UI [Start] ===== 
 
   constructor(private utilsService: UtilsService) { }
@@ -146,6 +147,7 @@ export class DoorDesignAddComponent implements OnInit {
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();    
   }
 
   selectColor(item: any) {
@@ -161,6 +163,7 @@ export class DoorDesignAddComponent implements OnInit {
     }
     console.log("Click to Color", item);
     console.log("this.visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();
   }
 
   generateImageWoodenColorImage(colorItem: any) {
@@ -849,6 +852,13 @@ setVisualizeArrayValues(){
 
   }
   if (this.visualizationSelection['visualize_backSelectedImage']){
+    if(this.bgColor == '--'){
+        this.bgDefaultImage = this.visualizationSelection['visualize_backSelectedImage'].toLowerCase();
+    }
+    else
+    {
+        this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
+    }
   }
   if (this.visualizationSelection['visualize_backRepeatImage']){
     this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'].toLowerCase();
