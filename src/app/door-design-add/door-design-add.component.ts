@@ -973,7 +973,7 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectDoorLock(item: any) {
     this.doorLock = item?.doorLockId;
-    this.priceDetails.trackLHRPrice = item?.lockSalePrice;
+    this.priceDetails.lockPrice = item?.lockSalePrice;
   }
 
   // Get selected Item values and details
