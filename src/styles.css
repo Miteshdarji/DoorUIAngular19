@@ -6,6 +6,7 @@
 	--tc-secondary: #039be5;
 	--gray-100: #f8f9fa;
 	--gray-200: #e9ecef;
+  --gray-300: #dee2e6;
 }
 
 body {
@@ -433,6 +434,22 @@ h6,
 	visibility: visible;
 }
 
+.button-grey-200 {
+	background-color: var(--gray-200);
+	border: 1px solid #ddd;
+	color: #000;
+}
+
+.button-grey-200:hover{
+	background-color: var(--gray-300);
+}
+
+.button-grey-200.active{
+	background-color: var(--tc-secondary);
+	border-color: var(--tc-secondary);
+	color: #fff;
+}
+
 .form-group {
 	margin-bottom: 16px
 }
@@ -650,12 +667,12 @@ h6,
     width: 1%;
 }
 
-.quantity-box .form-control-custom[type=number]::-webkit-inner-spin-button, 
-.quantity-box .form-control-custom[type=number]::-webkit-outer-spin-button { 
+.quantity-box .form-control-custom[type=number]::-webkit-inner-spin-button,
+.quantity-box .form-control-custom[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
 
 .quantity-box .btn-minus,

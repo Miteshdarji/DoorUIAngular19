@@ -11,7 +11,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder d-none">
+            <div class="visual-canvas-placeholder">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -529,18 +529,273 @@
                 Windows New
               </div>
               <div class="card-body">
-                <div class="windows-edit">
+                <div class="windows-edit" style="--ds-hr-column: 4; --ds-vr-column: 4; --ds-grid-height: 65px;">
                   <div class="row">
-                    <div class="col-4">
-                      <div>Button</div>
+                    <div class="col-auto">
+                      <div class="selectall-list">
+                        <div class="list">
+                          <button class="button button-block button-grey-200 active"><span>All</span></button>
+                        </div>
+                        <div class="list">
+                          <button class="button button-block button-grey-200"><span>All</span></button>
+                        </div>
+                        <div class="list">
+                          <button class="button button-block button-grey-200"><span>All</span></button>
+                        </div>
+                        <div class="list">
+                          <button class="button button-block button-grey-200"><span>All</span></button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <div>Grid</div>
+                    <div class="col">
+                      <div class="design-grid">
+
+                        <!-- Loop -->
+                        <div class="column-grid">
+                          <div class="grid-box active">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Loop End -->
+
+                        <!-- Loop -->
+                        <div class="column-grid">
+                          <div class="grid-box active">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Loop End -->
+
+                        <!-- Loop -->
+                        <div class="column-grid">
+                          <div class="grid-box active">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Loop End -->
+
+                        <!-- Loop -->
+                        <div class="column-grid">
+                          <div class="grid-box active">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div class="grid-box">
+                            <div class="checkbox">
+                              <input type="checkbox" id="gridcheck01" checked>
+                              <label for="gridcheck01">&nbsp;</label>
+                            </div>
+                            <div class="edit-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                  d="M495 59.6C516.9 81.47 516.9 116.9 495 138.8L182.3 451.6C170.9 462.9 156.9 471.2 141.5 475.8L20.52 511.4C14.9 513 8.827 511.5 4.687 507.3C.5466 503.2-1.002 497.1 .6506 491.5L36.23 370.5C40.76 355.1 49.09 341.1 60.44 329.7L373.2 16.97C395.1-4.897 430.5-4.897 452.4 16.97L495 59.6zM341 94.4L417.6 170.1L472.4 116.2C481.8 106.8 481.8 91.6 472.4 82.23L429.8 39.6C420.4 30.23 405.2 30.23 395.8 39.6L341 94.4zM318.4 117L83.07 352.4C75.5 359.9 69.95 369.3 66.93 379.6L39.63 472.4L132.4 445.1C142.7 442.1 152.1 436.5 159.6 428.9L394.1 193.6L318.4 117z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Loop End -->
+
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <div>21 - value</div>
+                    <div class="col-auto">
+                      <div class="value-list">
+                        <div class="list">
+                          <span class="value-box">21</span>
+                        </div>
+                        <div class="list">
+                          <span class="value-box">21</span>
+                        </div>
+                        <div class="list">
+                          <span class="value-box">21</span>
+                        </div>
+                        <div class="list">
+                          <span class="value-box">21</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
+                <div class="selected-quantity d-flex align-items-center justify-content-center">
+                  <span>Selected Window Quantity Is:</span> <span class="value">5</span>
                 </div>
               </div>
             </div>
