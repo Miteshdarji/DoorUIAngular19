@@ -66,6 +66,32 @@ export class DoorDesignAddComponent implements OnInit {
     visualize_backWindowInsertImage: ""
   }
 
+  priceDetails: {
+    colorPrice: number,
+    glassPrice: number,
+    insertPrice: number,
+    springCyclePrice: number,
+    strutPrice: number,
+    trackPrice: number,
+    trackLHRPrice: number,
+    upgradTackPrice: number,
+    roofpitchPrice: number,
+    sealPrice: number,
+    lockPrice: number
+  } = {
+      colorPrice: 0,
+      glassPrice: 0,
+      insertPrice: 0,
+      springCyclePrice: 0,
+      strutPrice: 0,
+      trackPrice: 0,
+      trackLHRPrice: 0,
+      upgradTackPrice: 0,
+      roofpitchPrice: 0,
+      sealPrice: 0,
+      lockPrice: 0
+    };
+
   // ===  Visualize UI [Start] =====
   rowArray: string[] = [];
   column: number = 0;
@@ -95,6 +121,12 @@ export class DoorDesignAddComponent implements OnInit {
     setTimeout(() => {
       this.getDoorCollection();
     }, 3000);
+  }
+
+  calculatePrice() {
+    console.log("this.priceDetail", this.priceDetails);
+    const price = this.priceDetails.colorPrice + this.priceDetails.glassPrice + this.priceDetails.insertPrice + this.priceDetails.springCyclePrice + this.priceDetails.strutPrice + this.priceDetails.trackPrice + this.priceDetails.trackLHRPrice + this.priceDetails.upgradTackPrice + this.priceDetails.roofpitchPrice + this.priceDetails.sealPrice + this.priceDetails.lockPrice;
+    return price.toFixed(2);
   }
 
   changeDoorSize(widthFt: number, heightFt: number, widthInch: number = 0, heightInch: number = 0): void {
@@ -128,6 +160,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorColorList = item?.lstDoorColor;
 
     this.doorColor = this.doorColorList[0]?.doorColorId;
+    this.priceDetails.colorPrice = this.doorColorList[0]?.doorSalePrice;
     this.visualizationSelection['visualize_noOfSections'] = this.doorColorList[0]?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = this.doorColorList[0]?.noOfSectionDetail?.length;
     this.visualizationSelection['visualize_column'] = item?.widthSection;
@@ -154,6 +187,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorColor = item?.doorColorId;
     this.visualizationSelection['visualize_noOfSections'] = item?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = item?.noOfSectionDetail?.length;
+    this.priceDetails.colorPrice = item?.doorSalePrice;
     if (item?.colorCode?.length < 6) {
       this.visualizationSelection['visualize_backSelectedColor'] = "--";
       this.generateImageWoodenColorImage(item);
@@ -507,6 +541,7 @@ export class DoorDesignAddComponent implements OnInit {
   // Select the window glass category
   selectWindowGlassCategory(item: any) {
     this.doorWindowGlassCategory = item?.factoryGlazeTypeId;
+
     this.getWindowGlassSubCategory(this.doorWindowGlassCategory);
   }
 
@@ -515,6 +550,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorWindowGlassSubCategory = item?.factoryGlazeSizeId;
     this.visualizationSelection['visualize_backGlassImage'] = item?.fileRawPath;
     console.log("Click to glass", item);
+    this.priceDetails.glassPrice = item?.factoryGlazeSalePrice;
     console.log("visualizationSelection", this.visualizationSelection);
     this.setVisualizeArrayValues();
   }
@@ -530,6 +566,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorWindowInsertSubCategory = item?.doorInsulatedId;
     this.visualizationSelection['visualize_backWindowInsertImage'] = this.generateWindowImagePath();
     console.log("Click to insert", item);
+    this.priceDetails.insertPrice = item?.insulatedSalePrice;
     console.log("Select insert visualizationSelection", this.visualizationSelection);
     this.setVisualizeArrayValues();
   }
@@ -693,6 +730,7 @@ export class DoorDesignAddComponent implements OnInit {
     }
     this.utilsService.getVisualizationSpringDetails(payload).subscribe((data: any) => {
       this.visualizationSpringDetails = data?.payload?.length > 0 ? data?.payload[0] : null;
+      this.priceDetails.springCyclePrice = this.visualizationSpringDetails?.springSalesPrice || 0;
     }, (error) => {
       console.error('Error During door getVisualizationSpringDetails :', error);
     })
@@ -763,6 +801,7 @@ export class DoorDesignAddComponent implements OnInit {
   selectSealCategoryType(item: any) {
     this.doorSealCategoryType = item?.doorSealTypeId;
     this.doorSealCategorySalesPrice = null;
+    this.priceDetails.sealPrice = 0;
     this.getDoorSealTypeCategory();
   }
 
@@ -782,6 +821,7 @@ export class DoorDesignAddComponent implements OnInit {
       // Set default price for default selected
       const selectedSealCategoryPrice = this.doorSealTypeCategoryList.find(c => c.doorSealCategoryId === Number(this.selectedSealCategory));
       this.doorSealCategorySalesPrice = selectedSealCategoryPrice?.doorSealCategorySalesPrice;
+      this.priceDetails.sealPrice = this.doorSealCategorySalesPrice;
     }, (error) => {
       console.error('Error During door getDoorSealTypeCategory :', error);
     })
@@ -791,11 +831,13 @@ export class DoorDesignAddComponent implements OnInit {
     this.selectedSealCategory = event.target.value;
     const selectedSealCategoryPrice = this.doorSealTypeCategoryList.find(c => c.doorSealCategoryId === Number(event.target.value));
     this.doorSealCategorySalesPrice = selectedSealCategoryPrice?.doorSealCategorySalesPrice;
+    this.priceDetails.sealPrice = this.doorSealCategorySalesPrice;
   }
 
   deSelectSeal() {
     this.selectedSealCategory = null;
     this.doorSealCategorySalesPrice = null;
+    this.priceDetails.sealPrice = 0;
     this.doorSealCategoryType = 0;
   }
 
@@ -835,6 +877,7 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectTrackPrice(item: any) {
     this.doorTrackPrice = item?.trackPriceId;
+    this.priceDetails.trackPrice = item?.salesPrice;
     this.getVisulizationUpgradeTrackPrice();
     this.getVisulizationPriceRoofPitch();
     if (item?.trackCategoryName == '12R') {
@@ -866,6 +909,7 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectUpgradTrackPrice(item: any) {
     this.doorUpgradTrack = item?.trackUpdatePriceId
+    this.priceDetails.upgradTackPrice = item?.salesPrice;
   }
 
   doorTractLHRList: any[] = [];
@@ -887,6 +931,7 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectTractLHR(item: any) {
     this.doorTractLHR = item?.lhrId;
+    this.priceDetails.trackLHRPrice = item?.salePrice;
   }
 
   doorTrackRoofPitchList: any = [];
@@ -911,6 +956,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorTrackRoofPitch = event.target.value;
     const roofDetails = this.doorTrackRoofPitchList.find((element: any) => element.roofPitchId == this.doorTrackRoofPitch);
     this.doorTrackRoofPitchSalesPrice = roofDetails.salesPrice;
+    this.priceDetails.roofpitchPrice = this.doorTrackRoofPitchSalesPrice;
   }
 
   // Door lock
@@ -927,14 +973,59 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectDoorLock(item: any) {
     this.doorLock = item?.doorLockId;
+    this.priceDetails.trackLHRPrice = item?.lockSalePrice;
   }
 
   // Get selected Item values and details
   getTypeOfDoorAndCompany() {
-
+    const companInfo = this.doorCompanyList.find((element) => element.doorCompanyId == this.doorCompany);
+    const doorTypeInfo = this.typeOfDoorsList.find((element) => element.doorTypeId == this.doorType);
+    return doorTypeInfo?.doorTypeName + ' ' + companInfo?.doorCompanyName;
   }
 
+  getModelSelectedInfo() {
+    const collectionInfo = this.doorCollectionList.find((element) => element.doorCollectionId == this.doorCollection);
+    const familyInfo = this.doorSubCollectionList.find((element) => element.doorSubCollectionId == this.doorSubCollection);
+    const panelInfo = this.doorPanelList.find((element) => element.doorPanelId == this.doorPanel);
+    const modelInfo = this.doorModelList.find((element) => element.doorModelId == this.doorModel);
+    const colorInfo = this.doorColorList.find((element) => element.doorColorId == this.doorColor);
+    return collectionInfo?.doorCollectionName + ' ' + familyInfo?.doorSubCollectionName + ' ' + panelInfo?.doorPanelName + ' ' + modelInfo?.doorModelName + ' ' + colorInfo?.doorColorAliasName
+  }
 
+  getSpringInfo() {
+    const details = this.doorSpringCategoryTypeList.find((element) => element.springCategoryTypeId == this.doorSpringCategoryType);
+    return details?.springCategoryTypeName ? details?.springCategoryTypeName : '';
+  }
+
+  getCycleInfo() {
+    const details = this.doorSpringCategoryList.find((element) => element.springCategoryId == this.doorSpringCategory);
+    return details?.springCategoryDesc ? details?.springCategoryDesc : '';
+  }
+
+  getSealInfo() {
+    const details = this.doorSealCategoryTypeList.find((element) => element.doorSealTypeId == this.doorSealCategoryType);
+    return details?.doorSealTypeDescription ? details?.doorSealTypeDescription : '';
+  }
+
+  getLockInfo() {
+    const details = this.doorLockList.find((element: any) => element.doorLockId == this.doorLock);
+    return details?.doorLockName ? details?.doorLockName : '';
+  }
+
+  getStrutInfo() {
+    const details = this.doorStrutCategoryTypeList.find((element: any) => element.sturtCategoryTypeId == this.doorStrutCategoryType);
+    return details?.sturtCategoryTypeDesc ? details?.sturtCategoryTypeDesc : '';
+  }
+
+  getTrackInfo() {
+    const details = this.doorTrackTypeList.find((element: any) => element.trackTypeId == this.doorTrackType);
+    return details?.trackName ? details?.trackName : '';
+  }
+
+  getJumboMount() {
+    const details = this.doorTrackTypePriceList.find((element: any) => element.trackPriceId == this.doorTrackPrice);
+    return details?.trackCategoryName ? details?.trackCategoryName : '';
+  }
 
   // Mitesh Code Start
   // ====== Dynamic Window Binding ( Row and Column )=====
