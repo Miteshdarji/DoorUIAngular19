@@ -633,6 +633,20 @@
   background-color: var(--bs-light);
 } 
 
+.door-designer-tool .designer .modal-info-wrap .box{
+  background-color: var(--bs-light);
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.door-designer-tool .designer .modal-info-wrap .box .content{
+  font-size: 14px;
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
 /* .door-designer-tool .designer .windows-edit .editable-box {
   width: 100px;
   height: 100px;

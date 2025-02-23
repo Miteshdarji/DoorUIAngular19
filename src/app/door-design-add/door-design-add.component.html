@@ -11,7 +11,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder d-none">
+            <div class="visual-canvas-placeholder">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -455,41 +455,61 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-0">
-                  <label class="form-label">Select Model number</label>
-                  <div class="row g-3">
-                    <ng-container *ngFor="let item of doorModelList">
-                      <div class="col-auto">
-                        <div class="model-box d-flex flex-column align-items-center"
-                          [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-                          <div class="content">
-                            <p class="mb-1">{{item?.doorModelName}}</p>
-                            <p class="mb-0">{{item?.range}}</p>
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="form-group mb-0">
+                      <label class="form-label">Select Model number</label>
+                      <div class="row g-3">
+                        <ng-container *ngFor="let item of doorModelList">
+                          <div class="col-auto">
+                            <div class="model-box d-flex flex-column align-items-center"
+                              [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
+                              <div class="content">
+                                <p class="mb-1">{{item?.doorModelName}}</p>
+                                <p class="mb-0">{{item?.range}}</p>
+                              </div>
+                              <div class="box-label">
+                                <span>{{item?.quality}}</span>
+                              </div>
+                              <div class="star-rating" data-rating="3">
+                                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
+                                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <defs>
+                                    <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent" />
+                                  </defs> <text font-size="45">
+                                    <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%">
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                    </textPath>
+                                  </text>
+                                </svg>
+                              </div>
+                            </div>
                           </div>
-                          <div class="box-label">
-                            <span>{{item?.quality}}</span>
-                          </div>
-                          <div class="star-rating" data-rating="3">
-                            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
-                              xmlns:xlink="http://www.w3.org/1999/xlink">
-                              <defs>
-                                <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent" />
-                              </defs> <text font-size="45">
-                                <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%">
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                </textPath>
-                              </text>
-                            </svg>
-                          </div>
-                        </div>
+                        </ng-container>
                       </div>
-                    </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                     <div class="modal-info-wrap">
+                      <label for="">&nbsp;</label>
+                         <div class="box">
+                          <div class="pb-2 bg-white">
+                            <div class="image-wrap aspect-custom img-auto text-center loader" style="--aspect-custom: 58%">
+                              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorModel/1/2216_Sandwich_Polyurethane_1_7_8.jpg" height="1px" width="1px">
+                            </div> 
+                          </div>
+                          <div class="content">
+                              <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
+                          </div>
+                         </div>
+                     </div>
                   </div>
                 </div>
+                
               </div>
             </div>
 
@@ -1251,9 +1271,9 @@
               <div class="card-body">
                 <div class="form-group mb-0">
                   <label class="form-label">Select Door lock</label>
-                  <div class="row g-3">
+                  <div class="row g-3 row-cols-5">
                     <ng-container *ngFor="let item of doorLockList">
-                      <div class="col-12 col-sm-12 col-md-3 col-lg-3" (click)="selectDoorLock(item)">
+                      <div class="col" (click)="selectDoorLock(item)">
                         <div class="item-box box-active" [ngClass]="{'active': doorLock == item.doorLockId }">
                           <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
                             <img [src]="item.filePath" alt="#" height="1px" width="1px">
