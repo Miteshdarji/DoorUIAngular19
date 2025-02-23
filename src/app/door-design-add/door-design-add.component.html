@@ -11,7 +11,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder">
+            <div class="visual-canvas-placeholder d-none">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -33,8 +33,8 @@
                 <div class="visualization-main"
                   style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
                   <!-- Left Side (Display Boxes with Image) -->
-                  <div class="cover-bg"
-                    style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                  <div class="cover-bg position-relative" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                    <div class="grid-overlay" style="--color-overlay: #ccc3b1"></div>
                     <div class="main-grid">
                       <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
                         <div *ngFor="let cell of row; let colIndex = index" class="design-box"
@@ -929,10 +929,10 @@
                         <div class="item-box box-active"
                           [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
                           (click)="selectWindowInsertSubCategory(item)">
-                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 68%;">
+                          <div class="image-wrap aspect-custom loader img-auto" style="--aspect-custom: 68%;">
                             <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
                           </div>
-                          <div class="box-title">
+                          <div class="box-title border-top-tc">
                             <span>{{item?.doorInsulatedDesc}}</span>
                             <div class="price">
                               <span class="currency text-danger">$</span><span>212</span>
@@ -1157,7 +1157,7 @@
                     <ng-container *ngFor="let item of doorTrackTypePriceList">
                       <button class="button button-grey button-check-icon" (click)="selectTrackPrice(item)"
                         [ngClass]="{'active': doorTrackPrice == item.trackPriceId}">
-                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em> {{ item?.salesPrice
+                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em>{{ item?.salesPrice
                               }}</em>)</small></span>
                       </button>
                     </ng-container>
@@ -1417,5 +1417,13 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div class="site-loader hide">
+  <div class="inner w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="spinner"></div>
+    <div class="loader-text">Loading...</div>  
   </div>
 </div>
