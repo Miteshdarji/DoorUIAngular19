@@ -11,7 +11,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder">
+            <div class="visual-canvas-placeholder d-none">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -25,11 +25,22 @@
               </div>
             </div>
             <!-- End  if no design -->
+
             <!-- if design add visual canvas -->
+           <div class="design-main">
             <div class="visual-canvas">
+              <div class="canvas-scale">
+                 <div class="scale-hr">
+                    <div class="line"></div>
+                    <span>8 Feet</span>
+                 </div>
+                 <div class="scale-vr">
+                  <div class="line"></div>
+                  <span>7 Feet</span>
+                 </div>
+              </div>
               <!-- Mitesh Code  -->
-              <div
-                *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+              <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
                 <div class="visualization-main"
                   style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
                   <!-- Left Side (Display Boxes with Image) -->
@@ -55,6 +66,7 @@
               </div>
               <!-- Mitesh Code  -->
             </div>
+
             <div class="short-info d-flex">
               <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
@@ -62,6 +74,8 @@
                 </svg></div>
               <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
             </div>
+            </div>
+
             <!-- End if design add visual canvas -->
             <div class="estimate-quote d-flex justify-content-between">
               <div class="title d-flex align-items-center"><span
@@ -72,7 +86,7 @@
                   </svg></span>Quote Estimate</div>
               <span class="price">$ 989.96</span>
             </div>
-            <div class="main-info">
+            <div class="main-info custom-scroll">
               <ul class="info-list list-none">
                 <li>
                   <div class="info">
@@ -456,7 +470,7 @@
                 </div>
 
                 <div class="row align-items-center">
-                  <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8 align-self-start">
                     <div class="form-group mb-0">
                       <label class="form-label">Select Model number</label>
                       <div class="row g-3">
