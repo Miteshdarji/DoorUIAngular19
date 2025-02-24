@@ -174,4 +174,19 @@ export class UtilsService {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `DoorLock/DoorLock`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
+
+  getCompanyOperatorType() {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `CompanyOperatorType/CompanyOperatorType`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getCompanyOperatorByTypeId(operatorId : any) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `CompanyOperator/CompanyOperatorByTypeId?CompanyOperatorTypeId=${operatorId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getCompanyOperatorRailByTypeId(operatorId : any) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `CompanyOperatorRail/CompanyOperatorRailByTypeId?CompanyOperatorId=${operatorId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
 }

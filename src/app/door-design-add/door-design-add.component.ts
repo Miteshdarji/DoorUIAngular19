@@ -121,13 +121,19 @@ export class DoorDesignAddComponent implements OnInit {
     }, 1000);
     setTimeout(() => {
       this.getDoorCollection();
+      this.getCompanyOperatorType();
     }, 3000);
   }
 
   calculatePrice() {
-    console.log("this.priceDetail", this.priceDetails);
     const price = this.priceDetails.colorPrice + this.priceDetails.glassPrice + this.priceDetails.insertPrice + this.priceDetails.springCyclePrice + this.priceDetails.strutPrice + this.priceDetails.trackPrice + this.priceDetails.trackLHRPrice + this.priceDetails.upgradTackPrice + this.priceDetails.roofpitchPrice + this.priceDetails.sealPrice + this.priceDetails.lockPrice;
-    return price.toFixed(2);
+
+    const operatorSum: any = Object.values(this.dropdownDataPricingData).reduce((total: any, value: any) => Number(total) + Number(value), 0);
+    const railTotal: any = Object.values(this.railOperatorDataPricingData).reduce((total: any, value: any) => Number(total) + Number(value), 0);
+
+    const totalPrice = Number(operatorSum ? operatorSum : 0) + Number(railTotal ? railTotal : 0) + Number(price ? price : 0);
+
+    return totalPrice.toFixed(2);
   }
 
   changeDoorSize(widthFt: number, heightFt: number, widthInch: number = 0, heightInch: number = 0): void {
@@ -179,6 +185,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.getDoorSealType();
     this.getVisulizationTrackType();
     this.getDoorLock();
+    this.getCompanyOperatorType();
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
@@ -977,7 +984,58 @@ export class DoorDesignAddComponent implements OnInit {
     this.priceDetails.lockPrice = item?.lockSalePrice;
   }
 
+  // Door operators
+  doorCompanyOperatorTypeList: any = [];
+  doorCompanyOperatorType!: any;
+  dropdownData: any = {};
+  railOperatorData: any = {};
+  dropdownDataPricingData: any = {};
+  railOperatorDataPricingData: any = {};
+  selectedDetails: any = {};
+
+  getCompanyOperatorType() {
+    this.doorCompanyOperatorTypeList = [];
+    this.utilsService.getCompanyOperatorType().subscribe((data: any) => {
+      this.doorCompanyOperatorTypeList = data?.payload;
+      this.doorCompanyOperatorTypeList.forEach((item: any) => {
+        this.utilsService.getCompanyOperatorByTypeId(item.companyOperatorTypeId).subscribe((response: any) => {
+          this.dropdownData[item.companyOperatorTypeId] = response?.payload;
+        });
+      });
+    }, (error) => {
+      console.error('Error During door getCompanyOperatorType :', error);
+    });
+  }
+
+  getCompanyOperatorRailByTypeId(typeId: any, id: any) {
+    this.utilsService.getCompanyOperatorRailByTypeId(id).subscribe((data: any) => {
+      this.railOperatorData[typeId] = data?.payload;
+    });
+  }
+
+  changeOperator(optTypeId: any, event: any) {
+    const data = this.dropdownData[optTypeId]?.find((element: any) => element.company_Operator_Id == event.target.value);
+    this.dropdownDataPricingData[optTypeId] = data?.company_Operator_Sale_Price;
+    this.railOperatorDataPricingData[optTypeId] = 0;
+    this.selectedDetails[optTypeId] = data?.company_Operator_Type_Name + '/'+ data?.company_Operator_Name;
+    this.getCompanyOperatorRailByTypeId(optTypeId, event.target.value);
+    this.calculatePrice();
+  }
+
+  changeRailOperator(optTypeId: any, event: any) {
+    const data = this.railOperatorData[optTypeId]?.find((element: any) => element.railOperatorId == event.target.value);
+    this.railOperatorDataPricingData[optTypeId] = data?.railSalesPrice;
+    this.selectedDetails[optTypeId] = this.selectedDetails[optTypeId] + ' - ' + data?.railProductCode;
+    this.calculatePrice();
+  }
+
+
   // Get selected Item values and details
+  selectedOperator() {
+    const operatorSum: any = Object.values(this.selectedDetails).reduce((total: any, value: any) => total + ' , ' + value, '');
+    return operatorSum;
+  }
+
   getTypeOfDoorAndCompany() {
     const companInfo = this.doorCompanyList.find((element) => element.doorCompanyId == this.doorCompany);
     const doorTypeInfo = this.typeOfDoorsList.find((element) => element.doorTypeId == this.doorType);
@@ -1099,12 +1157,11 @@ export class DoorDesignAddComponent implements OnInit {
 
     }
     if (this.visualizationSelection['visualize_backSelectedImage']) {
-      if(this.bgColor == '--'){
+      if (this.bgColor == '--') {
         this.bgDefaultImage = this.visualizationSelection['visualize_backSelectedImage'].toLowerCase();
       }
-      else
-      {
-          this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
+      else {
+        this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
       }
     }
     if (this.visualizationSelection['visualize_backRepeatImage']) {

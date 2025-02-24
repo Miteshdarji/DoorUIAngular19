@@ -27,53 +27,55 @@
             <!-- End  if no design -->
 
             <!-- if design add visual canvas -->
-           <div class="design-main">
-            <div class="visual-canvas">
-              <div class="canvas-scale">
-                 <div class="scale-hr">
+            <div class="design-main">
+              <div class="visual-canvas">
+                <div class="canvas-scale">
+                  <div class="scale-hr">
                     <div class="line"></div>
                     <span>8 Feet</span>
-                 </div>
-                 <div class="scale-vr">
-                  <div class="line"></div>
-                  <span>7 Feet</span>
-                 </div>
-              </div>
-              <!-- Mitesh Code  -->
-              <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
-                <div class="visualization-main"
-                  style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
-                  <!-- Left Side (Display Boxes with Image) -->
-                  <div class="cover-bg position-relative" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
-                    <div class="grid-overlay" style="--color-overlay: #ccc3b1"></div>
-                    <div class="main-grid">
-                      <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
-                        <div *ngFor="let cell of row; let colIndex = index" class="design-box"
-                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
-                          <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
-                          <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
-                          <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
-                            class="glass-image" style="background-image: url('{{bgGlassImage}}');">
-                            <img src="{{bgWindowInsertImage}}"
-                              *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
-                              class="window-image" />
+                  </div>
+                  <div class="scale-vr">
+                    <div class="line"></div>
+                    <span>7 Feet</span>
+                  </div>
+                </div>
+                <!-- Mitesh Code  -->
+                <div
+                  *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
+                  <div class="visualization-main"
+                    style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
+                    <!-- Left Side (Display Boxes with Image) -->
+                    <div class="cover-bg position-relative"
+                      style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                      <div class="grid-overlay" style="--color-overlay: #ccc3b1"></div>
+                      <div class="main-grid">
+                        <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
+                          <div *ngFor="let cell of row; let colIndex = index" class="design-box"
+                            [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                            <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
+                            <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
+                            <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                              class="glass-image" style="background-image: url('{{bgGlassImage}}');">
+                              <img src="{{bgWindowInsertImage}}"
+                                *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                                class="window-image" />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <!-- Mitesh Code  -->
               </div>
-              <!-- Mitesh Code  -->
-            </div>
 
-            <div class="short-info d-flex">
-              <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path
-                    d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z" />
-                </svg></div>
-              <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
-            </div>
+              <div class="short-info d-flex">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                      d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z" />
+                  </svg></div>
+                <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
+              </div>
             </div>
 
             <!-- End if design add visual canvas -->
@@ -189,7 +191,7 @@
                     <div class="row">
                       <div class="col">
                         <div class="title"><span>Door Operator</span></div>
-                        <span class="value">LiftMaster 98022, Genie 2028, Marantec 380 Head</span>
+                        <span class="value">{{selectedOperator()}}</span>
                       </div>
                     </div>
                   </div>
@@ -289,6 +291,7 @@
                   <div class="selection-button-list" *ngIf="doorType == 1">
                     <ng-container *ngFor="let size of DoorSizeList.Residential.width_arr; let index = index">
                       <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorWidthFt == size && doorHeightFt == DoorSizeList.Residential.height_arr[index]}"
                         (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index])">
                         <span>{{size}}' x {{DoorSizeList.Residential.height_arr[index]}}'</span> </button>
                     </ng-container>
@@ -297,6 +300,7 @@
                   <div class="selection-button-list" *ngIf="doorType == 2">
                     <ng-container *ngFor="let size of DoorSizeList.Commercial.width_arr; let index = index">
                       <button class="button button-grey button-check-icon"
+                        [ngClass]="{'active': doorWidthFt == size && doorHeightFt == DoorSizeList.Residential.height_arr[index]}"
                         (click)="changeDoorSize(size, DoorSizeList.Residential.height_arr[index], DoorSizeList.Commercial.width_arr_inch[index])">
                         <span>{{size}}'{{DoorSizeList.Commercial.width_arr_inch[index]}}" x
                           {{DoorSizeList.Commercial.height_arr[index]}}'</span>
@@ -360,7 +364,7 @@
                         <button class="button btn-minus" type="button"
                           (click)="doorHeightFt = doorHeightFt - 1 < 0 ? 0 : doorHeightFt - 1"><svg
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <<path
+                            <path
                               d="M432 256C432 264.8 424.8 272 416 272H32c-8.844 0-16-7.15-16-15.99C16 247.2 23.16 240 32 240h384C424.8 240 432 247.2 432 256z" />
                           </svg></button>
                         <input type="number" class="form-control-custom" id="exampleFormControlInput1"
@@ -461,7 +465,7 @@
                             <img [src]="item?.filePath" [alt]="item?.fileName" height="60px" width="100px">
                           </div>
                           <div class="box-title">
-                            <span>{{item?.doorPanelName}}</span>
+                            <span>{{item?.doorPanelDescription}}</span>
                           </div>
                         </div>
                       </div>
@@ -508,19 +512,23 @@
                     </div>
                   </div>
                   <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-                     <div class="modal-info-wrap">
+                    <div class="modal-info-wrap">
                       <label for="">&nbsp;</label>
-                         <div class="box">
-                          <div class="pb-2 bg-white">
-                            <div class="image-wrap aspect-custom img-auto text-center loader" style="--aspect-custom: 58%">
-                              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorModel/1/2216_Sandwich_Polyurethane_1_7_8.jpg" height="1px" width="1px">
-                            </div>
+                      <div class="box">
+                        <div class="pb-2 bg-white">
+                          <div class="image-wrap aspect-custom img-auto text-center loader"
+                            style="--aspect-custom: 58%">
+                            <img
+                              src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorModel/1/2216_Sandwich_Polyurethane_1_7_8.jpg"
+                              height="1px" width="1px">
                           </div>
-                          <div class="content">
-                              <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
-                          </div>
-                         </div>
-                     </div>
+                        </div>
+                        <div class="content">
+                          <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27
+                            ga</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -557,17 +565,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -920,17 +928,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -982,17 +990,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -1046,17 +1054,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -1095,17 +1103,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -1153,17 +1161,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -1262,17 +1270,17 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -1306,23 +1314,23 @@
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
 
             <!-- Door Operator -->
-            <div class="card mt-3" style="display: none;">
+            <div class="card mt-3">
               <div class="card-header">
                 Door Operator
               </div>
@@ -1330,7 +1338,66 @@
                 <div class="form-group mb-0">
                   <label class="form-label">Select Door Operator</label>
                   <div class="row g-3">
-                    <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                    <ng-container *ngFor="let item of doorCompanyOperatorTypeList">
+                      <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="item-box box-active active">
+                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
+                            <img *ngIf="item?.filePath" [src]="item?.filePath" alt="#" height="1px" width="1px">
+                            <img *ngIf="!item?.filePath"
+                              src="https://doorportal-001-site1.etempurl.com/Resources/Documents/companyoperatortype/1/test.jpg"
+                              alt="#" height="1px" width="1px">
+                          </div>
+                          <div class="box-select border-top-tc">
+
+                            <div class="operatore">
+                              <div class="row g-1 align-items-center">
+                                <div class="col-8">
+                                  <select class="form-select-custom form-select-custom-sm"
+                                    (change)="changeOperator(item?.companyOperatorTypeId, $event)">
+                                    <option>Select Operator</option>
+                                    <ng-container *ngFor="let dropItem of dropdownData[item?.companyOperatorTypeId]">
+                                      <option [value]="dropItem?.company_Operator_Id">{{ dropItem?.company_Operator_Name
+                                        }}</option>
+                                    </ng-container>
+                                  </select>
+                                </div>
+                                <div class="col-4">
+                                  <div class="price">
+                                    <span
+                                      class="text-danger">$</span><span>{{dropdownDataPricingData[item?.companyOperatorTypeId]
+                                      || 0 }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="operatore">
+                              <div class="row g-1 align-items-center">
+                                <div class="col-8">
+                                  <select class="form-select-custom form-select-custom-sm" (change)="changeRailOperator(item?.companyOperatorTypeId, $event)">
+                                    <option>Select Rail</option>
+                                    <ng-container
+                                      *ngFor="let railItem of railOperatorData[item?.companyOperatorTypeId]">
+                                      <option [value]="railItem?.railOperatorId">{{ railItem?.railProductCode }}
+                                      </option>
+                                    </ng-container>
+                                  </select>
+                                </div>
+                                <div class="col-4">
+                                  <div class="price">
+                                    <span class="text-danger">$</span><span>{{railOperatorDataPricingData[item?.companyOperatorTypeId]
+                                      || 0 }}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                       <div class="item-box box-active active">
                         <div class="image-wrap aspect-custom loader" style="--aspect-custom: 50%">
                           <img
@@ -1426,24 +1493,24 @@
 
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                   </div>
                 </div>
               </div>
               <div class="card-footer">
                 <div class="additional-discount">
-                <div class="row align-items-center">
-                  <div class="col-auto">
-                    <label class="col-form-label">Additional Discount</label>
-                  </div>
-                  <div class="col-3 ms-auto">
-                    <div class="input-group">
-                      <input type="number" class="form-control-custom form-control-custom-sm">
-                      <span class="input-group-text" id="basic-addon1">%</span>
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label class="col-form-label">Additional Discount</label>
+                    </div>
+                    <div class="col-3 ms-auto">
+                      <div class="input-group">
+                        <input type="number" class="form-control-custom form-control-custom-sm">
+                        <span class="input-group-text" id="basic-addon1">%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>
