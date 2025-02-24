@@ -1,0 +1,89 @@
+.customer-quote{
+    font-size: 14px;
+    margin: 20px;
+}
+.customer-quote .main{
+    border: 1px solid #ccc;
+}
+.customer-quote .container{
+    max-width: 940px;
+}
+
+.customer-quote .header{
+    padding: 5px 15px;
+}
+
+.customer-quote .header .logo img{
+    max-width: 140px;
+}
+
+.customer-quote .company-info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 75px;
+}
+
+.customer-quote .company-info ul li:not(:first-child){
+    margin-top: 3px;
+}
+
+.customer-quote .quote-title{
+    background-color: #039be5;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.customer-quote .customer-info{
+    padding: 20px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.customer-quote .customer-info .info ul li{
+    display: flex;
+}
+
+.customer-quote .customer-info .info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 130px;
+    flex: 0 0 auto;
+}
+.customer-quote .customer-info .info ul li:not(:first-child){
+    margin-top: 5px;
+}
+
+.customer-quote .main-table{
+   padding: 20px 15px;
+   border-bottom: 1px solid #ccc; 
+}
+
+.customer-quote .main-table table thead tr th{
+    padding: 12px 10px;
+}
+
+.customer-quote .main-table table thead tr td{
+    padding: .5rem 10px;
+}
+
+.customer-quote .main-table table tfoot tr.grand-total{
+    font-size: 16px;
+}
+
+.customer-quote .finel-design{
+    padding: 20px 15px;  
+}
+
+.customer-quote .finel-design .title{
+    font-weight: bold;
+}
+
+.customer-quote .finel-design .image img{
+    max-width: 300px;
+}
+
+.quote-description{
+    padding: 20px 15px;
+    font-size: 12px; 
+    border-top: 1px solid #ccc; 
+}

@@ -1,0 +1,89 @@
+.pull-sheet-quote{
+    font-size: 14px;
+    margin: 20px;
+}
+.pull-sheet-quote .main{
+    border: 1px solid #ccc;
+}
+.pull-sheet-quote .container{
+    max-width: 940px;
+}
+
+.pull-sheet-quote .header{
+    padding: 5px 15px;
+}
+
+.pull-sheet-quote .header .logo img{
+    max-width: 140px;
+}
+
+.pull-sheet-quote .company-info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 75px;
+}
+
+.pull-sheet-quote .company-info ul li:not(:first-child){
+    margin-top: 3px;
+}
+
+.pull-sheet-quote .quote-title{
+    background-color: #039be5;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.pull-sheet-quote .customer-info{
+    padding: 20px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.pull-sheet-quote .customer-info .info ul li{
+    display: flex;
+}
+
+.pull-sheet-quote .customer-info .info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 130px;
+    flex: 0 0 auto;
+}
+.pull-sheet-quote .customer-info .info ul li:not(:first-child){
+    margin-top: 5px;
+}
+
+.pull-sheet-quote .main-table{
+   padding: 20px 15px;
+   border-bottom: 1px solid #ccc; 
+}
+
+.pull-sheet-quote .main-table table thead tr th{
+    padding: 12px 10px;
+}
+
+.pull-sheet-quote .main-table table thead tr td{
+    padding: .5rem 10px;
+}
+
+.pull-sheet-quote .main-table table tfoot tr.grand-total{
+    font-size: 16px;
+}
+
+.pull-sheet-quote .finel-design{
+    padding: 20px 15px;  
+}
+
+.pull-sheet-quote .finel-design .title{
+    font-weight: bold;
+}
+
+.pull-sheet-quote .finel-design .image img{
+    max-width: 300px;
+}
+
+.quote-description{
+    padding: 20px 15px;
+    font-size: 12px; 
+    border-top: 1px solid #ccc; 
+}

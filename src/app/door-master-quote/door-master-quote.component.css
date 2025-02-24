@@ -1,0 +1,89 @@
+.door-quote{
+    font-size: 14px;
+    margin: 20px;
+}
+.door-quote .main{
+    border: 1px solid #ccc;
+}
+.door-quote .container{
+    max-width: 940px;
+}
+
+.door-quote .header{
+    padding: 5px 15px;
+}
+
+.door-quote .header .logo img{
+    max-width: 140px;
+}
+
+.door-quote .company-info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 75px;
+}
+
+.door-quote .company-info ul li:not(:first-child){
+    margin-top: 3px;
+}
+
+.door-quote .quote-title{
+    background-color: #039be5;
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.door-quote .customer-info{
+    padding: 20px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.door-quote .customer-info .info ul li{
+    display: flex;
+}
+
+.door-quote .customer-info .info ul li span{
+    font-weight: 600;
+    display: inline-block;
+    width: 130px;
+    flex: 0 0 auto;
+}
+.door-quote .customer-info .info ul li:not(:first-child){
+    margin-top: 5px;
+}
+
+.door-quote .main-table{
+   padding: 20px 15px;
+   border-bottom: 1px solid #ccc; 
+}
+
+.door-quote .main-table table thead tr th{
+    padding: 12px 10px;
+}
+
+.door-quote .main-table table thead tr td{
+    padding: .5rem 10px;
+}
+
+.door-quote .main-table table tfoot tr.grand-total{
+    font-size: 16px;
+}
+
+.door-quote .finel-design{
+    padding: 20px 15px;  
+}
+
+.door-quote .finel-design .title{
+    font-weight: bold;
+}
+
+.door-quote .finel-design .image img{
+    max-width: 300px;
+}
+
+.quote-description{
+    padding: 20px 15px;
+    font-size: 12px; 
+    border-top: 1px solid #ccc; 
+}

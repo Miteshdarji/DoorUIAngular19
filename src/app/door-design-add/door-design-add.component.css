@@ -2,7 +2,7 @@
 .door-designer-tool .leftbar{
   border: 1px solid #ddd;
   position: sticky;
-  top: 20px;
+  top: 0px;
 }
 
 .door-designer-tool .section-title h2{
@@ -11,10 +11,6 @@
   border-bottom: 1px solid #ddd;
   background-color: #5d5d5d;
   color: #fff;
-}
-
-.door-designer-tool .summary{
-   padding: 20px;
 }
 
 .door-designer-tool .summary .visual-canvas-placeholder{
@@ -42,14 +38,132 @@
    fill: #fff;
 }
 
+.door-designer-tool .summary .design-main{
+  background-color: var(--bs-light);
+  padding: 10px;
+}
+
 .door-designer-tool .summary .visual-canvas{
-  border: 1px solid #eee;
-  border-radius: 3px 3px 0px 0px;
+  padding-left: 30px;
+  position: relative;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-hr{
+  position: relative;
+  text-align: center;
+  margin: 0px 0px 8px 0px;
+  z-index: 1;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-hr .line{
+  height: 1px;
+  width: 100%;
+  border-top: 1px dashed #999;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-hr::after{
+  content: "";
+  height: 100%;
+  width: 1px;
+  border-right: 1px dashed #999;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-hr:before{
+  content: "";
+  height: 100%;
+  width: 1px;
+  border-left: 1px dashed #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-hr span{
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 3px 10px;
+    font-size: 10px;
+    border-radius: 100px;
+    position: relative;
+    top: -2px;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr{
+   position: absolute;
+   left: 0;
+   top: 32px;
+   height: calc(100% - 33px);
+   text-align: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 1;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr span{
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 3px;
+  font-size: 10px;
+  border-radius: 100px;
+  writing-mode: vertical-rl;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr .line{
+  height: 100%;
+  width: 1px;
+  border-left: 1px dashed #999;
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr::after{
+  content: "";
+  height: 1px;
+  width: 100%;
+  border-top: 1px dashed #999;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr:before{
+  content: "";
+  height: 1px;
+  width: 100%;
+  border-bottom: 1px dashed #999;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.door-designer-tool .summary .visual-canvas .visualization-main{
+  border: 2px solid #ddd;
   overflow: hidden;
 }
 
-.door-designer-tool .summary .visual-canvas .visualization-main {
-    /* height: var(--visualization-height); */
+.door-designer-tool .summary .visual-canvas .visualization-main .grid-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-overlay, f2);
+  mix-blend-mode: multiply;
+  z-index: 1;
 }
 
 .door-designer-tool .summary .visual-canvas .visualization-main .cover-bg{
@@ -119,21 +233,13 @@
 }
 
 
-
-
-
-
-
-
-
-
 .door-designer-tool .summary .short-info{
-  padding: 10px 15px;
-  border: 1px solid #eee;
-  border-top: none;
-  margin-bottom: 16px;
-  font-size: 14px;
-  border-radius: 0px 0px 3px 3px;
+  padding: 8px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  font-size: 12px;
+  border-radius: 3px;
+  margin-top: 10px;
 }
 
 .door-designer-tool .summary .short-info .icon{
@@ -149,7 +255,6 @@
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   padding: 15px 20px;
-  margin: 0 -20px;
 }
 
 .door-designer-tool .summary .estimate-quote .title{
@@ -174,6 +279,12 @@
 .door-designer-tool .summary .estimate-quote .price{
   font-size: 25px;
   font-weight: 700;
+}
+
+.door-designer-tool .summary .main-info{
+  padding: 10px 20px;
+  /* height: 200px; */
+  overflow-y: auto;
 }
 
 .door-designer-tool .summary .main-info ul.info-list li{
@@ -245,6 +356,11 @@
 
 .door-designer-tool .designer .item-box .box-title .price span{
   display: inline-block;
+  margin: 0px 1px;
+}
+
+.door-designer-tool .designer .item-box .box-title .price .currency{
+   font-weight: 600;
 }
 
 .door-designer-tool .designer .item-box .box-select.border-top-tc,
@@ -296,9 +412,10 @@
 }
 
 .door-designer-tool .designer .model-box.active{
-  background-color: var(--gray-200);
+  background-color: #5d5d5d;
   border-color: #ddd;
   outline-color: #ddd;
+  color: #fff;
 }
 
 .door-designer-tool .designer .model-box .box-label{
@@ -307,7 +424,12 @@
   padding: 3px 12px;
   font-size: 12px;
   border-radius: 100px;
-  margin-top: 10px;
+  margin-top: 8px;
+}
+
+.door-designer-tool .designer .model-box.active .box-label{
+  background-color: #fff;
+  color: #000;
 }
 
 .door-designer-tool .designer .model-box .star-rating{
@@ -409,6 +531,11 @@
 
 .door-designer-tool .designer .color-box .box-title .price span{
   display: inline-block;
+  margin: 0 1px;
+}
+
+.door-designer-tool .designer .color-box .box-title .price span.currency{
+  font-weight: 600;
 }
 
 .door-designer-tool .designer .box-active.active{
@@ -576,6 +703,48 @@
 
 .door-designer-tool .designer .selected-quantity span.value{
   font-weight: 600;
+}
+
+.door-designer-tool .designer .additional-discount .col-form-label{
+  font-size: 14px;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom{
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom[type=number]::-webkit-inner-spin-button,
+.door-designer-tool .designer .additional-discount .input-group .form-control-custom[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.door-designer-tool .designer .additional-discount .input-group .input-group-text{
+  border-radius: 3px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0 0.75rem;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: var(--bs-light);
+} 
+
+.door-designer-tool .designer .modal-info-wrap .box{
+  background-color: var(--bs-light);
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.door-designer-tool .designer .modal-info-wrap .box .content{
+  font-size: 14px;
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #ddd;
 }
 
 /* .door-designer-tool .designer .windows-edit .editable-box {

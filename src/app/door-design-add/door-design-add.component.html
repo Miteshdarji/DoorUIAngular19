@@ -11,7 +11,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder">
+            <div class="visual-canvas-placeholder d-none">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -25,36 +25,48 @@
               </div>
             </div>
             <!-- End  if no design -->
+
             <!-- if design add visual canvas -->
+           <div class="design-main">
             <div class="visual-canvas">
+              <div class="canvas-scale">
+                 <div class="scale-hr">
+                    <div class="line"></div>
+                    <span>8 Feet</span>
+                 </div>
+                 <div class="scale-vr">
+                  <div class="line"></div>
+                  <span>7 Feet</span>
+                 </div>
+              </div>
               <!-- Mitesh Code  -->
               <div *ngIf="this.visualizationSelection.visualize_row && this.visualizationSelection.visualize_column && this.visualizationSelection.visualize_backSelectedColor">
-                <!-- <div class="visualization-main" style="--visualization-height: 350px; --hr-column: {rowSize}; --vr-column: {colSize}; --partition-line-color: #000"> -->
-                <div class="visualization-main" 
-                [style.--visualization-height.px]="350"
-                [style.--hr-column]="rowSize"
-                [style.--vr-column]="colSize"
-                [style.--partition-line-color]="bgColor === '--' ? '#000' : bgColor">
+                <div class="visualization-main"
+                  style="--visualization-height: 350px; --hr-column: 4; --vr-column: 4; --partition-line-color: #000">
                   <!-- Left Side (Display Boxes with Image) -->
-                  <!-- <div class="cover-bg" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);"> -->
-                  <div class="cover-bg" [style.background-image]="'url(' + bgDefaultImage + ')'">
-                   <div class="main-grid">
-                    <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
-                      <div *ngFor="let cell of row; let colIndex = index" class="design-box">
-                        <!-- [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}"> -->
-                        <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
-                        <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
-                        <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0" class="glass-image" style="background-image: url('{{bgGlassImage}}');">
-                          <img src="{{bgWindowInsertImage}}" *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"  class="window-image" />
+                  <div class="cover-bg position-relative" style="background-image: url(https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png);">
+                    <div class="grid-overlay" style="--color-overlay: #ccc3b1"></div>
+                    <div class="main-grid">
+                      <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
+                        <div *ngFor="let cell of row; let colIndex = index" class="design-box"
+                          [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}">
+                          <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
+                          <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
+                          <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                            class="glass-image" style="background-image: url('{{bgGlassImage}}');">
+                            <img src="{{bgWindowInsertImage}}"
+                              *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                              class="window-image" />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                 </div>
                 </div>
               </div>
               <!-- Mitesh Code  -->
             </div>
+
             <div class="short-info d-flex">
               <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
@@ -62,6 +74,8 @@
                 </svg></div>
               <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
             </div>
+            </div>
+
             <!-- End if design add visual canvas -->
             <div class="estimate-quote d-flex justify-content-between">
               <div class="title d-flex align-items-center"><span
@@ -72,7 +86,7 @@
                   </svg></span>Quote Estimate</div>
               <span class="price">$ {{ calculatePrice() }}</span>
             </div>
-            <div class="main-info">
+            <div class="main-info custom-scroll">
               <ul class="info-list list-none">
                 <li>
                   <div class="info">
@@ -455,41 +469,61 @@
                   </div>
                 </div>
 
-                <div class="form-group mb-0">
-                  <label class="form-label">Select Model number</label>
-                  <div class="row g-3">
-                    <ng-container *ngFor="let item of doorModelList">
-                      <div class="col-auto">
-                        <div class="model-box d-flex flex-column align-items-center"
-                          [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
-                          <div class="content">
-                            <p class="mb-1">{{item?.doorModelName}}</p>
-                            <p class="mb-0">{{item?.range}}</p>
+                <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8 align-self-start">
+                    <div class="form-group mb-0">
+                      <label class="form-label">Select Model number</label>
+                      <div class="row g-3">
+                        <ng-container *ngFor="let item of doorModelList">
+                          <div class="col-auto">
+                            <div class="model-box d-flex flex-column align-items-center"
+                              [ngClass]="{'active': doorModel == item.doorModelId}" (click)="selectModel(item)">
+                              <div class="content">
+                                <p class="mb-1">{{item?.doorModelName}}</p>
+                                <p class="mb-0">{{item?.range}}</p>
+                              </div>
+                              <div class="box-label">
+                                <span>{{item?.quality}}</span>
+                              </div>
+                              <div class="star-rating" data-rating="3">
+                                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
+                                  xmlns:xlink="http://www.w3.org/1999/xlink">
+                                  <defs>
+                                    <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent" />
+                                  </defs> <text font-size="45">
+                                    <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%">
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                      <tspan>★</tspan>
+                                    </textPath>
+                                  </text>
+                                </svg>
+                              </div>
+                            </div>
                           </div>
-                          <div class="box-label">
-                            <span>{{item?.quality}}</span>
-                          </div>
-                          <div class="star-rating" data-rating="3">
-                            <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
-                              xmlns:xlink="http://www.w3.org/1999/xlink">
-                              <defs>
-                                <path id="textPath" d="M 50,150 A 100,100 0 1,1 250,150" fill="transparent" />
-                              </defs> <text font-size="45">
-                                <textPath xlink:href="#textPath" text-anchor="middle" startOffset="50%">
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                  <tspan>★</tspan>
-                                </textPath>
-                              </text>
-                            </svg>
-                          </div>
-                        </div>
+                        </ng-container>
                       </div>
-                    </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                     <div class="modal-info-wrap">
+                      <label for="">&nbsp;</label>
+                         <div class="box">
+                          <div class="pb-2 bg-white">
+                            <div class="image-wrap aspect-custom img-auto text-center loader" style="--aspect-custom: 58%">
+                              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/DoorModel/1/2216_Sandwich_Polyurethane_1_7_8.jpg" height="1px" width="1px">
+                            </div>
+                          </div>
+                          <div class="content">
+                              <span>2", 2-Sided Steel Sandwich, Heavy Duty, Polyurethane Insulation - 1-7/8" Thick, 27 ga</span>
+                          </div>
+                         </div>
+                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
 
@@ -519,6 +553,21 @@
                       </div>
                     </ng-container>
                   </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -869,6 +918,21 @@
 
 
               </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
 
             <!-- Window Insert -->
@@ -899,10 +963,10 @@
                         <div class="item-box box-active"
                           [ngClass]="{'active': doorWindowInsertSubCategory == item.doorInsulatedId}"
                           (click)="selectWindowInsertSubCategory(item)">
-                          <div class="image-wrap aspect-custom loader" style="--aspect-custom: 68%;">
+                          <div class="image-wrap aspect-custom loader img-auto" style="--aspect-custom: 68%;">
                             <img [src]="item?.filePath" [alt]="item?.fileName" height="100px" width="100px">
                           </div>
-                          <div class="box-title">
+                          <div class="box-title border-top-tc">
                             <span>{{item?.doorInsulatedDesc}}</span>
                             <div class="price">
                               <span class="currency text-danger">$</span><span>{{ item?.insulatedSalePrice }}</span>
@@ -915,6 +979,21 @@
                 </div>
 
 
+              </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
               </div>
             </div>
 
@@ -965,6 +1044,21 @@
                   </div>
                 </div>
               </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
 
             <!-- Strut -->
@@ -998,6 +1092,21 @@
                   </div>
                 </div>
 
+              </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
               </div>
             </div>
 
@@ -1042,6 +1151,21 @@
                   </div>
                 </div>
               </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
 
             <!-- Track -->
@@ -1067,7 +1191,7 @@
                     <ng-container *ngFor="let item of doorTrackTypePriceList">
                       <button class="button button-grey button-check-icon" (click)="selectTrackPrice(item)"
                         [ngClass]="{'active': doorTrackPrice == item.trackPriceId}">
-                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em> {{ item?.salesPrice
+                        <span> {{item?.trackCategoryName}} <small class="price"> ($<em>{{ item?.salesPrice
                               }}</em>)</small></span>
                       </button>
                     </ng-container>
@@ -1136,6 +1260,21 @@
                   </div>
                 </div>
               </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
 
             <!-- Door lock -->
@@ -1146,9 +1285,9 @@
               <div class="card-body">
                 <div class="form-group mb-0">
                   <label class="form-label">Select Door lock</label>
-                  <div class="row g-3">
+                  <div class="row g-3 row-cols-5">
                     <ng-container *ngFor="let item of doorLockList">
-                      <div class="col-12 col-sm-12 col-md-3 col-lg-3" (click)="selectDoorLock(item)">
+                      <div class="col" (click)="selectDoorLock(item)">
                         <div class="item-box box-active" [ngClass]="{'active': doorLock == item.doorLockId }">
                           <div class="image-wrap aspect-custom loader" style="--aspect-custom: 100%">
                             <img [src]="item.filePath" alt="#" height="1px" width="1px">
@@ -1163,6 +1302,21 @@
                       </div>
                     </ng-container>
                   </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -1277,10 +1431,33 @@
                   </div>
                 </div>
               </div>
+              <div class="card-footer">
+                <div class="additional-discount">
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label class="col-form-label">Additional Discount</label>
+                  </div>
+                  <div class="col-3 ms-auto">
+                    <div class="input-group">
+                      <input type="number" class="form-control-custom form-control-custom-sm">
+                      <span class="input-group-text" id="basic-addon1">%</span>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div class="site-loader hide">
+  <div class="inner w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+    <div class="spinner"></div>
+    <div class="loader-text">Loading...</div>
   </div>
 </div>
