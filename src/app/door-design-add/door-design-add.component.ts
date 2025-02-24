@@ -121,7 +121,6 @@ export class DoorDesignAddComponent implements OnInit {
     }, 1000);
     setTimeout(() => {
       this.getDoorCollection();
-      this.getCompanyOperatorType();
     }, 3000);
   }
 
