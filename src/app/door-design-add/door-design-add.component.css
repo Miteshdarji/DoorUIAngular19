@@ -1,8 +1,11 @@
 /* Ps */
+.door-designer-tool{
+  padding-top: 90px;
+  padding-bottom: 20px;
+}
+
 .door-designer-tool .leftbar{
   border: 1px solid #ddd;
-  position: sticky;
-  top: 0px;
 }
 
 .door-designer-tool .section-title h2{
@@ -117,6 +120,7 @@
   font-size: 10px;
   border-radius: 100px;
   writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 .door-designer-tool .summary .visual-canvas .canvas-scale .scale-vr .line{
@@ -171,6 +175,7 @@
     background-repeat: no-repeat;
     background-position: center;
     padding: 5px 10px;
+    position: relative;
 }
 
 .door-designer-tool .summary .visual-canvas .visualization-main .main-grid{
@@ -497,7 +502,7 @@
 }
 
 .door-designer-tool .designer .color-box.active .image-wrap{
-  outline-color: #ddd;
+  outline-color: var(--gray-500);
 }
 
 .door-designer-tool .designer .color-box.active .image-wrap:after{
@@ -539,8 +544,8 @@
 }
 
 .door-designer-tool .designer .box-active.active{
-  border-color: #ddd;
-  background-color: var(--gray-200);
+  border-color: var(--gray-500); 
+  background-color: var(--gray-400); 
 }
 
 .door-designer-tool .designer .box-active.active:after{
@@ -568,6 +573,7 @@
 .door-designer-tool .designer .windows-edit .selectall-list{
   display: grid;
   grid-template-rows: repeat(var(--ds-vr-column), 1fr);
+  min-width: 65px;
 }
 
 .door-designer-tool .designer .windows-edit .selectall-list .list{
@@ -575,6 +581,7 @@
   align-items: center;
   justify-content: center;
   height: var(--ds-grid-height);
+  min-width: 65px;
 }
 
 .door-designer-tool .designer .windows-edit .selectall-list .list .button{
@@ -595,12 +602,12 @@
 
 .door-designer-tool .designer .windows-edit .value-list .list .value-box{
    width: 60px;
-   height: 43px;
+   height: 44px;
    display: flex;
    background-color: #fff;
    border: 1px solid #ddd;
    border-radius: 3px;
-   justify-content: center;
+   justify-content: center; 
    align-items: center;
    font-size: 14px;
 }
@@ -630,6 +637,14 @@
     cursor: pointer;
     background-color: #fff;
     position: relative;
+}
+
+.door-designer-tool .designer .windows-edit .design-grid .grid-box .button{
+   position: absolute;
+   left: calc(-65px - 1.5rem);
+   top: 50%;
+   width: 65px;
+   transform: translateY(-50%);
 }
 
 .door-designer-tool .designer .windows-edit .design-grid .grid-box .checkbox input{

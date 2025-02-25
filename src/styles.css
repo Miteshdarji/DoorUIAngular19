@@ -6,7 +6,9 @@
 	--tc-secondary: #039be5;
 	--gray-100: #f8f9fa;
 	--gray-200: #e9ecef;
-  --gray-300: #dee2e6;
+  	--gray-300: #dee2e6;
+  	--gray-400: #ced4da;
+  	--gray-500: #adb5bd;
 }
 
 body {
@@ -320,7 +322,7 @@ h6,
 	left: 0;
 	width: 100%;
 	border: 1px solid rgba(0, 0, 0, 0);
-	padding: 10px 20px;
+	padding: 8px 15px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -353,6 +355,32 @@ h6,
 	width: 100%
 }
 
+.button-icon{
+	/* font-size: 14px; */
+}
+
+.button-icon span{
+	padding: 0;
+}
+
+.button-icon span small{
+	margin-left: 10px;
+    margin-right: 15px;
+}
+
+.button-icon span.icon{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 35px;
+    width: 35px;
+    border-radius: 100px;
+}
+
+.button-icon span.icon svg{
+	height: 15px;
+}
+
 .button-check-icon::before{
 	content: "";
     position: absolute;
@@ -376,48 +404,6 @@ h6,
 
 .button-check-icon.active span{
 	padding-left: 40px;
-}
-
-.button-primary {
-	background-color: #000
-}
-
-.button-primary::before {
-	background-color: #3577f0
-}
-
-.button-primary span {
-	color: #fff
-}
-
-.button-primary:hover span {
-	color: #fff
-}
-
-.button-input-primary {
-	background-color: #3577f0;
-	color: #fff
-}
-
-.button-input-primary:hover {
-	background-color: #000;
-	color: #fff
-}
-
-.button-black {
-	background-color: #eee;
-}
-
-.button-black::before {
-	background-color: #000
-}
-
-.button-black span {
-	color: #fff
-}
-
-.button-black:hover span {
-	color: #000
 }
 
 .button-grey {
@@ -461,6 +447,30 @@ h6,
 	color: #fff;
 }
 
+.button-white {
+	background-color: #fff;
+	border: 1px solid #fff;
+	color: #000;
+}
+
+.button-white span.icon{
+	background-color: var(--tc-secondary);
+}
+
+.button-white span.icon svg{
+	fill: #fff;
+}
+
+.button-white:hover span.icon{
+	background-color: #5d5d5d;
+}
+
+.button[disabled]{
+	opacity: 0.85;
+	pointer-events: none;
+	cursor: not-allowed;
+}
+
 .form-group {
 	margin-bottom: 16px
 }
@@ -489,6 +499,11 @@ h6,
 	-ms-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	outline: none
+}
+
+.form-control-custom:disabled, .form-control-custom[readonly] {
+    background-color: var(--gray-100);
+    opacity: 1;
 }
 
 .form-control-custom-sm {
@@ -539,6 +554,10 @@ h6,
 	background-repeat: no-repeat;
 	background-position: right 12px center;
 	cursor: pointer
+}
+
+.form-select-custom:disabled {
+    background-color: var(--gray-100);
 }
 
 .form-select-custom-sm{
@@ -669,8 +688,8 @@ h6,
 
 .card-footer{
 	border-top: 1px solid #ddd;
-	background-color: #fff;
-	padding: 8px 20px;
+	background-color: var(--bs-light);
+	padding: 8px 20px; 
 }
 
 .quantity-box{
@@ -700,7 +719,7 @@ h6,
 
 .quantity-box .btn-minus,
 .quantity-box .btn-pluse {
-	background-color: var(--bs-light);
+	background-color: var(--gray-300);
     height: 40px;
     width: 48px;
 	border-radius: 0;
@@ -725,10 +744,10 @@ h6,
 .quantity-box .btn-label{
 	height: 40px;
     padding: 0 12px;
-    border-left: 1px solid #ddd;
+    border-left: 2px solid var(--gray-400);
     border-radius: 0;
     font-size: 12px;
-    background-color: var(--bs-light);
+    background-color: var(--gray-300);
 }
 
 .info-icon{
@@ -827,5 +846,30 @@ h6,
 	  box-shadow: 0.2em -0.2em 0 0 currentcolor;
 	}
   }
+
+.door-designer-header{
+	padding: 10px 0;
+	background-color: var(--tc-secondary);
+	padding: 10px 0px;
+    background-color: var(--tc-secondary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+	border-bottom: 1px solid #eee;
+}
+
+.door-designer-header .logo img{
+	max-height: 50px;
+}
+
+.door-designer-header .logo
+{
+	display: inline-block;
+    background-color: #fff;
+    margin: -10px 0 -10px -0.75rem;
+    padding: 10px 10px;
+}
 
 /* Developer css Here */
