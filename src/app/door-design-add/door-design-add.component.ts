@@ -158,6 +158,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.getVisualizationModel();
     console.log("Click to Panel", item);
     console.log("visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();
   }
 
   // Select the model
@@ -188,6 +189,8 @@ export class DoorDesignAddComponent implements OnInit {
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
+
+    this.setVisualizeArrayValues();
   }
 
   selectColor(item: any) {
@@ -204,6 +207,7 @@ export class DoorDesignAddComponent implements OnInit {
     }
     console.log("Click to Color", item);
     console.log("this.visualizationSelection", this.visualizationSelection);
+    this.setVisualizeArrayValues();
   }
 
   generateImageWoodenColorImage(colorItem: any) {
