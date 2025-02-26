@@ -109,6 +109,7 @@ export class DoorDesignAddComponent implements OnInit {
   bgGlassImage = '';
   checkboxSelectedCount: number = 0;
   bgDefaultImage: string = '';
+  activeColumns: { [key: number]: boolean } = {}; // Track active state of checkbox ALL
   // ===  Visualize UI [Start] =====
 
   constructor(private utilsService: UtilsService) { }
@@ -159,6 +160,9 @@ export class DoorDesignAddComponent implements OnInit {
     console.log("Click to Panel", item);
     console.log("visualizationSelection", this.visualizationSelection);
     this.setVisualizeArrayValues();
+    this.doorModel = 0;
+    console.log('=====================================');
+    console.log(this.doorModel);
   }
 
   // Select the model
@@ -189,7 +193,8 @@ export class DoorDesignAddComponent implements OnInit {
 
     console.log("Click to Model", item);
     console.log("visualizationSelection", this.visualizationSelection);
-
+    console.log('&&&&&&&&&&&&&&&&&&&&&&');
+    console.log(this.doorModel);
     this.setVisualizeArrayValues();
   }
 
@@ -1123,6 +1128,8 @@ export class DoorDesignAddComponent implements OnInit {
 
   // To select all checkbox logic
   toggleColumnSelection(col: number) {
+    // Toggle the active class for the button selection
+    this.activeColumns[col] = !this.activeColumns[col];
     const allChecked = this.selectedBoxes.every(row => row[col]);
     this.selectedBoxes.forEach(row => row[col] = !allChecked);
     this.getSelectedCheckboxCount();
@@ -1176,9 +1183,11 @@ export class DoorDesignAddComponent implements OnInit {
     if (this.visualizationSelection['visualize_backGlassImage']) {
       this.bgGlassImage = this.visualizationSelection['visualize_backGlassImage'].toLowerCase();
     }
+    else { this.bgGlassImage = ''; }
     if (this.visualizationSelection['visualize_backWindowInsertImage']) {
       this.bgWindowInsertImage = this.visualizationSelection['visualize_backWindowInsertImage'].toLowerCase();
     }
+    else { this.bgWindowInsertImage = ''; }
 
     console.log('$$$$$$$$$$$$$$$$$$$$$$$$');
     console.log('bgWindowInsertImage', this.bgWindowInsertImage);

@@ -29,7 +29,7 @@
           <div class="summary">
             <!-- Door Visual Canvas -->
             <!-- if no design -->
-            <div class="visual-canvas-placeholder d-none">
+            <div class="visual-canvas-placeholder" [class.d-none]="doorModel > 0">
               <div class="inner d-flex flex-column align-items-center justify-content-center">
                 <div class="icon d-flex align-items-center justify-content-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -45,7 +45,7 @@
             <!-- End  if no design -->
 
             <!-- if design add visual canvas -->
-            <div class="design-main">
+            <div class="design-main d-none" [class.d-none]="doorModel === 0 || doorModel === undefined">
               <div class="visual-canvas">
                 <div class="canvas-scale">
                   <div class="scale-hr">
@@ -67,17 +67,17 @@
                   [style.--partition-line-color]="bgColor === '--' ? '#000' : bgColor">
                     <!-- Left Side (Display Boxes with Image) -->
                     <div class="cover-bg" [style.background-image]="'url(' + bgDefaultImage + ')'">
-                      <div class="grid-overlay" [style.--color-overlay]="bgColor === '--' ? '#000' : bgColor"></div>
+                      <div class="grid-overlay" [style.--color-overlay]="bgColor === '--' ? '#000' : bgColor" [class.d-none]="bgColor === '--'"></div>
                       <div class="main-grid">
                         <div class="column-grid" *ngFor="let row of grid; let rowIndex = index">
                           <div *ngFor="let cell of row; let colIndex = index" class="design-box">
                             <!-- [ngStyle]="bgColor === '--' ? {'background-image': 'url(' + bgImage + ')' } : {'background-color': bgColor}"> -->
                             <!-- <img *ngIf="selectedBoxes[rowIndex][colIndex]" src="{{repeatfilePath}}" alt="Selected" class="innerImg" /> -->
                             <img src="{{repeatfilePath}}" alt="Selected" class="frame-image" />
-                            <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                            <div *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0 && this.bgGlassImage && this.bgWindowInsertImage"
                               class="glass-image" style="background-image: url('{{bgGlassImage}}');">
                               <img src="{{bgWindowInsertImage}}"
-                                *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0"
+                                *ngIf="selectedBoxes[rowIndex][colIndex] && checkboxSelectedCount > 0 && this.bgGlassImage && this.bgWindowInsertImage"
                                 class="window-image" />
                             </div>
                           </div>
@@ -605,7 +605,10 @@
                 Windows
               </div>
               <div class="card-body">
-                <div class="windows-edit" style="--ds-hr-column: 4; --ds-vr-column: 4; --ds-grid-height: 65px;">
+                <div class="windows-edit" 
+                [style.--ds-grid-height.px]="65"
+                [style.--ds-hr-column]="colSize"
+                [style.--ds-vr-column]="rowSize">
                   <div class="row">
                     <div class="col-auto">
                       <div class="selectall-list">
@@ -619,7 +622,7 @@
                         <div class="grid-box" 
                             *ngFor="let cell of row; let colIndex = index"
                             [ngClass]="{'active': selectedBoxes[rowIndex][colIndex]}">
-                          <button *ngIf="rowIndex === 0" (click)="toggleColumnSelection(colIndex)" class="button button-block button-grey-200">
+                          <button *ngIf="rowIndex === 0" (click)="toggleColumnSelection(colIndex)" class="button button-block button-grey-200"  [class.active]="activeColumns[colIndex]">
                             <span>All</span>
                           </button>
                           <div class="checkbox">
