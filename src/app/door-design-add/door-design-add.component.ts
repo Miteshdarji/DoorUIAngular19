@@ -17,9 +17,9 @@ import { DoorSize } from '../../config/size.constant';
 export class DoorDesignAddComponent implements OnInit {
   DoorSizeList = DoorSize;
   doorQuantity: number = 1;
-  doorWidthFt: number = 8;
+  doorWidthFt: number = 0;
   doorWidthInch: number = 0;
-  doorHeightFt: number = 7;
+  doorHeightFt: number = 0;
   doorHeightInch: number = 0;
 
   doorCompanyList: any[] = [];
@@ -145,6 +145,9 @@ export class DoorDesignAddComponent implements OnInit {
 
   // Select the sub collection
   selectSubCollection(item: any) {
+    if (this.doorHeightFt == 0 || this.doorWidthFt == 0) {
+      return alert("Please select door size");
+    }
     this.doorSubCollection = item.doorSubCollectionId;
     this.getDoorPanels(item.doorSubCollectionId);
 
@@ -413,6 +416,7 @@ export class DoorDesignAddComponent implements OnInit {
       (selected_color_id == weatheredGrey) ? repeatedImage = "assets/images/woodenimg/garga/Weathered_Grey_Vog.png" : '';
     }
     this.visualizationSelection['visualize_backSelectedImage'] = repeatedImage;
+    console.log("visualizationSelection visualizationSelectionvisualizationSelectionvisualizationSelectionvisualizationSelection ==== ", this.visualizationSelection['visualize_backSelectedImage'].toLowerCase())
     // return repeatedImage;
   }
 
@@ -1025,7 +1029,7 @@ export class DoorDesignAddComponent implements OnInit {
     const data = this.dropdownData[optTypeId]?.find((element: any) => element.company_Operator_Id == event.target.value);
     this.dropdownDataPricingData[optTypeId] = data?.company_Operator_Sale_Price;
     this.railOperatorDataPricingData[optTypeId] = 0;
-    this.selectedDetails[optTypeId] = data?.company_Operator_Type_Name + '/'+ data?.company_Operator_Name;
+    this.selectedDetails[optTypeId] = data?.company_Operator_Type_Name + '/' + data?.company_Operator_Name;
     this.getCompanyOperatorRailByTypeId(optTypeId, event.target.value);
     this.calculatePrice();
   }
@@ -1040,7 +1044,10 @@ export class DoorDesignAddComponent implements OnInit {
 
   // Get selected Item values and details
   selectedOperator() {
-    const operatorSum: any = Object.values(this.selectedDetails).reduce((total: any, value: any) => total + ' , ' + value, '');
+    const operatorSum = Object.values(this.selectedDetails)
+      .filter(value => value != null && value !== '')  // Filter out null, undefined, or empty strings
+      .join(' , ');  // Join with a comma and space
+
     return operatorSum;
   }
 
@@ -1056,7 +1063,17 @@ export class DoorDesignAddComponent implements OnInit {
     const panelInfo = this.doorPanelList.find((element) => element.doorPanelId == this.doorPanel);
     const modelInfo = this.doorModelList.find((element) => element.doorModelId == this.doorModel);
     const colorInfo = this.doorColorList.find((element) => element.doorColorId == this.doorColor);
-    return collectionInfo?.doorCollectionName + ' ' + familyInfo?.doorSubCollectionName + ' ' + panelInfo?.doorPanelName + ' ' + modelInfo?.doorModelName + ' ' + colorInfo?.doorColorAliasName
+
+    const parts = [
+      collectionInfo?.doorCollectionName,
+      familyInfo?.doorSubCollectionName,
+      panelInfo?.doorPanelDescription,
+      modelInfo?.doorModelName,
+      colorInfo?.doorColorAliasName
+    ];
+
+    // Filter out undefined or null and join the remaining parts with a space
+    return parts.filter(part => part != null && part !== '').join(' ');
   }
 
   getSpringInfo() {
@@ -1174,8 +1191,10 @@ export class DoorDesignAddComponent implements OnInit {
         this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
       }
     }
-    if (this.visualizationSelection['visualize_backRepeatImage']) {
+    if (this.visualizationSelection['visualize_backRepeatImage'] && this.visualizationSelection['visualize_backSelectedColor'] !== '--') {
       this.repeatfilePath = this.visualizationSelection['visualize_backRepeatImage'].toLowerCase();
+    } else {
+      this.repeatfilePath = this.visualizationSelection['visualize_backSelectedImage'].toLowerCase();
     }
     if (this.visualizationSelection['visualize_noOfSections']) {
 

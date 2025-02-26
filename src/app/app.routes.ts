@@ -6,7 +6,7 @@ import { DoorMasterQuoteComponent } from './door-master-quote/door-master-quote.
 import { CustomerQuoteComponent } from './customer-quote/customer-quote.component';
 import { PullSheetComponent } from './pull-sheet/pull-sheet.component';
 export const routes: Routes = [
-    { path: '', redirectTo: 'door-design-list', pathMatch: 'full' },
+    { path: '', redirectTo: 'door-design-add', pathMatch: 'full' },
     { path: 'door-design-list', component: DoorDesignListComponent },
     { path: 'door-design-add', component: DoorDesignAddComponent },
     { path: 'door-design-edit/:id', component: DoorDesignEditComponent },
