@@ -19,6 +19,7 @@ body {
 	font-weight: 400;
 	letter-spacing: 0px;
 	overflow-x: hidden;
+	overflow-y: hidden;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: antialiased
 }
@@ -375,10 +376,27 @@ h6,
 	height: 35px;
     width: 35px;
     border-radius: 100px;
+	position: relative;
 }
 
 .button-icon span.icon svg{
 	height: 15px;
+}
+
+.button-icon span.icon em.qty{
+	position: absolute;
+    top: -2px;
+    right: -5px;
+    background-color: var(--bs-danger);
+    width: 17px;
+    height: 17px;
+    border-radius: 100px;
+    color: #fff;
+    font-style: normal;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-check-icon::before{
@@ -507,9 +525,9 @@ h6,
 }
 
 .form-control-custom-sm {
-	padding: 5px 10px;
-	height: 35px;
-	font-size: 14px;
+	padding: 3px 8px;
+	height: 30px;
+	font-size: 12px;
 }
 
 .form-control-custom::-webkit-input-placeholder {
@@ -666,6 +684,10 @@ h6,
 	margin-right: 0
 }
 
+.container-fluid{
+	max-width: 1920px;
+}
+
 .card{
 	border-radius: 3px;
 	border: 1px solid #ddd;
@@ -688,8 +710,9 @@ h6,
 
 .card-footer{
 	border-top: 1px solid #ddd;
-	background-color: var(--bs-light);
-	padding: 8px 20px; 
+	background-color: var(--bs-success-bg-subtle);
+	padding: 5px 20px;
+    border-radius: 0 !important;
 }
 
 .quantity-box{
@@ -699,6 +722,7 @@ h6,
 	border: 1px solid #ddd;
 	border-radius: 3px;
 	overflow: hidden;
+	max-width: 220px;
 }
 
 .quantity-box .form-control-custom{
@@ -868,8 +892,15 @@ h6,
 {
 	display: inline-block;
     background-color: #fff;
-    margin: -10px 0 -10px -0.75rem;
+    margin-top: -10px;
+    margin-bottom: -10px;
     padding: 10px 10px;
+}
+
+@media screen and (max-width: 1920px){
+	.door-designer-header .logo{
+		margin-left: -0.75rem;
+	}
 }
 
 /* Developer css Here */

@@ -4,8 +4,14 @@
   padding-bottom: 20px;
 }
 
+.door-designer-tool .col-leftbar{
+  max-width: 470px;
+}
+
 .door-designer-tool .leftbar{
   border: 1px solid #ddd;
+  position: sticky;
+  top: 90px;
 }
 
 .door-designer-tool .section-title h2{
@@ -16,11 +22,17 @@
   color: #fff;
 }
 
+.door-designer-tool .summary{
+  max-height: calc(100vh - 110px - 51px);
+  overflow-y: auto;
+}
+
 .door-designer-tool .summary .visual-canvas-placeholder{
   background-color: #fcfcfc;
   border: 1px solid #eee;
   border-radius: 3px;
   padding: 20px;
+  margin: 20px 15px;
 }
 
 .door-designer-tool .summary .visual-canvas-placeholder .inner{
@@ -259,7 +271,7 @@
 .door-designer-tool .summary .estimate-quote{
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-  padding: 15px 20px;
+  padding: 15px 15px;
 }
 
 .door-designer-tool .summary .estimate-quote .title{
@@ -287,7 +299,7 @@
 }
 
 .door-designer-tool .summary .main-info{
-  padding: 10px 20px;
+  padding: 10px 15px;
   /* height: 200px; */
   overflow-y: auto;
 }
@@ -318,10 +330,14 @@
 
 .door-designer-tool .right-part{
   border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
 .door-designer-tool .designer{
-  padding: 20px;
+  padding: 15px 10px 15px 15px;
+  max-height: calc(100vh - 110px - 51px);
+  overflow-y: auto;
 }
 
 .door-designer-tool .designer .info-text{
@@ -722,6 +738,7 @@
 
 .door-designer-tool .designer .additional-discount .col-form-label{
   font-size: 14px;
+  color: var(--bs-success-text-emphasis);
 }
 
 .door-designer-tool .designer .additional-discount .input-group .form-control-custom{
@@ -743,7 +760,7 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   padding: 0 0.75rem;
-  font-size: 14px;
+  font-size: 12px;
   border: 1px solid #ddd;
   background-color: var(--bs-light);
 } 
