@@ -186,7 +186,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    padding: 5px 10px;
+    padding: 10px 10px;
     position: relative;
 }
 
@@ -201,6 +201,7 @@
   display: grid;
   grid-template-rows: repeat(var(--vr-column), 1fr);
   /* height: var(--visualization-height); */
+  gap: 5px 0px;
 }
 
 .door-designer-tool .summary .visual-canvas .visualization-main .design-box {
@@ -209,14 +210,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 0;
+  margin: 2px 0;
 }
 
 .door-designer-tool .summary .visual-canvas .visualization-main .design-box:after{
   content: "";
   position: absolute;
   left: -10px;
-  bottom: 0;
+  bottom: -4px;
   width: calc(100% + 20px);
   height: 0.5px;
   background-color: var(--partition-line-color);
@@ -284,13 +285,12 @@
   height: 35px;
   width: 35px;
   border-radius: 100px;
-  background-color: #fcfcfc;
-  border: 1px solid #eee;
-  color: #fff;
+  background-color: var(--bs-danger);
 }
 
 .door-designer-tool .summary .estimate-quote .title .icon svg{
   height: 18px;
+  fill: #fff;
 }
 
 .door-designer-tool .summary .estimate-quote .price{
@@ -411,9 +411,15 @@
 
 }
 
+.door-designer-tool .designer .item-box .box-select .price span{
+  margin: 0 1px;
+}
+
 .door-designer-tool .designer .item-box.active .box-select .price{
   background-color: #fff;
 }
+
+
 
 
 .door-designer-tool .designer .model-box{
@@ -653,6 +659,7 @@
     cursor: pointer;
     background-color: #fff;
     position: relative;
+    margin-bottom: -2px;
 }
 
 .door-designer-tool .designer .windows-edit .design-grid .grid-box .button{
@@ -715,10 +722,6 @@
    background-color: var(--bs-light);
 }
 
-.door-designer-tool .designer .windows-edit .design-grid .grid-box:not(:last-child){
-  border-bottom: none;
-}
-
 .door-designer-tool .designer .selected-quantity{
   padding: 12px 15px;
   border: 1px solid #ddd;
@@ -779,79 +782,28 @@
   border-top: 1px solid #ddd;
 }
 
-/* .door-designer-tool .designer .windows-edit .editable-box {
-  width: 100px;
-  height: 100px;
-  border: 1px solid #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-} */
-
-/* Mitesh Code */
-
-.grid-controls {
-  margin-bottom: 15px;
-  text-align: center;
+.door-designer-tool .designer .list-clear{
+  margin-top: 5px;
 }
 
-/* .grid {
-  display: grid;
-  gap: 1px;
-  align-items: center;
-  justify-content: center;
-} */
-
-
-
-
-
-.checkmark {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-}
-
-/* Ensure both left and right grids have equal width */
-.left-grid{
-  display: grid;
-  grid-template-columns: repeat(var(--columns), 100px);
-}
-
-
-
-/* Mitesh Darji */
-
-
-/* for checkbox all logic */
-.check-all-btn {
-  position: absolute;
-  top: 50px;
-  /* left: 50%; */
-  transform: translateX(-50%);
-  background: none;
-  /* border: none; */
-  font-size: 18px;
+.door-designer-tool .designer .list-clear span{
+  font-size: 14px;
   cursor: pointer;
-  color: black;             /* Black text */
-  margin-left: -100px;
-  background-color: green;  /* Green background */
-  border: 1px solid lightgray; /* Light border */
-  padding: 5px 10px;        /* Some padding */
-  cursor: pointer;          /* Pointer on hover */
-  border-radius: 4px;       /* Slightly rounded corners */
-  .check-all-btn:hover {
-    background-color: lightgreen; /* Darker green on hover */
-  }
 }
 
-.background-div {
-  width: 50%;
-  height: 50%;
-  background-size: cover;
-  background-position: center;
+.door-designer-tool .designer .family-list .item-col,
+.door-designer-tool .designer .door-lock-list .item-col{
+   width: 170px;
 }
+
+.door-designer-tool .designer .panel-list .item-col{
+  width: 200px;
+}
+
+.door-designer-tool .designer .glass-list .item-col,
+.door-designer-tool .designer .window-insert-list .item-col{
+  width: 130px;
+}
+
+
+
