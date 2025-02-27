@@ -28,8 +28,8 @@
 }
 
 .door-designer-tool .summary .visual-canvas-placeholder{
-  background-color: #fcfcfc;
-  border: 1px solid #eee;
+  background-color: var(--bs-light);
+  border: 1px solid #ddd;
   border-radius: 3px;
   padding: 20px;
   margin: 20px 15px;
@@ -285,12 +285,13 @@
   height: 35px;
   width: 35px;
   border-radius: 100px;
-  background-color: var(--bs-danger);
+  background-color: var(--bs-light);
+  border: 1px solid #ddd;
 }
 
 .door-designer-tool .summary .estimate-quote .title .icon svg{
   height: 18px;
-  fill: #fff;
+  fill: var(--bs-danger);
 }
 
 .door-designer-tool .summary .estimate-quote .price{
@@ -784,11 +785,22 @@
 
 .door-designer-tool .designer .list-clear{
   margin-top: 5px;
+  
 }
 
 .door-designer-tool .designer .list-clear span{
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
+  background-color: var(--bs-danger);
+  color: #fff;
+  padding: 4px 5px;
+  display: inline-block;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.door-designer-tool .designer .list-clear span:hover{
+  background-color: var(--bs-red);
 }
 
 .door-designer-tool .designer .family-list .item-col,
