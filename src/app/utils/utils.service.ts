@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,12 @@ export class UtilsService {
   // Function to be used authenticate the user
   authentication(): Observable<any> {
     const payload = { "userName": "sap.dhaval@gmail.com", "password": "Tdhaval@74" }
-    return this.http.post(this.apiUrl + 'Account/Authenticate', payload);
+    const headers = new HttpHeaders({
+      'Content-Type': '*',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*'
+    });
+    return this.http.post(this.apiUrl + 'Account/Authenticate', payload, { headers });
   }
 
   // Function to be used fot setting login user details

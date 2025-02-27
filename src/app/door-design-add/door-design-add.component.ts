@@ -126,7 +126,9 @@ export class DoorDesignAddComponent implements OnInit {
   }
 
   calculatePrice() {
-    const price = this.priceDetails.colorPrice + this.priceDetails.glassPrice + this.priceDetails.insertPrice + this.priceDetails.springCyclePrice + this.priceDetails.strutPrice + this.priceDetails.trackPrice + this.priceDetails.trackLHRPrice + this.priceDetails.upgradTackPrice + this.priceDetails.roofpitchPrice + this.priceDetails.sealPrice + this.priceDetails.lockPrice;
+    const glassPrice = this.checkboxSelectedCount == 0 ? 0 : (Number(this.checkboxSelectedCount) * this.priceDetails.glassPrice);
+    const insertPrice = this.checkboxSelectedCount == 0 ? 0 : (Number(this.checkboxSelectedCount) * this.priceDetails.insertPrice);
+    const price = this.priceDetails.colorPrice + glassPrice + insertPrice + this.priceDetails.springCyclePrice + this.priceDetails.strutPrice + this.priceDetails.trackPrice + this.priceDetails.trackLHRPrice + this.priceDetails.upgradTackPrice + this.priceDetails.roofpitchPrice + this.priceDetails.sealPrice + this.priceDetails.lockPrice;
 
     const operatorSum: any = Object.values(this.dropdownDataPricingData).reduce((total: any, value: any) => Number(total) + Number(value), 0);
     const railTotal: any = Object.values(this.railOperatorDataPricingData).reduce((total: any, value: any) => Number(total) + Number(value), 0);
@@ -141,6 +143,13 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorWidthInch = widthInch;
     this.doorHeightFt = heightFt;
     this.doorHeightInch = heightInch;
+  }
+
+  getRanking(ranking: string) {
+    if (!ranking || ranking == '0') {
+      return 0;
+    }
+    return Number(ranking);
   }
 
   // Select the sub collection
@@ -207,6 +216,9 @@ export class DoorDesignAddComponent implements OnInit {
     this.visualizationSelection['visualize_noOfSections'] = item?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = item?.noOfSectionDetail?.length;
     this.priceDetails.colorPrice = item?.doorSalePrice;
+    if(this.doorWindowInsertSubCategory) {
+      this.visualizationSelection['visualize_backWindowInsertImage'] = this.generateWindowImagePath();
+    }
     if (item?.colorCode?.length < 6) {
       this.visualizationSelection['visualize_backSelectedColor'] = "--";
       this.generateImageWoodenColorImage(item);
@@ -628,10 +640,20 @@ export class DoorDesignAddComponent implements OnInit {
     })
   }
 
+  changeCompany() {
+    this.getDoorCollection();
+  }
+
+  changeDoorType() {
+    this.getDoorCollection();
+  }
+
   getDoorCollection() {
+    this.doorCollectionList = [];
+    this.doorCollection = 0;
     this.utilsService.getDoorCollection(this.doorType, this.doorCompany).subscribe((data: any) => {
       this.doorCollectionList = data?.payload;
-      this.doorCollection = this.doorCollectionList[0]?.doorCollectionId;
+      this.doorCollection = this.doorCollectionList?.[0]?.doorCollectionId;
       this.getDoorSubCollection(this.doorCollection);
     }, (error) => {
       console.error('Error During door typeOfDoorsList :', error);
@@ -1129,8 +1151,8 @@ export class DoorDesignAddComponent implements OnInit {
     }
 
     // Reset all checkboxes and active columns
-  this.selectedBoxes = this.grid.map(row => row.map(() => false));
-  this.activeColumns = new Array(this.rowSize).fill(false); // Ensure no "All" button is active
+    this.selectedBoxes = this.grid.map(row => row.map(() => false));
+    this.activeColumns = new Array(this.rowSize).fill(false); // Ensure no "All" button is active
   }
 
   onCheckboxChange(row: number, col: number, event: Event) {
@@ -1141,7 +1163,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.selectedBoxes[row][col] = (event.target as HTMLInputElement).checked;
     // Check if all checkboxes in the column are selected
     const allChecked = this.selectedBoxes.every(row => row[col]);
-  
+
     // Update activeColumns array
     this.activeColumns[col] = allChecked;
     this.getSelectedCheckboxCount();
@@ -1161,7 +1183,7 @@ export class DoorDesignAddComponent implements OnInit {
     this.activeColumns[col] = !this.activeColumns[col];
     const allChecked = this.selectedBoxes.every(row => row[col]);
     console.log('AAAAAAAAAA')
-    console.log('Active Column',this.activeColumns[col]);
+    console.log('Active Column', this.activeColumns[col]);
     console.log(this.selectedBoxes);
     this.selectedBoxes.forEach(row => row[col] = !allChecked);
     this.getSelectedCheckboxCount();
@@ -1200,7 +1222,11 @@ export class DoorDesignAddComponent implements OnInit {
         this.bgDefaultImage = this.visualizationSelection['visualize_backSelectedImage'].toLowerCase();
       }
       else {
-        this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
+        if(this.doorSubCollection == 3) {
+          this.bgDefaultImage = 'assets/images/bg_img_fcfcfc.png';
+        } else {
+          this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
+        }
       }
     }
     if (this.visualizationSelection['visualize_backRepeatImage'] && this.visualizationSelection['visualize_backSelectedColor'] !== '--') {

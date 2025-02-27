@@ -268,8 +268,8 @@
                     <div class="form-group mb-0">
                       <label for="dropdown" class="form-label">Door Company </label>
                       <select id="dropdown" class="form-select-custom" aria-label="Default select example"
-                        [(ngModel)]="doorCompany">
-                        <option *ngFor="let item of doorCompanyList" [ngValue]="item.doorCompanyId"
+                        [(ngModel)]="doorCompany" (change)="changeCompany()">
+                        <option *ngFor="let item of doorCompanyList" [value]="item.doorCompanyId"
                           [disable]="item.doorCompanyName == 'Safeway'">
                           {{ item.doorCompanyName }}
                         </option>
@@ -280,7 +280,7 @@
                     <div class="form-group mb-0">
                       <label for="dropdown" class="form-label">Types of Doors </label>
                       <select id="dropdown" class="form-select-custom" aria-label="Default select example"
-                        [(ngModel)]="doorType">
+                        [(ngModel)]="doorType" (change)="changeDoorType()">
                         <option *ngFor="let item of typeOfDoorsList" [value]="item.doorTypeId">
                           {{ item.doorTypeName }}
                         </option>
@@ -527,7 +527,7 @@
                               <div class="box-label">
                                 <span>{{item?.quality}}</span>
                               </div>
-                              <div class="star-rating" data-rating="3">
+                              <div class="star-rating" [attr.data-rating]="getRanking(item?.ranking)">
                                 <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"
                                   xmlns:xlink="http://www.w3.org/1999/xlink">
                                   <defs>
