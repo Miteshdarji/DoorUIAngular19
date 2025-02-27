@@ -199,6 +199,7 @@ export class DoorDesignAddComponent implements OnInit {
     console.log('&&&&&&&&&&&&&&&&&&&&&&');
     console.log(this.doorModel);
     this.setVisualizeArrayValues();
+    this.initializeGrid();
   }
 
   selectColor(item: any) {
@@ -1126,12 +1127,23 @@ export class DoorDesignAddComponent implements OnInit {
         this.selectedBoxes[i][j] = false; // Default unchecked
       }
     }
+
+    // Reset all checkboxes and active columns
+  this.selectedBoxes = this.grid.map(row => row.map(() => false));
+  this.activeColumns = new Array(this.rowSize).fill(false); // Ensure no "All" button is active
   }
 
   onCheckboxChange(row: number, col: number, event: Event) {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
+    // const isChecked = (event.target as HTMLInputElement).checked;
+    // this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
     //console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
+    //this.activeColumns[col] = allChecked;
+    this.selectedBoxes[row][col] = (event.target as HTMLInputElement).checked;
+    // Check if all checkboxes in the column are selected
+    const allChecked = this.selectedBoxes.every(row => row[col]);
+  
+    // Update activeColumns array
+    this.activeColumns[col] = allChecked;
     this.getSelectedCheckboxCount();
     console.log('Count', this.getSelectedCheckboxCount())
   }
@@ -1148,6 +1160,9 @@ export class DoorDesignAddComponent implements OnInit {
     // Toggle the active class for the button selection
     this.activeColumns[col] = !this.activeColumns[col];
     const allChecked = this.selectedBoxes.every(row => row[col]);
+    console.log('AAAAAAAAAA')
+    console.log('Active Column',this.activeColumns[col]);
+    console.log(this.selectedBoxes);
     this.selectedBoxes.forEach(row => row[col] = !allChecked);
     this.getSelectedCheckboxCount();
   }
@@ -1173,9 +1188,6 @@ export class DoorDesignAddComponent implements OnInit {
       if (this.visualizationSelection['visualize_backSelectedColor'] == '--') {
         this.bgImage = this.visualizationSelection['visualize_backSelectedImage'];
         this.bgColor = '--';
-        // console.log('Mitesh IF Condition :::');
-        // console.log(this.bgImage);
-        // console.log(this.bgColor);
       }
       else {
         this.bgColor = this.visualizationSelection['visualize_backSelectedColor'];
@@ -1208,18 +1220,7 @@ export class DoorDesignAddComponent implements OnInit {
     }
     else { this.bgWindowInsertImage = ''; }
 
-    console.log('$$$$$$$$$$$$$$$$$$$$$$$$');
-    console.log('bgWindowInsertImage', this.bgWindowInsertImage);
-    console.log('repeatfilePath', this.repeatfilePath);
-    // console.log('%%%%%%%%%%%%%%');
-    // console.log(this.rowSize);
-    // console.log(this.colSize);
-    // console.log(this.bgColor);
-    // console.log(this.repeatfilePath);
-
-    this.initializeGrid();
-    // console.log(this.bgColor == '--')
-    // console.log('Final Image:',this.getBackgroundStyle());
+    //this.initializeGrid();
   }
   // Mitesh Code End
 }
