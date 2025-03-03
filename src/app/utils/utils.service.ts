@@ -13,12 +13,17 @@ export class UtilsService {
   // Function to be used authenticate the user
   authentication(): Observable<any> {
     const payload = { "userName": "sap.dhaval@gmail.com", "password": "Tdhaval@74" }
-    const headers = new HttpHeaders({
-      'Content-Type': '*',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*'
-    });
-    return this.http.post(this.apiUrl + 'Account/Authenticate', payload, { headers });
+    return this.http.post(this.apiUrl + 'Account/Authenticate', payload);
+  }
+
+  getExistingQuoteId(): Observable<any> {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + 'CustomerQuotation/GetUserWiseCustomerQuotationId', { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  getCartCount(quoteId: any): Observable<any> {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `CustomerQuotationAll/CustomerQuotationAllItemsWiseByQuotationId?QuotationId=${quoteId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
   // Function to be used fot setting login user details
@@ -155,22 +160,22 @@ export class UtilsService {
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationTrackType?DoorTypeId=${doorType}`, {}, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getVisulizationTrackPrice(payload : any) {
+  getVisulizationTrackPrice(payload: any) {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationTrackPrice`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getVisulizationUpgradeTrackPrice(payload : any) {
+  getVisulizationUpgradeTrackPrice(payload: any) {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationUpgradeTrackPrice`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getVisulizationPriceLHR(payload : any) {
+  getVisulizationPriceLHR(payload: any) {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationPriceLHR`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getVisulizationPriceRoofPitch(payload : any) {
+  getVisulizationPriceRoofPitch(payload: any) {
     const token = this.getLoginUserToken();
     return this.http.post(this.apiUrl + `DoorVisulization/GetVisulizationPriceRoofPitch`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
@@ -185,13 +190,23 @@ export class UtilsService {
     return this.http.get(this.apiUrl + `CompanyOperatorType/CompanyOperatorType`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getCompanyOperatorByTypeId(operatorId : any) {
+  getCompanyOperatorByTypeId(operatorId: any) {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `CompanyOperator/CompanyOperatorByTypeId?CompanyOperatorTypeId=${operatorId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  getCompanyOperatorRailByTypeId(operatorId : any) {
+  getCompanyOperatorRailByTypeId(operatorId: any) {
     const token = this.getLoginUserToken();
     return this.http.get(this.apiUrl + `CompanyOperatorRail/CompanyOperatorRailByTypeId?CompanyOperatorId=${operatorId}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  generateDoorMasterQuote(payload: any) {
+    const token = this.getLoginUserToken();
+    return this.http.post(this.apiUrl + `CustomerQuotationAll/AddOrUpdateCustomerQuotationAll`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
+  }
+
+  resellerDetailedQuotationAllByQuotationId(quotationID: any) {
+    const token = this.getLoginUserToken();
+    return this.http.get(this.apiUrl + `CustomerQuotationAll/ResellerDetailedQuotationAllByQuotationId?QuotationId=${quotationID}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 }

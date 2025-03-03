@@ -3,6 +3,7 @@ import { UtilsService } from '../utils/utils.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DoorSize } from '../../config/size.constant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-door-design-add',
@@ -113,17 +114,20 @@ export class DoorDesignAddComponent implements OnInit {
   seqList: any[] = [];
   // ===  Visualize UI [Start] =====
 
-  constructor(private utilsService: UtilsService) { }
+  constructor(
+    private utilsService: UtilsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.authentication();
-    setTimeout(() => {
-      this.getDoorCompany();
-      this.getTypeOfDoors();
-    }, 1000);
-    setTimeout(() => {
-      this.getDoorCollection();
-    }, 3000);
+    // setTimeout(() => {
+    //   this.getDoorCompany();
+    //   this.getTypeOfDoors();
+    // }, 1000);
+    // setTimeout(() => {
+    //   this.getDoorCollection();
+    // }, 3000);
   }
 
   calculatePrice() {
@@ -170,12 +174,8 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorPanel = item?.doorPanelId;
     this.visualizationSelection['visualize_backRepeatImage'] = item?.repeatfilePath;
     this.getVisualizationModel();
-    console.log("Click to Panel", item);
-    console.log("visualizationSelection", this.visualizationSelection);
     this.setVisualizeArrayValues();
     this.doorModel = 0;
-    console.log('=====================================');
-    console.log(this.doorModel);
   }
 
   // Select the model
@@ -203,21 +203,18 @@ export class DoorDesignAddComponent implements OnInit {
     this.getVisulizationTrackType();
     this.getDoorLock();
     this.getCompanyOperatorType();
-
-    console.log("Click to Model", item);
-    console.log("visualizationSelection", this.visualizationSelection);
-    console.log('&&&&&&&&&&&&&&&&&&&&&&');
-    console.log(this.doorModel);
     this.setVisualizeArrayValues();
     this.initializeGrid();
   }
 
+  colorPriceId!: number;
   selectColor(item: any) {
     this.doorColor = item?.doorColorId;
+    this.colorPriceId = item?.priceId;
     this.visualizationSelection['visualize_noOfSections'] = item?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = item?.noOfSectionDetail?.length;
     this.priceDetails.colorPrice = item?.doorSalePrice;
-    if(this.doorWindowInsertSubCategory) {
+    if (this.doorWindowInsertSubCategory) {
       this.visualizationSelection['visualize_backWindowInsertImage'] = this.generateWindowImagePath();
     }
     if (item?.colorCode?.length < 6) {
@@ -616,6 +613,12 @@ export class DoorDesignAddComponent implements OnInit {
   authentication() {
     this.utilsService.authentication().subscribe((data) => {
       this.utilsService.setLocalStorage(data?.payload);
+      this.getExistingQuoteId();
+      this.getDoorCompany();
+      this.getTypeOfDoors();
+      setTimeout(() => {
+        this.getDoorCollection();
+      }, 2000);
     }, (error) => {
       console.error('Error During Authentication :', error);
     }
@@ -890,6 +893,8 @@ export class DoorDesignAddComponent implements OnInit {
   doorTrackType!: number;
   doorTrackTypePriceList: any[] = [];
   doorTrackPrice!: number;
+  trackCategoryId!: number;
+  trackJambMaterialId!: number;
 
   getVisulizationTrackType() {
     this.utilsService.getVisulizationTrackType(this.doorType).subscribe((data: any) => {
@@ -921,6 +926,8 @@ export class DoorDesignAddComponent implements OnInit {
 
   selectTrackPrice(item: any) {
     this.doorTrackPrice = item?.trackPriceId;
+    this.trackCategoryId = item?.trackCategoryId;
+    this.trackJambMaterialId = item?.trackJambMaterialId;
     this.priceDetails.trackPrice = item?.salesPrice;
     this.getVisulizationUpgradeTrackPrice();
     this.getVisulizationPriceRoofPitch();
@@ -1065,6 +1072,186 @@ export class DoorDesignAddComponent implements OnInit {
     this.calculatePrice();
   }
 
+
+  customerId: any;
+
+  viewCartButton: boolean = false;
+  cartCount: number = 0;
+  existingQuoteId: any;
+
+  // Function to be used for getting existing quotation ID
+  getExistingQuoteId() {
+    this.utilsService.getExistingQuoteId().subscribe((respone) => {
+      if (respone?.payload) {
+        this.viewCartButton = true;
+        this.getCartCount(respone?.payload?.id);
+        this.existingQuoteId = respone?.payload?.id;
+      }
+    });
+  }
+
+  getCartCount(id: any) {
+    this.utilsService.getCartCount(id).subscribe((respone) => {
+      if (respone?.payload) {
+        const quotationData = respone?.payload || [];
+        this.cartCount = quotationData.length;
+      }
+    });
+  }
+
+  // Save quotation functionality
+  saveQuote() {
+    // windowGlassModel payload
+    let windowGlassModel: any = [];
+    // new code for windowGlassModel
+    // let seqList = localStorage.getItem('seqList')
+    let seqList: any = [
+      { seqNumber: 1, selectedWindow: [0, 1, 2, 3] }
+    ];
+
+    if (seqList) {
+      const parsedData: any = seqList;
+      if (parsedData && parsedData.length) {
+        parsedData.forEach((seq: any, index: any) => {
+          seq.selectedWindow.forEach(() => {
+            let glazingobj = { "quotationItemId": 0, "windowGlassId": this.doorWindowGlassSubCategory, "seqNo": seq.seqNumber, "statusFlag": "Y" }
+            windowGlassModel.push(glazingobj);
+          });
+        });
+      }
+    }
+
+    // windowInsertModel pyload
+    let windowInsertModel = [];
+    for (let i = 0; i < this.checkboxSelectedCount; i++) {
+      let windowobj = { "quotationItemId": 0, "windowInsertId": this.doorWindowInsertSubCategory, "statusFlag": "Y" }
+      windowInsertModel.push(windowobj);
+    };
+
+    // Operator models
+    let companyOperatorTypesModel: any = [];
+    // document.querySelectorAll('#doorOperator .door_operator_col_inr.selected').forEach(e => {
+    //   let operatorcompanyobj = `{"quotationItemId": 0, "statusFlag" : "Y", "companyOperatorTypeId": ${Number(e.getAttribute('companyoperatortypeid'))}}`;
+    //   companyOperatorTypesModel.push(operatorcompanyobj);
+    // });
+
+    let companyOperatorsModel: any = [];
+    // companyOperatorTypesModel?.forEach((obj : any) => {
+    //   const railindex = JSON.parse(obj).companyOperatorTypeId - 1
+    //   const { doorOperatorId, railOperatorId } = getSelectedInfo(railindex);
+    //   if (doorOperatorId) {
+    //     let operatormodel = `{ "quotationItemId": 0, "railOperatorId": ${railOperatorId}, "companyOperatorId": ${doorOperatorId}, "statusFlag" : "Y" },`;
+    //     companyOperatorsModel.push(operatormodel);
+    //   }
+    // })
+
+    const payload = {
+      "quotationId": this.existingQuoteId || 0,
+      "customerId": this.customerId || 41,
+      "vendorId": null,
+      "companyId": 1,
+      "QuotationFor": "SECTION_DOOR",
+      "quotationNumber": 0,
+      "quotationSerialNumber": 0,
+      "quotationDate": "",
+      "quotationValidDays": 30,
+      "statusFlag": "Y",
+      "quotationStatusId": 1,
+      "quotationItemId": 0, // While edit need to add itemId,
+      "doorTypeID": this.doorType,
+      "doorQuantity": this.doorQuantity,
+      "doorCompanyId": this.doorCompany,
+      "doorHeight": this.doorHeightFt,
+      "doorWidth": this.doorWidthFt,
+      "doorCollectionId": this.doorCollection,
+      "doorSubCollectionId": this.doorSubCollection,
+      "doorPanelId": this.doorPanel,
+      "doorModelId": this.doorModel,
+      "doorColorId": this.doorColor,
+      "windowQuantity": this.checkboxSelectedCount,
+      "windowGlassTypeId": this.doorWindowGlassCategory,
+      "windowGlassModel": windowGlassModel, // need to check
+      "windowInsertModel": windowInsertModel,
+      "springCategoryTypeId": this.doorSpringCategoryType || null,
+      "springCategoryId": this.doorSpringCategory || null,
+      "doorSealTypeId": this.doorSealCategoryType || null,
+      "doorLockId": this.doorLock || null,
+      "companyOperatorTypesModel": companyOperatorTypesModel,  // need to check
+      "companyOperatorsModel": companyOperatorsModel,  // need to check
+      "strutCategoryTypeId": this.doorStrutCategoryType || null,
+      "strutCategoryId": this.doorStrutsType || null,
+      "extraStrutQuantity": 0, // NEED TO CHECK,
+      "strutPriceId": this.getstrutPriceId(),
+      "quotationStatus": "New Quotation",
+      "strutUpgradePriceId": null, // NEED TO CHECK,
+      "trackTypeId": this.doorTrackType || null,
+      "trackCategoryId": this.trackCategoryId || null,
+      "trackPriceId": this.doorTrackPrice || null,
+      "trackJambMaterialId": this.trackJambMaterialId || null,
+      "trackUpdatePriceId": this.doorUpgradTrack || null,
+      "highLift": this.trackHighlift || null,
+      "roofPitch": this.selectedDoorTrackRoofPitch || null,
+      "fullVert": null, // NEED TO CHECK,
+      "colorMultiplayer": 1, // NEED TO CHECK
+      "glassMultiplayer": 1, // NEED TO CHECK
+      "insertsMultiplayer": 1, // NEED TO CHECK
+      "springMultiplayer": 1, // NEED TO CHECK
+      "strutMultiplayer": 1, // NEED TO CHECK
+      "trackMultiplayer": 1, // NEED TO CHECK
+      "sealMultiplayer": 1, // NEED TO CHECK
+      "doorlockMultiplayer": 1, // NEED TO CHECK
+      "doorOperatorMultiplayer": 1, // NEED TO CHECK
+      "doorRailMultiplayer": 1, // NEED TO CHECK
+      "perforatedAngleId": null, // NEED TO CHECK,
+      "torsionTubeId": null, // NEED TO CHECK
+      "hardwareBoxId": null, // NEED TO CHECK
+      "priceID": this.colorPriceId || null,
+      "springPriceID": this.visualizationSpringDetails?.springPriceId || null,
+      "doorSealCategoryId": this.selectedSealCategory || null,
+      "perforatedMultiplayer": 1,
+      "hardwareboxMultiplayer": 1,
+      "torsionMultiplayer": 1,
+      "doorImage": null,
+      "doorModelImage": null,
+      "membershipDiscount": 0, // NEED TO CHECK,
+      "generateCustomerQuotation": "Y", // "Y"
+      "ColorAdditionalDiscount": 0, // NEED TO CHECK,
+      "GlassAdditionalDiscount": 0, // NEED TO CHECK,
+      "InsertsAdditionalDiscount": 0, // NEED TO CHECK,
+      "SpringAdditionalDiscount": 0, // NEED TO CHECK,
+      "StrutAdditionalDiscount": 0, // NEED TO CHECK,
+      "TrackAdditionalDiscount": 0, // NEED TO CHECK,
+      "SealAdditionalDiscount": 0, // NEED TO CHECK,
+      "DoorlockAdditionalDiscount": 0, // NEED TO CHECK,
+      "DoorOperatorAdditionalDiscount": 0, // NEED TO CHECK,
+      "DecorativeItemAdditionalDiscount": 0, // NEED TO CHECK,
+      "PerforatedAdditionalDiscount": 0, // NEED TO CHECK,
+      "HardwareboxAdditionalDiscount": 0, // NEED TO CHECK,
+      "TorsionAdditionalDiscount": 0, // NEED TO CHECK,
+      "DoorrailAdditionalDiscount": 0, // NEED TO CHECK,
+      "SectionAdditionalDiscount": 0, // NEED TO CHECK,
+      "PartsAdditionalDiscount": 0, // NEED TO CHECK,
+      "lhrId": this.doorTractLHR || null,
+      "resellerTotal": this.calculatePrice(),
+      "customerTotal": 0
+    }
+
+    this.utilsService.generateDoorMasterQuote(payload).subscribe((response: any) => {
+      if (response?.payload) {
+        console.log("response?.payload, response?.payload, response?.payload == ", response?.payload);
+        this.router.navigate(['/door-master-quote'], {
+          queryParams: { quoteId: response?.payload?.id }
+        });
+      } else {
+        console.log("this is error ==", response);
+      }
+    });
+  }
+
+  getstrutPriceId() {
+    const data = this.doorStrutsTypeList?.find((element) => element.sturtCategoryId == this.doorStrutsType);
+    return data?.strutPriceId || null;
+  }
 
   // Get selected Item values and details
   selectedOperator() {
@@ -1228,7 +1415,7 @@ export class DoorDesignAddComponent implements OnInit {
         this.bgDefaultImage = this.visualizationSelection['visualize_backSelectedImage'].toLowerCase();
       }
       else {
-        if(this.doorSubCollection == 3) {
+        if (this.doorSubCollection == 3) {
           this.bgDefaultImage = 'assets/images/bg_img_fcfcfc.png';
         } else {
           this.bgDefaultImage = 'https://doorportal-001-site3.etempurl.com/images/bg_img_eaeaea.png';
@@ -1257,23 +1444,23 @@ export class DoorDesignAddComponent implements OnInit {
   // Mitesh Code End
   updateSeqList() {
     this.seqList = [];
-  
+
     this.selectedBoxes.forEach((row, rowIndex) => {
       let selectedCols: number[] = [];
-  
+
       // Collect all selected columns for this row
       row.forEach((isChecked, colIndex) => {
         if (isChecked) {
           selectedCols.push(colIndex);
         }
       });
-  
+
       // Only add to seqList if there are selected columns in this row
       if (selectedCols.length > 0) {
         this.seqList.push({ seqNumber: rowIndex + 1, selectedWindow: selectedCols });
       }
     });
-  
+
     console.log('Updated seqList:', JSON.stringify(this.seqList, null, 2));
   }
 }
