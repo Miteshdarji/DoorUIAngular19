@@ -110,6 +110,7 @@ export class DoorDesignAddComponent implements OnInit {
   checkboxSelectedCount: number = 0;
   bgDefaultImage: string = '';
   activeColumns: { [key: number]: boolean } = {}; // Track active state of checkbox ALL
+  seqList: any[] = [];
   // ===  Visualize UI [Start] =====
 
   constructor(private utilsService: UtilsService) { }
@@ -1133,7 +1134,12 @@ export class DoorDesignAddComponent implements OnInit {
     this.selectedBoxes[row][col] = isChecked; // Update the checkbox state immediately
     //console.log('Col: ' + row + ' Row: ' + col + 'isChecked: ' + isChecked);
     this.getSelectedCheckboxCount();
-    console.log('Count', this.getSelectedCheckboxCount())
+    //console.log('Count', this.getSelectedCheckboxCount())
+    //this.updateSeqList(row, col, isChecked);
+    this.updateSeqList();
+    console.log('Updated seqList6666:', this.seqList);
+    console.log('Updated seqList [JSON]:', JSON.stringify(this.seqList, null, 2));
+
   }
   getSelectedCheckboxCount(): number {
     this.checkboxSelectedCount = this.selectedBoxes.flat().filter(isChecked => isChecked).length;
@@ -1222,4 +1228,25 @@ export class DoorDesignAddComponent implements OnInit {
     // console.log('Final Image:',this.getBackgroundStyle());
   }
   // Mitesh Code End
+  updateSeqList() {
+    this.seqList = [];
+  
+    this.selectedBoxes.forEach((row, rowIndex) => {
+      let selectedCols: number[] = [];
+  
+      // Collect all selected columns for this row
+      row.forEach((isChecked, colIndex) => {
+        if (isChecked) {
+          selectedCols.push(colIndex);
+        }
+      });
+  
+      // Only add to seqList if there are selected columns in this row
+      if (selectedCols.length > 0) {
+        this.seqList.push({ seqNumber: rowIndex + 1, selectedWindow: selectedCols });
+      }
+    });
+  
+    console.log('Updated seqList:', JSON.stringify(this.seqList, null, 2));
+  }
 }
