@@ -5,8 +5,11 @@
         <div class="row align-items-center">
           <div class="col-4">
             <div class="logo">
-              <img src="https://doorportal-001-site1.etempurl.com/Resources/Documents/CompanyLogo/1/Door_Company.jpg"
+              <img *ngIf="!quotationData?.companyMasterModel?.companyLogoPath"
+                src="https://doorportal-001-site1.etempurl.com/Resources/Documents/CompanyLogo/1/Door_Company.jpg"
                 alt="">
+              <img *ngIf="quotationData?.companyMasterModel?.companyLogoPath"
+                [src]="quotationData?.companyMasterModel?.companyLogoPath" alt="">
             </div>
           </div>
           <div class="col-8">
@@ -53,7 +56,7 @@
             <div class="info d-flex justify-content-end">
               <ul class="list-unstyled mb-0">
                 <li><span>Quote No</span> {{quotationData?.quotationNo}} </li>
-                <li><span>Date of Issue</span> 02-20-2025</li>
+                <li><span>Date of Issue</span> {{ getDate() | date : "dd-MM-yyyy"}} </li>
               </ul>
             </div>
           </div>
@@ -77,12 +80,12 @@
             </tr>
             <ng-container *ngFor="let item of doorQuoteListingData">
               <tr>
-                <td>
+                <td class="door-quote-bg">
                   <span *ngIf="item?.quotationFor == 'SECTION_DOOR'">Door</span>
                   <span *ngIf="item?.quotationFor == 'SECTION_ONLY'">Section</span>
                   <span *ngIf="item?.quotationFor == 'MISCELLANEOUSPARTS'">Part</span>
-                <td>{{item?.product}}</td>
-                <td>
+                <td class="door-quote-bg">{{item?.product}}</td>
+                <td class="door-quote-bg">
                   <span *ngIf="item?.product == 'Seal'">
                     {{ generateSealData(item?.first_row, item?.qty)?.generatedString }}
                   </span>
@@ -90,11 +93,76 @@
                     {{item?.first_row}}
                   </span>
                 </td>
-                <td class="text-center">
-                  {{ item?.qty }} &nbsp;&nbsp;&nbsp;&nbsp; {{item?.unit || ''}}
+                <td class="text-center door-quote-bg">
+                  <span *ngIf="item?.product == 'Seal'">
+                    Linear ft {{ generateSealData(item?.first_row, item?.qty)?.quantity }}
+                  </span>
+                  <span *ngIf="item?.product !== 'Seal'">
+                    {{ item?.qty }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item?.unit || ''}}
+                  </span>
                 </td>
-                <td class="text-end">$ {{ item?.price?.toFixed(2) }}</td>
-                <td class="text-end">$ {{ item?.total }}</td>
+                <td class="text-end door-quote-bg">$ {{ item?.price?.toFixed(2) }}</td>
+                <td class="text-end door-quote-bg">$ {{ getSubTotalItemWise(item?.qty, item?.price) }}</td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="sectionListingData.length > 0">
+              <th colspan="6">Section Description</th>
+            </tr>
+            <ng-container *ngFor="let item of sectionListingData">
+              <tr>
+                <td class="section-quote-bg">
+                  <span *ngIf="item?.quotationFor == 'SECTION_DOOR'">Door</span>
+                  <span *ngIf="item?.quotationFor == 'SECTION_ONLY'">Section</span>
+                  <span *ngIf="item?.quotationFor == 'MISCELLANEOUSPARTS'">Part</span>
+                <td class="section-quote-bg">{{item?.product}}</td>
+                <td class="section-quote-bg">
+                  <span *ngIf="item?.product == 'Seal'">
+                    {{ generateSealData(item?.first_row, item?.qty)?.generatedString }}
+                  </span>
+                  <span *ngIf="item?.product !== 'Seal'">
+                    {{item?.first_row}}
+                  </span>
+                </td>
+                <td class="text-center section-quote-bg">
+                  <span *ngIf="item?.product == 'Seal'">
+                    Linear ft {{ generateSealData(item?.first_row, item?.qty)?.quantity }}
+                  </span>
+                  <span *ngIf="item?.product !== 'Seal'">
+                    {{ item?.qty }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item?.unit || ''}}
+                  </span>
+                </td>
+                <td class="text-end section-quote-bg">$ {{ item?.price?.toFixed(2) }}</td>
+                <td class="text-end section-quote-bg">$ {{ getSubTotalItemWise(item?.qty, item?.price) }}</td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="partsListingData.length > 0">
+              <th colspan="6">Parts Description</th>
+            </tr>
+            <ng-container *ngFor="let item of partsListingData">
+              <tr >
+                <td class="part-quote-bg">
+                  <span *ngIf="item?.quotationFor == 'SECTION_DOOR'">Door</span>
+                  <span *ngIf="item?.quotationFor == 'SECTION_ONLY'">Section</span>
+                  <span *ngIf="item?.quotationFor == 'MISCELLANEOUSPARTS'">Part</span>
+                <td class="part-quote-bg">{{item?.product}}</td>
+                <td class="part-quote-bg">
+                  <span *ngIf="item?.product == 'Seal'">
+                    {{ generateSealData(item?.first_row, item?.qty)?.generatedString }}
+                  </span>
+                  <span *ngIf="item?.product !== 'Seal'">
+                    {{item?.first_row}}
+                  </span>
+                </td>
+                <td class="text-center part-quote-bg">
+                  <span *ngIf="item?.product == 'Seal'">
+                    Linear ft {{ generateSealData(item?.first_row, item?.qty)?.quantity }}
+                  </span>
+                  <span *ngIf="item?.product !== 'Seal'">
+                    {{ item?.qty }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item?.unit || ''}}
+                  </span>
+                </td>
+                <td class="text-end part-quote-bg">$ {{ item?.price?.toFixed(2) }}</td>
+                <td class="text-end part-quote-bg">$ {{ getSubTotalItemWise(item?.qty, item?.price) }}</td>
               </tr>
             </ng-container>
           </tbody>
@@ -102,15 +170,15 @@
             <tr>
               <th colspan="3" rowspan="3"></th>
               <th colspan="2">Total</th>
-              <th class="text-end">$2225.36</th>
+              <th class="text-end">$ {{ subTotal }}</th>
             </tr>
             <tr>
               <th colspan="2">Tax (9.25%)</th>
-              <th class="text-end">$205.85</th>
+              <th class="text-end">$ {{ taxableTotal }}</th>
             </tr>
             <tr class="grand-total">
               <th colspan="2">Grand Total</th>
-              <th class="text-end">$2431.21</th>
+              <th class="text-end">$ {{ finalTotal }}</th>
             </tr>
           </tfoot>
         </table>

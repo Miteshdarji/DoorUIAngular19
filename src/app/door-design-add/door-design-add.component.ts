@@ -3,7 +3,7 @@ import { UtilsService } from '../utils/utils.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DoorSize } from '../../config/size.constant';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-door-design-add',
@@ -112,12 +112,16 @@ export class DoorDesignAddComponent implements OnInit {
   bgDefaultImage: string = '';
   activeColumns: { [key: number]: boolean } = {}; // Track active state of checkbox ALL
   seqList: any[] = [];
+  membershipDiscount: number = 0;
   // ===  Visualize UI [Start] =====
 
   constructor(
     private utilsService: UtilsService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.membershipDiscount = Number(this.route.snapshot.queryParamMap.get('membershipDiscount')) || 0; // Get 'id' from query params
+  }
 
   ngOnInit(): void {
     this.authentication();
@@ -184,6 +188,8 @@ export class DoorDesignAddComponent implements OnInit {
     this.doorColorList = item?.lstDoorColor;
 
     this.doorColor = this.doorColorList[0]?.doorColorId;
+    this.colorPriceId = this.doorColorList[0]?.colorPriceId;
+
     this.priceDetails.colorPrice = this.doorColorList[0]?.doorSalePrice;
     this.visualizationSelection['visualize_noOfSections'] = this.doorColorList[0]?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = this.doorColorList[0]?.noOfSectionDetail?.length;
@@ -210,7 +216,7 @@ export class DoorDesignAddComponent implements OnInit {
   colorPriceId!: number;
   selectColor(item: any) {
     this.doorColor = item?.doorColorId;
-    this.colorPriceId = item?.priceId;
+    this.colorPriceId = item?.colorPriceId;
     this.visualizationSelection['visualize_noOfSections'] = item?.noOfSectionDetail;
     this.visualizationSelection['visualize_row'] = item?.noOfSectionDetail?.length;
     this.priceDetails.colorPrice = item?.doorSalePrice;
@@ -1106,7 +1112,8 @@ export class DoorDesignAddComponent implements OnInit {
     // new code for windowGlassModel
     // let seqList = localStorage.getItem('seqList')
     let seqList: any = [
-      { seqNumber: 1, selectedWindow: [0, 1, 2, 3] }
+      // { seqNumber: 1, selectedWindow: [0, 1, 2, 3] },
+      { seqNumber: 1, selectedWindow: [0, 1] }
     ];
 
     if (seqList) {
@@ -1115,7 +1122,9 @@ export class DoorDesignAddComponent implements OnInit {
         parsedData.forEach((seq: any, index: any) => {
           seq.selectedWindow.forEach(() => {
             let glazingobj = { "quotationItemId": 0, "windowGlassId": this.doorWindowGlassSubCategory, "seqNo": seq.seqNumber, "statusFlag": "Y" }
-            windowGlassModel.push(glazingobj);
+            if (this.doorWindowGlassSubCategory) {
+              windowGlassModel.push(glazingobj);
+            }
           });
         });
       }
@@ -1213,7 +1222,7 @@ export class DoorDesignAddComponent implements OnInit {
       "torsionMultiplayer": 1,
       "doorImage": null,
       "doorModelImage": null,
-      "membershipDiscount": 0, // NEED TO CHECK,
+      "membershipDiscount": this.membershipDiscount,
       "generateCustomerQuotation": "Y", // "Y"
       "ColorAdditionalDiscount": 0, // NEED TO CHECK,
       "GlassAdditionalDiscount": 0, // NEED TO CHECK,
@@ -1236,11 +1245,13 @@ export class DoorDesignAddComponent implements OnInit {
       "customerTotal": 0
     }
 
+    console.log("test", payload);
     this.utilsService.generateDoorMasterQuote(payload).subscribe((response: any) => {
       if (response?.payload) {
         console.log("response?.payload, response?.payload, response?.payload == ", response?.payload);
+        const token = this.utilsService.getLoginUserToken(); // NEED to get from query params
         this.router.navigate(['/door-master-quote'], {
-          queryParams: { quoteId: response?.payload?.id }
+          queryParams: { quoteId: response?.payload?.id, token: token }
         });
       } else {
         console.log("this is error ==", response);

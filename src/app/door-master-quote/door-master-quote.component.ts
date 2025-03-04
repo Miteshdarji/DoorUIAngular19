@@ -15,18 +15,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './door-master-quote.component.css'
 })
 export class DoorMasterQuoteComponent implements OnInit {
-  token!: string;
+  token!: any;
   id: string | null = null;
   quotationData: any;
   doorQuoteListingData: any[] = [];
   sectionListingData: any[] = [];
   partsListingData: any[] = [];
+  subTotal: any = 0;
+  taxableTotal: any = 0;
+  finalTotal: any = 0;
 
   constructor(
     private utilsService: UtilsService,
     private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.queryParamMap.get('quoteId'); // Get 'id' from query params
+    this.token = this.route.snapshot.queryParamMap.get('token');
     console.log(this.id);
   }
 
@@ -34,7 +38,7 @@ export class DoorMasterQuoteComponent implements OnInit {
     this.resellerDetailedQuotationAllByQuotationId();
   }
   resellerDetailedQuotationAllByQuotationId() {
-    this.utilsService.resellerDetailedQuotationAllByQuotationId(this.id).subscribe((data: any) => {
+    this.utilsService.resellerDetailedQuotationAllByQuotationId(this.id, this.token).subscribe((data: any) => {
       const productDetails: any = [];
 
       if (data?.payload?.length > 0) {
@@ -55,8 +59,7 @@ export class DoorMasterQuoteComponent implements OnInit {
       this.doorQuoteListingData = data.payload[0].lstQuotationItemDetails?.filter((data: any) => data?.quotationFor == 'SECTION_DOOR');
       this.sectionListingData = data.payload[0].lstQuotationItemDetails?.filter((data: any) => data?.quotationFor == 'SECTION_ONLY');
       this.partsListingData = data.payload[0].lstQuotationItemDetails?.filter((data: any) => data?.quotationFor == 'MISCELLANEOUSPARTS');
-
-      console.log("this.quotationListingData", this.quotationData, this.doorQuoteListingData);
+      this.getTotalCalculation();
     })
   }
 
@@ -81,5 +84,24 @@ export class DoorMasterQuoteComponent implements OnInit {
       quantity = quantity + Number(valueQuantity[1]?.split("'")[0]);
     });
     return { generatedString, quantity };
+  }
+
+  getDate() {
+    return new Date();
+  }
+
+  getSubTotalItemWise(qty: any, price: any) {
+    const total = Number(qty) * Number(price);
+    return total?.toFixed(2) || 0.00;
+  }
+
+  getTotalCalculation() {
+    let total = 0;
+    this.quotationData?.lstQuotationItemDetails?.map((item: any) => {
+      total = total + (item?.price ? Number(item.price) * Number(item?.qty) : 0);
+    });
+    this.subTotal = total?.toFixed(2);
+    this.taxableTotal = ((Number(total) * 9.25) / 100).toFixed(2);
+    this.finalTotal = (Number(this.subTotal) + Number(this.taxableTotal)).toFixed(2);
   }
 }

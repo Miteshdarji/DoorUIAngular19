@@ -205,8 +205,7 @@ export class UtilsService {
     return this.http.post(this.apiUrl + `CustomerQuotationAll/AddOrUpdateCustomerQuotationAll`, payload, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 
-  resellerDetailedQuotationAllByQuotationId(quotationID: any) {
-    const token = this.getLoginUserToken();
+  resellerDetailedQuotationAllByQuotationId(quotationID: any, token: any) {
     return this.http.get(this.apiUrl + `CustomerQuotationAll/ResellerDetailedQuotationAllByQuotationId?QuotationId=${quotationID}`, { headers: { 'Accept': 'application/json', authorization: `Bearer ${token}` } });
   }
 }
